@@ -3,145 +3,619 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedant's Projects</title>
+    <title>Vedant Dhadge</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        .gradient-border {
+            background: linear-gradient(45deg, #000, #333, #000);
+            padding: 1px;
+            border-radius: 16px;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #000, #666, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .dark .gradient-text {
+            background: linear-gradient(45deg, #fff, #ccc, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .glass {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .project-image {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            position: relative;
+            overflow: hidden;
+        }
+        .dark .project-image {
+            background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+        }
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        .project-card:hover .project-image::before {
+            left: 100%;
+        }
+    </style>
 </head>
-<body class=" w-screen overflow-x-hidden bg-black text-white p-6 sm:p-20 
-            flex flex-col items-center h-full justify-center gap-2 ">
+<body class="transition-all duration-300 overflow-x-hidden">
+    <!-- Theme Toggle -->
+    <!-- <button id="theme-toggle" class="fixed top-6 right-6 z-50 p-3 rounded-full glass hover:scale-110 transition-transform">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+    </button> -->
 
-    <div class="w-screen h-screen fixed">
-
-        <canvas id="stars" class="absolute top-[-20vh] left-0 w-screen h-screen" style="z-index: -10;"></canvas>
-        
-        <script>
-            const canvas = document.getElementById('stars');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight ;
-            const stars = [];
-            const numStars = 50;
-            for (let i = 0; i < numStars; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 2,
-                    speed: Math.random() * 2 + 0.5,
-                });
-            }
-            function drawStars() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'white';
-                stars.forEach(star => {
-                    ctx.beginPath();
-                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                    ctx.fill();
-                    star.y += star.speed;
-                    if (star.y > canvas.height) {
-                        star.y = 0;
-                        star.x = Math.random() * canvas.width;
-                    }
-                });
-                requestAnimationFrame(drawStars);
-            }
-            drawStars();
-        </script>
-    </div>
-
-
-    <div class="flex flex-col gap-4 items-center justify-center h-[80vh] z-10">
-        <h1 class="text-5xl font-thin" id="name"><i>Vedant Dhadge</i></h1>  
-        <div class="flex gap-4 justify-center ">
-            <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank">
-                <svg class="h-8 w-8" fill="#ffffff" viewBox="-1.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M15.917 17.5H.083V1.666h15.834zM5.77 6.427a.96.96 0 0 0-1.032-.96.962.962 0 1 0-.025 1.92h.013a.963.963 0 0 0 1.044-.96zm-.123 1.719H3.803v5.552h1.845zm6.658 2.368c0-1.705-.91-2.5-2.125-2.5a1.832 1.832 0 0 0-1.663.917v-.786H6.67c.025.52 0 5.554 0 5.554h1.848v-3.102a1.264 1.264 0 0 1 .06-.45 1.011 1.011 0 0 1 .946-.676c.67 0 .936.51.936 1.256V13.7h1.846zm-3.8-1.564.013-.019v.019z"></path></g></svg>
-            </a>
-            
-                <a href="https://github.com/dhadgevedant" target="_blank">
-                    <svg class="h-8 w-8" fill="#ffffff" viewBox="-1.5 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M15.917 1.666V17.5h-5.15c-.424 0-.557-.238-.557-.455 0-.266.01-1.141.01-2.226a1.935 1.935 0 0 0-.552-1.502c1.808-.202 3.706-.887 3.706-4.005a3.134 3.134 0 0 0-.834-2.177 2.914 2.914 0 0 0-.081-2.147s-.68-.218-2.23.832a7.684 7.684 0 0 0-4.063 0c-1.55-1.05-2.23-.832-2.23-.832a2.918 2.918 0 0 0-.08 2.147 3.142 3.142 0 0 0-.835 2.177c0 3.11 1.894 3.806 3.696 4.011a1.737 1.737 0 0 0-.516 1.084 1.726 1.726 0 0 1-2.361-.674 1.706 1.706 0 0 0-1.243-.836s-.793-.01-.056.494a2.145 2.145 0 0 1 .9 1.187s.478 1.578 2.735 1.088c.004.676.01 1.186.01 1.38 0 .214-.147.454-.553.454H.083V1.666z"></path></g></svg>
-            </a>
-
-            <a href="mailto:dhadgevedant@gmail.com" target="_blank" class="h-9 w-9 ml-1">
-                <svg viewBox="0 -3.5 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>mail</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set-Filled" sketch:type="MSLayerGroup" transform="translate(-414.000000, -261.000000)" fill="#ffffff"> <path d="M430,275.916 L426.684,273.167 L415.115,285.01 L444.591,285.01 L433.235,273.147 L430,275.916 L430,275.916 Z M434.89,271.89 L445.892,283.329 C445.955,283.107 446,282.877 446,282.634 L446,262.862 L434.89,271.89 L434.89,271.89 Z M414,262.816 L414,282.634 C414,282.877 414.045,283.107 414.108,283.329 L425.147,271.927 L414,262.816 L414,262.816 Z M445,261 L415,261 L430,273.019 L445,261 L445,261 Z" id="mail" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>
-            </a>    
-        </div>
-
-        <div class=" absolute top-[75vh] flex flex-col justify-center items-center">
-            <p class=" text-sm text-stone-400">Want a Website for your Project or Business?</p>
-            <a href="mailto:dhadgevedant@gmail.com" target="_blank">
-            <button class=" p-1 py-0 m-1 text-white italic rounded border-b" >contact me</button>
-            </a>
-        </div>
-    </div>
-
-
-    <div class="w-full max-w-[48rem] flex flex-col gap-4 items-center justify-center z-10">
-        
-        
-        <div class="project-card border bg-black border-white rounded p-4 max-w-[36rem]">
-            
-            <div class="flex justify-between">
-                <h1 class="text-4xl font-thin">ProBunk</h1>
-
-                <a href="https://probunk.dhadge.in" target="_blank">
-                    <div class=" p-[2px] px-2 bg-white rounded text-black m-1 flex flex-row gap-1 items-center justify-center">
-                        <p class="text-sm ">Open</p>
-                        <svg class="h-5 w-5" fill="#000000" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="11.008"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M97.85352,185.8335c-5.04,15.11914-17.16211,26.26318-35.05664,32.228a88.27924,88.27924,0,0,1-25.30665,4.44825,4.0002,4.0002,0,0,1-4-4,88.27688,88.27688,0,0,1,4.44825-25.30665C43.90332,175.30859,55.04785,163.186,70.167,158.14648a3.99987,3.99987,0,1,1,2.5293,7.58936c-24.91016,8.30371-29.93945,37.49268-30.95215,48.52,11.02344-1.01172,40.21582-6.04,48.51953-30.95215a4.00018,4.00018,0,0,1,7.58985,2.52979ZM198.71,108.20117l-10.1416,10.1416v62.91211a11.92374,11.92374,0,0,1-3.51367,8.48487L152.71191,222.082A11.99995,11.99995,0,0,1,132.46,215.9502l-8.14429-40.72315-43.54223-43.542L40.05078,123.54a11.99947,11.99947,0,0,1-6.13281-20.252l32.3418-32.3418a11.925,11.925,0,0,1,8.48535-3.51465h62.91162l10.14209-10.14258c27.30078-27.30078,55.10351-26.54,65.78906-24.94531a11.90048,11.90048,0,0,1,10.06836,10.06738C225.251,53.09766,226.01172,80.89941,198.71,108.20117ZM41.61914,115.69531l39.81152,7.9624,48.2262-48.22607H74.74512a3.97492,3.97492,0,0,0-2.8291,1.17188l-32.3418,32.3413a4.00043,4.00043,0,0,0,2.04492,6.75049Zm138.94922,10.64746-48.22669,48.227,7.962,39.811a4.00088,4.00088,0,0,0,6.75195,2.04394l32.3418-32.34179a3.97415,3.97415,0,0,0,1.1709-2.82813ZM193.05371,102.544c24.72852-24.729,24.10547-49.46436,22.69043-58.95118a3.946,3.946,0,0,0-3.33594-3.33691c-9.48925-1.415-34.22461-2.03809-58.95312,22.69043l-11.31262,11.3125-.00135.00146L88.40234,128,128,167.59814l53.73962-53.73974.00086-.001Z"></path> </g></svg>
-                    </div>
-                </a>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 p-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass rounded-full px-6 py-3 flex justify-center space-x-8">
+                <a href="#home" class="nav-link text-sm font-light dark:text-stone-400 hover:text-black dark:hover:text-white transition-colors">Home</a>
+                <a href="#work" class="nav-link text-sm font-light dark:text-stone-400 hover:text-black dark:hover:text-white transition-colors">Work</a>
+                <a href="#resume" class="nav-link text-sm font-light dark:text-stone-400 hover:text-black dark:hover:text-white transition-colors">Resume</a>
+                <a href="#contact" class="nav-link text-sm font-light dark:text-stone-400 hover:text-black dark:hover:text-white transition-colors">Contact</a>
             </div>
-            <hr>
-            <p class="project-desc mt-2 text-sm text-stone-400 overflow-hidden h-10">
-                A neat Attendance Calculator that lets you calculate how many lectures you need to attend to get to 75% attendance, and if you are already above 75% it will show you how many lectures you can bunk but still remain above the detention percentage.
-            </p>
-            <button class="view-more-btn text-stone-400 text-sm mt-2">View More</button>
         </div>
-        
-        
-        <div class="project-card bg-black border border-white rounded p-4 max-w-[36rem] z-10">
-            
-            <div class="flex justify-between">
-                <h1 class="text-4xl font-thin mb-2">Prompt Tooling</h1>
-                <a href="https://github.com/dhadgevedant" target="_blank">
-                    <div class=" p-[2px] px-2 bg-white rounded text-black m-1 flex flex-row gap-1 items-center justify-center">
-                        <p class="text-sm ">Open</p>
-                        <svg class="h-5 w-5" fill="#000000" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="11.008"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M97.85352,185.8335c-5.04,15.11914-17.16211,26.26318-35.05664,32.228a88.27924,88.27924,0,0,1-25.30665,4.44825,4.0002,4.0002,0,0,1-4-4,88.27688,88.27688,0,0,1,4.44825-25.30665C43.90332,175.30859,55.04785,163.186,70.167,158.14648a3.99987,3.99987,0,1,1,2.5293,7.58936c-24.91016,8.30371-29.93945,37.49268-30.95215,48.52,11.02344-1.01172,40.21582-6.04,48.51953-30.95215a4.00018,4.00018,0,0,1,7.58985,2.52979ZM198.71,108.20117l-10.1416,10.1416v62.91211a11.92374,11.92374,0,0,1-3.51367,8.48487L152.71191,222.082A11.99995,11.99995,0,0,1,132.46,215.9502l-8.14429-40.72315-43.54223-43.542L40.05078,123.54a11.99947,11.99947,0,0,1-6.13281-20.252l32.3418-32.3418a11.925,11.925,0,0,1,8.48535-3.51465h62.91162l10.14209-10.14258c27.30078-27.30078,55.10351-26.54,65.78906-24.94531a11.90048,11.90048,0,0,1,10.06836,10.06738C225.251,53.09766,226.01172,80.89941,198.71,108.20117ZM41.61914,115.69531l39.81152,7.9624,48.2262-48.22607H74.74512a3.97492,3.97492,0,0,0-2.8291,1.17188l-32.3418,32.3413a4.00043,4.00043,0,0,0,2.04492,6.75049Zm138.94922,10.64746-48.22669,48.227,7.962,39.811a4.00088,4.00088,0,0,0,6.75195,2.04394l32.3418-32.34179a3.97415,3.97415,0,0,0,1.1709-2.82813ZM193.05371,102.544c24.72852-24.729,24.10547-49.46436,22.69043-58.95118a3.946,3.946,0,0,0-3.33594-3.33691c-9.48925-1.415-34.22461-2.03809-58.95312,22.69043l-11.31262,11.3125-.00135.00146L88.40234,128,128,167.59814l53.73962-53.73974.00086-.001Z"></path> </g></svg>
-                    </div>
-                </a>
-            </div>
-            <hr>
-            <p class="project-desc mt-2 text-sm text-stone-400 overflow-hidden h-10">
-                Company Portfolio Website for Prompt Tooling, an Ahmednager based company. Services they Provide are mainly around construction machines and tools. The company is an official supplier of german based tools.
-            </p>
-            <button class="view-more-btn text-stone-400 text-sm mt-2">View More</button>
-        </div>
-        
-        <p><i>To view more projects, visit <a href="https://github.com/dhadgevedant"><u>Github</u></a></i></p>
-    </div>
-   
+    </nav>
 
+    <div class="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center px-6 relative">
+            <div class="absolute inset-0 opacity-5   ">
+                <div class="floating absolute top-20 left-10 w-32 h-32 bg-black dark:bg-white rounded-full"></div>
+                <div class="floating absolute bottom-20 right-10 w-20 h-20 bg-black dark:bg-white rounded-full" style="animation-delay: -2s;"></div>
+                <div class="floating absolute top-40 right-20 w-16 h-16 bg-black dark:bg-white rounded-full" style="animation-delay: -4s;"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto text-center relative z-10 mt-40 md:mt-0 ">
+                <div class="hero-content opacity-1">
+                    <h1 class="text-7xl md:text-8xl font-thin mb-2 dark:text-stone-400 italic  ">
+                        Vedant Dhadge
+                    </h1>
+                    <p class="text-lg md:text-xl text-stone-600 dark:text-stone-600 font-light mb-8">
+                        Crafting Digital Experiences
+                    </p>
+                    <div class="text-sm text-stone-500 dark:text-stone-500 mb-12 tracking-widest uppercase">
+                        Developer • Designer • Problem Solver
+                    </div>
+                    
+                    <!-- Enhanced Social Links -->
+                    <div class="flex justify-center gap-4 mb-16">
+                        <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" class="social-link group">
+                            <div class="p-4 rounded-full border border-gray-200 dark:border-gray-700 hover:border-black dark:hover:border-white transition-all group-hover:scale-110">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="https://github.com/dhadgevedant" target="_blank" class="social-link group">
+                            <div class="p-4 rounded-full border border-gray-200 dark:border-gray-700 hover:border-black dark:hover:border-white transition-all group-hover:scale-110">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="mailto:dhadgevedant@gmail.com" class="social-link group">
+                            <div class="p-4 rounded-full border border-gray-200 dark:border-gray-700 hover:border-black dark:hover:border-white transition-all group-hover:scale-110">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Status -->
+                <div class="status-section opacity-0">
+                    <div class="inline-flex items-center gap-3 px-8 py-4 border border-gray-200 dark:border-gray-700 rounded-full mb-8">
+                        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-sm">Available for projects</span>
+                    </div>
+                    
+                    <a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full hover:scale-105 transition-transform">
+                        <span>Let's collaborate</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="py-32 px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-5xl md:text-6xl font-thin mb-20 text-center">Selected Work</h2>
+                
+                <div class="space-y-32">
+                    <!-- Project 1 -->
+                    <div class="project-card group">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="project-image aspect-video rounded-2xl flex items-center justify-center">
+                                <div class="text-center">
+                                    <img src="assets/Concert.jpeg" alt="">
+                                    <p class="text-sm opacity-70">Concert Website</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Concert Website</div>
+                                <h3 class="text-4xl font-light mb-4">Concert Ticket Booking Website</h3>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+                                    Excited to share our journey in building a large scale ticket booking website for our institute concert. The platform enabled a smooth and secure ticketing process for a 3,000-capacity event featuring Shirley Shetia and DJ Rubz on Women’s Day (March 8th).
+                                </p>
+                                <!-- <a href="https://github.com/dhadgevedant/assignmentPrinter" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
+                                    <span>View Project</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card group">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="md:order-2 project-image aspect-video rounded-2xl flex items-center justify-center">
+                                <div class="text-center">
+                                    <img src="assets/localai.jpeg" alt="">
+                                    <p class="text-sm opacity-70">ProBunk</p>
+                                </div>
+                            </div>
+                            <div class="md:order-1">
+                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Web Application</div>
+                                <h3 class="text-4xl font-light mb-4">LocalAI</h3>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+                                    Another AI chatbot? NOPE 🙂‍↔️. Welcome to a more private and secure approach to chat with AI by simply running your preferred model on your own machine. Visit <a href="https://localai.dhadge.in" class = "italic font-bold underline">local ai</a>  to know more 
+                                </p>
+                                <a href="https://localai.dhadge.in" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
+                                    <span>View Project</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+                <div class="space-y-32">
+                    <!-- Project 1 -->
+                    <div class="project-card group">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="project-image aspect-video rounded-2xl flex items-center justify-center">
+                                <div class="text-center">
+                                    <img src="assets/assignmentPrinter.jpeg" alt="">
+                                    <p class="text-sm opacity-70">Assignment Printer</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Development Tool</div>
+                                <h3 class="text-4xl font-light mb-4">Assignment Printer</h3>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+                                    Transform digital text into realistic handwritten assignments. A practical solution for students looking to print assignments that appear naturally handwritten.
+                                </p>
+                                <a href="https://github.com/dhadgevedant/assignmentPrinter" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
+                                    <span>View Project</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card group">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="md:order-2 project-image aspect-video rounded-2xl flex items-center justify-center">
+                                <div class="text-center">
+                                    <img src="assets/proBunk.png" alt="">
+                                    <p class="text-sm opacity-70">ProBunk</p>
+                                </div>
+                            </div>
+                            <div class="md:order-1">
+                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Web Application</div>
+                                <h3 class="text-4xl font-light mb-4">ProBunk</h3>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+                                    An intelligent attendance calculator that helps students track their attendance percentage and plan their schedule while maintaining the required 75% threshold.
+                                </p>
+                                <a href="https://probunk.dhadge.in" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
+                                    <span>View Project</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card group">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="project-image aspect-video rounded-2xl flex items-center justify-center">
+                                <div class="text-center">
+                                    <img src="assets/promptTooling.png" alt="">
+                                    <p class="text-sm opacity-70">Prompt Tooling</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Corporate Website</div>
+                                <h3 class="text-4xl font-light mb-4">Prompt Tooling</h3>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+                                    Professional portfolio website for an Ahmednagar-based construction tools company specializing in German engineering equipment and industrial solutions.
+                                </p>
+                                <a href="https://prompttooling.dhadge.in" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
+                                    <span>View Project</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-20">
+                    <a href="https://github.com/dhadgevedant" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 text-gray-600 dark:text-gray-400 transition-all">
+                        <span>View all projects</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="py-32 px-6 bg-gray-50 dark:bg-gray-900">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-5xl md:text-6xl font-thin mb-20 text-center">Resume</h2>
+                
+                <div class="grid md:grid-cols-2 gap-16">
+                    <!-- Skills -->
+                    <div class="resume-section">
+                        <h3 class="text-2xl font-light mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">Skills</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-medium mb-3">Programming Languages</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">C++</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Python</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">AutoHotKey</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Bash</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-3">Technologies</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">LAMP Stack</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">OOP</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">RayLib</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-3">Operating Systems</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Windows</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">WSL</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Ubuntu</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Kali Linux</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-3">Specialties</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Automation</span>
+                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Windows QoL Tools</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="resume-section">
+                        <h3 class="text-2xl font-light mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">Experience</h3>
+                        <div class="space-y-8">
+                            <div class="">
+                                <h4 class="font-medium">Google Developer Group Lead</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">GDG on Campus • 2024-25</p>
+                                <p class="text-sm leading-relaxed">Leading the Google Developer Group on Campus, organizing tech events and fostering developer community growth.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">AWS Cloud Club Executive</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">AWS Cloud Club • 2023-24</p>
+                                <p class="text-sm leading-relaxed">Executive member responsible for cloud computing initiatives, workshops, and community engagement.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">BTech Computer Engineering</h4>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">Sanjivani College of Engineering • CGPA: 8.2</p>
+                                <p class="text-sm leading-relaxed">Pursuing Bachelor's degree in Computer Engineering with focus on automation and software development.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Section -->
+                <div class="mt-20">
+                    <h3 class="text-2xl font-light mb-8 border-b border-gray-200 dark:border-gray-700 pb-4 text-center ">Featured Projects</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 ">
+                            <h4 class="font-medium mb-2">WinLens</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Automation and productivity tool for Windows</p>
+                            <p class="text-sm leading-relaxed">Comprehensive Windows automation suite designed to enhance productivity and streamline workflow processes.</p>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h4 class="font-medium mb-2">E-canteen</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Food ordering web application for canteen</p>
+                            <p class="text-sm leading-relaxed">Full-stack web application for canteen food ordering system with intuitive user interface and management features.</p>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h4 class="font-medium mb-2">NAAD</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Food recommendation web application</p>
+                            <p class="text-sm leading-relaxed">Award-winning food recommendation system that secured First Prize at National Level Tech Fest startup pitch.</p>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h4 class="font-medium mb-2">Chat Encryption Automation</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Windows-based encryption tool</p>
+                            <p class="text-sm leading-relaxed">Secure messaging tool for quick text encryption and transmission on Windows platforms with automated workflows.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievement -->
+                <div class="mt-16 text-center">
+                    <div class="inline-block bg-gradient-t bg-black dark:bg-white dark:text-black text-white px-8 py-3 rounded-full mb-4">
+                        <span class="text-sm font-medium">🏆 First Prize Winner - National Level Tech Fest</span>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Sanjivani Group of Institutes - Startup Pitch for NAAD</p>
+                </div>
+
+                <!-- <div class="text-center mt-16">
+                    <a href="#" class="inline-flex items-center gap-3 px-8 py-4 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span>Download Resume</span>
+                    </a>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-32 px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-5xl md:text-6xl font-thin mb-12">Let's Connect</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-16">
+                    Ready to bring your ideas to life? Let's discuss your next project.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <a href="mailto:dhadgevedant@gmail.com" class="contact-card p-8 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-black dark:hover:border-white transition-colors">
+                        <svg class="w-8 h-8 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <h3 class="font-medium mb-2">Email</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">dhadgevedant@gmail.com</p>
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" class="contact-card p-8 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-black dark:hover:border-white transition-colors">
+                        <svg class="w-8 h-8 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        <h3 class="font-medium mb-2">LinkedIn</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Connect with me</p>
+                    </a>
+                    
+                    <a href="https://github.com/dhadgevedant" target="_blank" class="contact-card p-8 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-black dark:hover:border-white transition-colors">
+                    <svg class="w-8 h-8 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <h3 class="font-medium mb-2">GitHub</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">View my work</p>
+                    </a>
+                </div>
+                
+                <div class="text-center">
+                    <a href="mailto:dhadgevedant@gmail.com" class="inline-flex items-center gap-3 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full hover:scale-105 transition-transform">
+                        <span>Start a conversation</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 px-6 border-t border-gray-200 dark:border-gray-700">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            © 2024 Vedant Dhadge. All rights reserved.
+                        </p>
+                    </div>
+                    <div class="flex gap-6">
+                        <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/dhadgevedant" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:dhadgevedant@gmail.com" class="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script>
-        document.querySelectorAll('.project-card').forEach(card => {
-        const desc = card.querySelector('.project-desc');
-        const btn = card.querySelector('.view-more-btn');
-        let isExpanded = false;
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to light mode
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            body.classList.add('dark');
+        }
+        
+        // themeToggle.addEventListener('click', () => {
+        //     body.classList.toggle('dark');
+        //     const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
+        //     localStorage.setItem('theme', currentTheme);
+        // });
 
-        btn.addEventListener('click', () => {
-            if (!isExpanded) {
-                gsap.to(desc, { duration: 0.5, height: 'auto', ease: 'power2.out' });
-                btn.textContent = 'View Less';
-            } else {
-                gsap.to(desc, { duration: 0.5, height: '2.5rem', ease: 'power2.out' });
-                btn.textContent = 'View More';
-            }
-            isExpanded = !isExpanded;
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
-    });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero section animations
+        // gsap.timeline()
+        //     .from('.hero-content', {
+        //         duration: 1,
+        //         y: 100,
+        //         opacity: 0,
+        //         ease: 'power3.out'
+        //     })
+        //     .from('.status-section', {
+        //         duration: 1,
+        //         y: 50,
+        //         opacity: 0,
+        //         ease: 'power3.out'
+        //     }, '-=0.5');
+
+        // Project cards animation
+        gsap.utils.toArray('.project-card').forEach(card => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 1,
+                y: 100,
+                opacity: 0,
+                ease: 'power3.out'
+            });
+        });
+
+        // Resume section animation
+        gsap.utils.toArray('.resume-section').forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                ease: 'power3.out'
+            });
+        });
+
+        // Contact cards animation
+        gsap.utils.toArray('.contact-card').forEach(card => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                ease: 'power3.out'
+            });
+        });
+
+        // Parallax effect for floating elements
+        gsap.utils.toArray('.floating').forEach(element => {
+            gsap.to(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                },
+                y: -100,
+                ease: 'none'
+            });
+        });
+
+        // Navigation highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-black', 'dark:text-white');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-black', 'dark:text-white');
+                }
+            });
+        });
     </script>
-
-
 </body>
-
-
 </html>
