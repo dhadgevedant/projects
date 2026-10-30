@@ -1,637 +1,756 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedant Dhadge</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <style>
-        .gradient-border {
-            background: linear-gradient(45deg, #000, #333, #000);
-            padding: 1px;
-            border-radius: 16px;
-        }
-        .gradient-text {
-            background: linear-gradient(45deg, #000, #666, #000);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .dark .gradient-text {
-            background: linear-gradient(45deg, #fff, #ccc, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        .glass {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .dark .glass {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .project-image {
-            background: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .dark .project-image {
-            background: black;
-        }
-        .project-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-        .project-card:hover .project-image::before {
-            left: 100%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vedant Dhadge — Developer &amp; Designer</title>
+  <link rel="icon" type="image/svg+xml" href="assets/vd-logo-dark-mode.svg" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/svg+xml" href="assets/vd-logo-light-mode.svg" media="(prefers-color-scheme: light)">
+  <link rel="alternate icon" type="image/png" href="images/favicon.png">
+
+  <!-- Monopo Saigon Fonts: Inter (Roobert substitute) & Raleway -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Monopo Saigon Design System Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- GSAP Animation Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
-<body class="transition-all duration-300 overflow-x-hidden dark:bg-black">
-    <!-- Theme Toggle -->
-    <!-- <button id="theme-toggle" class="fixed top-6 right-6 z-50 p-3 rounded-full glass hover:scale-110 transition-transform">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-        </svg>
-    </button> -->
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-40 p-6" id="nav">
-        <div class="max-w-4xl mx-auto">
-            <div class="glass rounded-full px-6 py-3 flex justify-center space-x-8">
-                <a href="#home" class="nav-link text-sm font-light dark:text-stone-400 hover:text-black dark:hover:text-white transition-colors">Home</a>
-                <a href="#work" class="nav-link text-sm font-light dark:text-stone-400 hover:text-black dark:hover:text-white transition-colors">Work</a>
-                <a href="#resume" class="nav-link text-sm font-light dark:text-stone-400 hover:text-black dark:hover:text-white transition-colors">Resume</a>
-                <a href="#contact" class="nav-link text-sm font-light dark:text-stone-400 hover:text-black dark:hover:text-white transition-colors">Contact</a>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <div class="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors">
-        <!-- Hero Section -->
-        <section id="home" class="min-h-screen flex items-center justify-center px-6 relative">
-            <div class="absolute inset-0 opacity-5   ">
-                <div class="floating absolute top-20 left-10 w-32 h-32 bg-black dark:bg-white rounded-full"></div>
-                <div class="floating absolute bottom-20 right-10 w-20 h-20 bg-black dark:bg-white rounded-full" style="animation-delay: -2s;"></div>
-                <div class="floating absolute top-40 right-20 w-16 h-16 bg-black dark:bg-white rounded-full" style="animation-delay: -4s;"></div>
-            </div>
-            
-            <div class="max-w-4xl mx-auto text-center relative z-10 mt-40 md:mt-0 ">
-                <div class="hero-content opacity-1">
-                    <h1 class="text-7xl md:text-8xl font-thin mb-2 dark:text-stone-400 italic  mt-24">
-                        Vedant Dhadge
-                    </h1>
-                    <p class="text-lg md:text-xl text-stone-600 dark:text-stone-600 font-light mb-8">
-                        Crafting Digital Experiences
-                    </p>
+  <!-- ==========================================================================
+       Persistent Top Navigation Bar (66px, logo left, locale center, menu right)
+       ========================================================================== -->
+  <header class="monopo-header" id="header">
+    <a href="#hero" class="nav-brand" aria-label="Vedant Dhadge">
+      <div class="nav-logo-box">
+        <img src="assets/vd-logo-dark-mode.svg" alt="VD Logo (Dark)" class="nav-logo logo-dark">
+        <img src="assets/vd-logo-light-mode.svg" alt="VD Logo (Light)" class="nav-logo logo-light">
+      </div>
+      <span class="nav-wordmark">VEDANT DHADGE</span>
+    </a>
 
-                    
-                    <div class="text-sm text-stone-500 dark:text-stone-500 mb-12 tracking-widest uppercase">
-                        Developer • Designer<span class=" text-nowrap"><br> Problem Solver </span>
-                    </div>
-                    
-                    <!-- Enhanced Social Links -->
-                    <div class="flex justify-center gap-4 mb-16">
-                        <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" class="social-link group">
-                            <div class="p-4 rounded-full border border-gray-200 dark:border-gray-700 hover:border-black dark:hover:border-white transition-all group-hover:scale-110">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                                </svg>
-                            </div>
-                        </a>
-                        <a href="https://github.com/dhadgevedant" target="_blank" class="social-link group">
-                            <div class="p-4 rounded-full border border-gray-200 dark:border-gray-700 hover:border-black dark:hover:border-white transition-all group-hover:scale-110">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                                </svg>
-                            </div>
-                        </a>
-                        <a href="mailto:dhadgevedant@gmail.com" class="social-link group">
-                            <div class="p-4 rounded-full border border-gray-200 dark:border-gray-700 hover:border-black dark:hover:border-white transition-all group-hover:scale-110">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                                </svg>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Status -->
-                <div class="status-section opacity-0">
-                    <div class="inline-flex items-center gap-3 px-8 py-4 border border-gray-200 dark:border-gray-700 rounded-full mb-8">
-                        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                        <span class="text-sm">Available for projects</span>
-                    </div>
-                    
-                    <a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full hover:scale-105 transition-transform">
-                        <span>Let's collaborate</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Work Section -->
-        <section id="work" class="py-32 px-6">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-5xl md:text-6xl font-thin mb-20 text-center">Selected Work</h2>
-                
-                <div class="space-y-32">
-                    <!-- Project 1 -->
-                    <div class="project-card group">
-                        <div class="grid md:grid-cols-2 gap-12 items-center">
-                            <div class="project-image aspect-video rounded-2xl flex items-center justify-center">
-                                <div class="text-center">
-                                    <img src="assets/Concert.jpeg" alt="">
-                                    <p class="text-sm opacity-70">Concert Website</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Concert Website</div>
-                                <h3 class="text-4xl font-light mb-4">Concert Ticket Booking Website</h3>
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                                    Excited to share our journey in building a large scale ticket booking website for our institute concert. The platform enabled a smooth and secure ticketing process for a 3,000-capacity event featuring Shirley Shetia and DJ Rubz on Women’s Day (March 8th).
-                                </p>
-                                <!-- <a href="https://github.com/dhadgevedant/assignmentPrinter" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
-                                    <span>View Project</span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                    </svg>
-                                </a> -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card group">
-                        <div class="grid md:grid-cols-2 gap-12 items-center">
-                            <div class="md:order-2 project-image aspect-video rounded-2xl flex items-center justify-center">
-                                <div class="text-center">
-                                    <img src="assets/localai.jpeg" alt="">
-                                    <p class="text-sm opacity-70">ProBunk</p>
-                                </div>
-                            </div>
-                            <div class="md:order-1">
-                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Web Application</div>
-                                <h3 class="text-4xl font-light mb-4">LocalAI</h3>
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                                    Another AI chatbot? NOPE 🙂‍↔️. Welcome to a more private and secure approach to chat with AI by simply running your preferred model on your own machine. Visit <a href="https://localai.dhadge.in" class = "italic font-bold underline">local ai</a>  to know more 
-                                </p>
-                                <a href="https://localai.dhadge.in" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
-                                    <span>View Project</span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                
-                
-                <div class="space-y-32">
-                    <!-- Project 1 -->
-                    <div class="project-card group">
-                        <div class="grid md:grid-cols-2 gap-12 items-center">
-                            <div class="project-image aspect-video rounded-2xl flex items-center justify-center">
-                                <div class="text-center">
-                                    <img src="assets/assignmentPrinter.jpeg" alt="">
-                                    <p class="text-sm opacity-70">Assignment Printer</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Development Tool</div>
-                                <h3 class="text-4xl font-light mb-4">Assignment Printer</h3>
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                                    Transform digital text into realistic handwritten assignments. A practical solution for students looking to print assignments that appear naturally handwritten.
-                                </p>
-                                <a href="https://github.com/dhadgevedant/assignmentPrinter" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
-                                    <span>View Project</span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card group">
-                        <div class="grid md:grid-cols-2 gap-12 items-center">
-                            <div class="md:order-2 project-image aspect-video rounded-2xl flex items-center justify-center">
-                                <div class="text-center">
-                                    <img src="assets/proBunk.png" alt="">
-                                    <p class="text-sm opacity-70">ProBunk</p>
-                                </div>
-                            </div>
-                            <div class="md:order-1">
-                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Web Application</div>
-                                <h3 class="text-4xl font-light mb-4">ProBunk</h3>
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                                    An intelligent attendance calculator that helps students track their attendance percentage and plan their schedule while maintaining the required 75% threshold.
-                                </p>
-                                <a href="https://probunk.dhadge.in" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
-                                    <span>View Project</span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3 -->
-                    <div class="project-card group ">
-                        <div class="grid md:grid-cols-2 gap-12 items-center">
-                            <div class="project-image aspect-video rounded-2xl flex items-center justify-center">
-                                <div class="text-center">
-                                    <img src="assets/promptTooling.png" alt="">
-                                    <p class="text-sm opacity-70">Prompt Tooling</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-sm text-gray-500 dark:text-gray-500 mb-2 tracking-widest uppercase">Corporate Website</div>
-                                <h3 class="text-4xl font-light mb-4">Prompt Tooling</h3>
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                                    Professional portfolio website for an Ahmednagar-based construction tools company specializing in German engineering equipment and industrial solutions.
-                                </p>
-                                <a href="https://prompttooling.dhadge.in" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 transition-all">
-                                    <span>View Project</span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center mt-20">
-                    <a href="https://github.com/dhadgevedant" target="_blank" class="inline-flex items-center gap-2 hover:gap-4 text-gray-600 dark:text-gray-400 transition-all">
-                        <span>View all projects</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Resume Section -->
-        <section id="resume" class="py-32 px-6 bg-gray-50 dark:bg-gray-900">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-5xl md:text-6xl font-thin mb-20 text-center">Resume</h2>
-                
-                <div class="grid md:grid-cols-2 gap-16">
-                    <!-- Skills -->
-                    <div class="resume-section">
-                        <h3 class="text-2xl font-light mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">Skills</h3>
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="font-medium mb-3">Programming Languages</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">C++</span>
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Python</span>
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">AutoHotKey</span>
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Bash</span>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="font-medium mb-3">Technologies</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">LAMP Stack</span>
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">OOP</span>
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">RayLib</span>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="font-medium mb-3">Operating Systems</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Windows</span>
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">WSL</span>
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Ubuntu</span>
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Kali Linux</span>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="font-medium mb-3">Specialties</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Automation</span>
-                                    <span class="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-sm">Windows QoL Tools</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Experience -->
-                    <div class="resume-section">
-                        <h3 class="text-2xl font-light mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">Experience</h3>
-                        <div class="space-y-8">
-                            <div class="">
-                                <h4 class="font-medium">Google Developer Group Lead</h4>
-                                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">GDG on Campus • 2024-25</p>
-                                <p class="text-sm leading-relaxed">Leading the Google Developer Group on Campus, organizing tech events and fostering developer community growth.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium">AWS Cloud Club Executive</h4>
-                                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">AWS Cloud Club • 2023-24</p>
-                                <p class="text-sm leading-relaxed">Executive member responsible for cloud computing initiatives, workshops, and community engagement.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-medium">BTech Computer Engineering</h4>
-                                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">Sanjivani College of Engineering • CGPA: 8.2</p>
-                                <p class="text-sm leading-relaxed">Pursuing Bachelor's degree in Computer Engineering with focus on automation and software development.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projects Section -->
-                <div class="mt-20">
-                    <h3 class="text-2xl font-light mb-8 border-b border-gray-200 dark:border-gray-700 pb-4 text-center ">Featured Projects</h3>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 ">
-                            <h4 class="font-medium mb-2">WinLens</h4>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Automation and productivity tool for Windows</p>
-                            <p class="text-sm leading-relaxed">Comprehensive Windows automation suite designed to enhance productivity and streamline workflow processes.</p>
-                        </div>
-                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h4 class="font-medium mb-2">E-canteen</h4>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Food ordering web application for canteen</p>
-                            <p class="text-sm leading-relaxed">Full-stack web application for canteen food ordering system with intuitive user interface and management features.</p>
-                        </div>
-                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h4 class="font-medium mb-2">NAAD</h4>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Food recommendation web application</p>
-                            <p class="text-sm leading-relaxed">Award-winning food recommendation system that secured First Prize at National Level Tech Fest startup pitch.</p>
-                        </div>
-                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h4 class="font-medium mb-2">Chat Encryption Automation</h4>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Windows-based encryption tool</p>
-                            <p class="text-sm leading-relaxed">Secure messaging tool for quick text encryption and transmission on Windows platforms with automated workflows.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Achievement -->
-                <div class="mt-16 text-center">
-                    <div class="inline-block bg-gradient-t bg-black dark:bg-white dark:text-black text-white px-8 py-3 rounded-full mb-4">
-                        <span class="text-sm font-medium">🏆 First Prize Winner - National Level Tech Fest</span>
-                    </div>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">Sanjivani Group of Institutes - Startup Pitch for NAAD</p>
-                </div>
-
-                <!-- <div class="text-center mt-16">
-                    <a href="#" class="inline-flex items-center gap-3 px-8 py-4 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        <span>Download Resume</span>
-                    </a>
-                </div> -->
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-32 px-6">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-5xl md:text-6xl font-thin mb-12">Let's Connect</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-400 mb-16">
-                    Ready to bring your ideas to life? Let's discuss your next project.
-                </p>
-                
-                <div class="grid md:grid-cols-3 gap-8 mb-16">
-                    <a href="mailto:dhadgevedant@gmail.com" class="contact-card p-8 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-black dark:hover:border-white transition-colors">
-                        <svg class="w-8 h-8 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
-                        <h3 class="font-medium mb-2">Email</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">dhadgevedant@gmail.com</p>
-                    </a>
-                    
-                    <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" class="contact-card p-8 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-black dark:hover:border-white transition-colors">
-                        <svg class="w-8 h-8 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                        <h3 class="font-medium mb-2">LinkedIn</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Connect with me</p>
-                    </a>
-                    
-                    <a href="https://github.com/dhadgevedant" target="_blank" class="contact-card p-8 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-black dark:hover:border-white transition-colors">
-                    <svg class="w-8 h-8 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        <h3 class="font-medium mb-2">GitHub</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">View my work</p>
-                    </a>
-                </div>
-                
-                <div class="text-center">
-                    <a href="mailto:dhadgevedant@gmail.com" class="inline-flex items-center gap-3 px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full hover:scale-105 transition-transform">
-                        <span>Start a conversation</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="py-12 px-6 border-t border-gray-200 dark:border-gray-700">
-            <div class="max-w-4xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="mb-4 md:mb-0">
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
-                            © 2024 Vedant Dhadge. All rights reserved.
-                        </p>
-                    </div>
-                    <div class="flex gap-6">
-                        <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                        <a href="https://github.com/dhadgevedant" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                        </a>
-                        <a href="mailto:dhadgevedant@gmail.com" class="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+    <div class="nav-locale">
+      <span class="active">EN</span>
+      <span>/</span>
+      <span>IN</span>
+      <span>/</span>
+      <span>ARCHIVE</span>
     </div>
 
-    <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        
-        // Check for saved theme preference or default to light mode
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
-            body.classList.add('dark');
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="#work" class="nav-link">Work</a></li>
+        <li><a href="#manifesto" class="nav-link">Manifesto</a></li>
+        <li><a href="#lab" class="nav-link">Lab</a></li>
+        <li><a href="#credentials" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         Hero Viewport — Bold & Rich Liquid Iridescent Atmosphere + Monumental Headline
+         ========================================================================== -->
+    <section class="hero-viewport" id="hero">
+      <!-- Full-Viewport Liquid Iridescent Canvas (Bold Oxblood, Amber Gold, Emerald Teal on Obsidian) -->
+      <div class="iridescent-canvas-container" id="iridescent-container">
+        <canvas id="liquid-canvas"></canvas>
+        <div class="iridescent-mesh-fallback"></div>
+      </div>
+
+      <!-- Monumental Editorial Typography (Dynamically Inverting Opposite Color) -->
+      <div class="hero-content">
+        <h1 class="hero-display-headline">
+          VEDANT<br>DHADGE
+        </h1>
+      </div>
+
+      <!-- Bottom-Left Rotating Circular Typography Scroll Indicator -->
+      <div class="scroll-indicator-container">
+        <svg class="scroll-badge-svg" viewBox="0 0 100 100">
+          <path id="circlePath" d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="none" />
+          <text font-size="8.5" fill="#ffffff" letter-spacing="2.8px" font-family="'Inter', sans-serif">
+            <textPath href="#circlePath" startOffset="0%">
+              SCROLL DOWN · EXPLORE ARCHIVE ·
+            </textPath>
+          </text>
+        </svg>
+        <div class="scroll-badge-center"></div>
+      </div>
+
+      <!-- Bottom Black Bar: Smaller Text + Animated Ribbon -->
+      <div class="hero-bottom-bar">
+        <!-- Top Info Row -->
+        <div class="hero-bottom-info">
+          <div class="hero-bottom-text">
+            <span style="font-weight: 500; color: #ffffff;">Software Engineer &amp; Designer</span> — Crafting digital
+            experiences with architectural engineering discipline and radical editorial silence.
+          </div>
+
+          <div class="hero-bottom-actions">
+            <div class="pill-tag pill-tag-dark" style="display: inline-flex; align-items: center; gap: 8px;">
+              <span
+                style="width: 7px; height: 7px; border-radius: 50%; background-color: #10b981; box-shadow: 0 0 8px #10b981; display: inline-block;"></span>
+              <span>Available for projects</span>
+            </div>
+
+            <a href="#work" class="ghost-pill-dark" style="padding: 7px 22px; font-size: 13px;">
+              Explore Work ↓
+            </a>
+          </div>
+        </div>
+
+        <!-- Flowing Ribbon of Projects & Clients -->
+        <div class="hero-ribbon-container">
+          <div class="hero-ribbon-track">
+            <!-- Set 1 -->
+            <div class="ribbon-item">
+              <img src="assets/vd-logo-dark-mode.svg" alt="VD"
+                style="height: 12px; width: auto; opacity: 0.9; margin-right: 6px; display: inline-block; vertical-align: middle;">
+              <span class="ribbon-tag">Archive</span>
+              <span>Vedant Dhadge</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Edge AI</span>
+              <span>LocalAI</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Community</span>
+              <span>Google Developer Groups</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">High Concurrency</span>
+              <span>Concert Ticketing (3K+)</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Cloud</span>
+              <span>AWS Cloud Club</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Industrial</span>
+              <span>Prompt Tooling Germany</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">PWA</span>
+              <span>ProBunk Analytics</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Generative</span>
+              <span>Assignment Printer</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">🏆 1st Prize</span>
+              <span>NAAD Tech Fest</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Automation</span>
+              <span>WinLens Suite</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <!-- Set 2 (Duplicates for seamless infinite loop) -->
+            <div class="ribbon-item">
+              <img src="assets/vd-logo-dark-mode.svg" alt="VD"
+                style="height: 12px; width: auto; opacity: 0.9; margin-right: 6px; display: inline-block; vertical-align: middle;">
+              <span class="ribbon-tag">Archive</span>
+              <span>Vedant Dhadge</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Edge AI</span>
+              <span>LocalAI</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Community</span>
+              <span>Google Developer Groups</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">High Concurrency</span>
+              <span>Concert Ticketing (3K+)</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Cloud</span>
+              <span>AWS Cloud Club</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Industrial</span>
+              <span>Prompt Tooling Germany</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">PWA</span>
+              <span>ProBunk Analytics</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Generative</span>
+              <span>Assignment Printer</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">🏆 1st Prize</span>
+              <span>NAAD Tech Fest</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+
+            <div class="ribbon-item">
+              <span class="ribbon-tag">Automation</span>
+              <span>WinLens Suite</span>
+            </div>
+            <span class="ribbon-sep">✦</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         01 / Manifesto Section (Paper Canvas, 78px Whisper Weight)
+         ========================================================================== -->
+    <section class="manifesto-section" id="manifesto">
+      <div class="monopo-container">
+        <div class="section-label">01 / Manifesto</div>
+
+        <h2 class="heading-whisper">
+          Engineering with architectural discipline. Designing with editorial silence.
+        </h2>
+
+        <div class="editorial-reading-block">
+          <p>
+            I build software platforms, automation tools, and web applications that value performance as much as graphic
+            clarity. From architecting high-traffic ticketing infrastructures handling thousands of concurrent users, to
+            crafting privacy-first on-device AI tools, every system is engineered to feel weightless and purposeful.
+          </p>
+          <p>
+            Based in India, leading student developer ecosystems as Google Developer Group Lead, and engineering tools
+            for desktop and web.
+          </p>
+        </div>
+
+        <div style="margin-top: 48px;">
+          <span class="pill-tag">
+            ● Open for Full-Stack, AI &amp; Product Engineering Roles
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         02 / Selected Works (Editorial Gallery — Radical 0px Images, 1078px Container)
+         ========================================================================== -->
+    <section class="work-section" id="work">
+      <div class="monopo-container">
+        <div
+          style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.12); padding-bottom: 24px;">
+          <div>
+            <div class="section-label">02 / Selected Works</div>
+            <h2 class="heading-anchor" style="margin-bottom: 0;">Featured Projects</h2>
+          </div>
+          <p
+            style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray); letter-spacing: 0.05em; text-transform: uppercase;">
+            (2023 — 2025)
+          </p>
+        </div>
+
+        <div class="project-list">
+          <!-- Project 01: Concert Ticket Booking Platform -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/Concert.jpeg" alt="Concert Ticket Booking Platform" loading="lazy">
+            </div>
+            <div class="project-row-meta">
+              <div>
+                <span class="project-row-category">01 · High-Concurrency Web Architecture</span>
+                <h3 class="project-row-title">Concert Ticket Booking Platform</h3>
+              </div>
+              <span
+                style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2024</span>
+            </div>
+            <p class="project-row-desc">
+              High-availability ticketing infrastructure engineered for our institute concert with a 3,000+ attendee
+              capacity, headlining Shirley Setia &amp; DJ Rubz on Women’s Day. Handled concurrent seat reservations, QR
+              check-in verification, and secure transaction workflows without downtime.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">Full-Stack</span>
+                <span class="pill-tag">High Concurrency</span>
+                <span class="pill-tag">QR Verification</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 02: LocalAI -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/localai.jpeg" alt="LocalAI Platform Interface" loading="lazy">
+            </div>
+            <div class="project-row-meta">
+              <div>
+                <span class="project-row-category">02 · Privacy-First Edge AI</span>
+                <h3 class="project-row-title">LocalAI — On-Device Intelligence</h3>
+              </div>
+              <span
+                style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2025</span>
+            </div>
+            <p class="project-row-desc">
+              A private and secure alternative to commercial cloud AI chatbots. Runs open models locally on your own
+              machine with full data sovereignty, zero external data leakage, and offline versatility.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">Local LLM</span>
+                <span class="pill-tag">Web Interface</span>
+                <span class="pill-tag">Zero Telemetry</span>
+              </div>
+              <a href="https://localai.dhadge.in" target="_blank" rel="noopener noreferrer" class="ghost-pill-light">
+                Launch Application ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 03: Assignment Printer -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/assignmentPrinter.jpeg" alt="Assignment Printer Output" loading="lazy">
+            </div>
+            <div class="project-row-meta">
+              <div>
+                <span class="project-row-category">03 · Generative Document Synthesis</span>
+                <h3 class="project-row-title">Assignment Printer</h3>
+              </div>
+              <span
+                style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2024</span>
+            </div>
+            <p class="project-row-desc">
+              Developer tool transforming raw digital text documents into organic, naturally irregular handwriting
+              simulations with custom stroke pressures, baseline drift, and paper textures for printable academic
+              assignments.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">Python</span>
+                <span class="pill-tag">Generative Typography</span>
+                <span class="pill-tag">Image Processing</span>
+              </div>
+              <a href="https://github.com/dhadgevedant/assignmentPrinter" target="_blank" rel="noopener noreferrer"
+                class="ghost-pill-light">
+                GitHub Repository ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 04: ProBunk -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/proBunk.png" alt="ProBunk Dashboard" loading="lazy">
+            </div>
+            <div class="project-row-meta">
+              <div>
+                <span class="project-row-category">04 · Predictive Academic Analytics</span>
+                <h3 class="project-row-title">ProBunk — Attendance Planner</h3>
+              </div>
+              <span
+                style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2024</span>
+            </div>
+            <p class="project-row-desc">
+              An algorithmic attendance tracking web application that allows university students to forecast attendance
+              percentages, simulate timetable absences, and maintain institutional 75% thresholds with precision.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">JavaScript</span>
+                <span class="pill-tag">Analytics</span>
+                <span class="pill-tag">PWA</span>
+              </div>
+              <a href="https://probunk.dhadge.in" target="_blank" rel="noopener noreferrer" class="ghost-pill-light">
+                Visit Platform ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 05: Prompt Tooling -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/promptTooling.png" alt="Prompt Tooling Corporate Showcase" loading="lazy">
+            </div>
+            <div class="project-row-meta">
+              <div>
+                <span class="project-row-category">05 · Industrial Portfolio &amp; Brand</span>
+                <h3 class="project-row-title">Prompt Tooling</h3>
+              </div>
+              <span
+                style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2024</span>
+            </div>
+            <p class="project-row-desc">
+              Corporate digital presence for an industrial tool manufacturer specializing in precision German
+              engineering equipment and industrial manufacturing solutions in Ahmednagar.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">Responsive Design</span>
+                <span class="pill-tag">Brand Identity</span>
+                <span class="pill-tag">SEO</span>
+              </div>
+              <a href="https://prompttooling.dhadge.in" target="_blank" rel="noopener noreferrer"
+                class="ghost-pill-light">
+                Explore Website ↗
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         03 / Engineering Lab & Archive (Obsidian Dark Band — Full-Bleed)
+         ========================================================================== -->
+    <section class="inverse-band" id="lab">
+      <div class="monopo-container">
+        <div class="section-label">03 / Engineering Lab</div>
+        <h2 class="heading-anchor">System Tools &amp; Experiments</h2>
+
+        <p class="editorial-reading-block" style="margin-bottom: 40px;">
+          Explorations in low-level utilities, automation scripts, encrypted communication pipes, and competitive
+          award-winning prototypes.
+        </p>
+
+        <!-- Archive Grid (Strict 0px Corners, Hairline Borders) -->
+        <div class="archive-grid">
+          <div class="archive-card">
+            <div class="archive-card-num">EXP · 01</div>
+            <h4 class="archive-card-title">WinLens</h4>
+            <div class="archive-card-sub">Windows Automation Suite</div>
+            <p class="archive-card-desc">
+              System-level productivity framework streamlining desktop workflows, macro bindings, and workspace
+              management.
+            </p>
+          </div>
+
+          <div class="archive-card">
+            <div class="archive-card-num">EXP · 02</div>
+            <h4 class="archive-card-title">NAAD</h4>
+            <div class="archive-card-sub">🏆 1st Prize · National Tech Fest</div>
+            <p class="archive-card-desc">
+              Award-winning food recommendation and discovery web application, winning 1st place at National Level Tech
+              Fest startup pitch.
+            </p>
+          </div>
+
+          <div class="archive-card">
+            <div class="archive-card-num">EXP · 03</div>
+            <h4 class="archive-card-title">E-Canteen</h4>
+            <div class="archive-card-sub">Full-Stack Ordering Portal</div>
+            <p class="archive-card-desc">
+              End-to-end digital ordering system for campus dining, streamlining meal preparation and order queue
+              analytics.
+            </p>
+          </div>
+
+          <div class="archive-card">
+            <div class="archive-card-num">EXP · 04</div>
+            <h4 class="archive-card-title">Chat Encryption</h4>
+            <div class="archive-card-sub">Automated Cryptographic Pipe</div>
+            <p class="archive-card-desc">
+              Automated workflow tool providing on-the-fly symmetric encryption and transmission across Windows
+              messaging apps.
+            </p>
+          </div>
+        </div>
+
+        <!-- Technical Repertoire / Stack -->
+        <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.15);">
+          <div class="section-label">Core Technical Repertoire</div>
+          <div class="skills-pill-group">
+            <span class="pill-tag pill-tag-dark">C++</span>
+            <span class="pill-tag pill-tag-dark">Python</span>
+            <span class="pill-tag pill-tag-dark">AutoHotKey</span>
+            <span class="pill-tag pill-tag-dark">Bash / Shell</span>
+            <span class="pill-tag pill-tag-dark">JavaScript / ESNext</span>
+            <span class="pill-tag pill-tag-dark">LAMP Stack</span>
+            <span class="pill-tag pill-tag-dark">RayLib</span>
+            <span class="pill-tag pill-tag-dark">WSL &amp; Linux Environments</span>
+            <span class="pill-tag pill-tag-dark">Workflow Automation</span>
+            <span class="pill-tag pill-tag-dark">System Architecture</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         04 / Background & Leadership (Paper Canvas, 240px | 1fr | 140px Table)
+         ========================================================================== -->
+    <section class="manifesto-section" id="credentials" style="padding-top: 100px;">
+      <div class="monopo-container">
+        <div class="section-label">04 / Background &amp; Leadership</div>
+        <h2 class="heading-anchor">Credentials</h2>
+
+        <div class="credentials-list">
+          <div class="credential-row">
+            <div>
+              <div class="credential-role">Google Developer Group</div>
+              <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">GDG on Campus</div>
+            </div>
+            <div class="credential-desc">
+              Community Lead directing technical hackathons, workshops, and developer mentoring initiatives across
+              campus.
+            </div>
+            <div class="credential-year">2024 — 2025</div>
+          </div>
+
+          <div class="credential-row">
+            <div>
+              <div class="credential-role">AWS Cloud Club</div>
+              <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">Executive Member</div>
+            </div>
+            <div class="credential-desc">
+              Organized cloud computing architecture sessions, student hands-on labs, and devops training events.
+            </div>
+            <div class="credential-year">2023 — 2024</div>
+          </div>
+
+          <div class="credential-row">
+            <div>
+              <div class="credential-role">BTech Computer Engineering</div>
+              <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">Sanjivani College of
+                Engineering</div>
+            </div>
+            <div class="credential-desc">
+              Bachelor of Technology in Computer Engineering with academic CGPA of 8.2. Specialized in systems and
+              automation.
+            </div>
+            <div class="credential-year">2022 — 2026</div>
+          </div>
+
+          <div class="credential-row">
+            <div>
+              <div class="credential-role">National Level Tech Fest</div>
+              <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">Startup Pitch First Prize
+              </div>
+            </div>
+            <div class="credential-desc">
+              Awarded 1st place for pitching and demonstrating NAAD food recommendation engine at national symposium.
+            </div>
+            <div class="credential-year">2024</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         05 / Studio Contact & Footer (Obsidian Full-Bleed Dark Band)
+         ========================================================================== -->
+    <footer class="monopo-footer" id="contact">
+      <div class="monopo-container">
+        <div class="footer-top">
+          <div>
+            <div class="section-label" style="color: var(--color-ash-mist);">05 / Inquiries &amp; Collaboration</div>
+            <h2 class="footer-cta-title">
+              Let's create something<br>uncompromising.
+            </h2>
+          </div>
+          <div>
+            <a href="mailto:dhadgevedant@gmail.com" class="ghost-pill-dark">
+              dhadgevedant@gmail.com ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-grid">
+          <div>
+            <div class="footer-col-title">Studio / Focus</div>
+            <div class="footer-address-stack">
+              <p>Full-Stack Engineering</p>
+              <p>System Automation</p>
+              <p>Generative AI Tools</p>
+              <p>Creative Development</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Digital Networks</div>
+            <div class="footer-address-stack">
+              <a href="https://github.com/dhadgevedant" target="_blank" rel="noopener noreferrer">GitHub / dhadgevedant
+                ↗</a>
+              <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" rel="noopener noreferrer">LinkedIn /
+                vedantdhadge ↗</a>
+              <a href="mailto:dhadgevedant@gmail.com">Direct Email ↗</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Location / Node</div>
+            <div class="footer-address-stack">
+              <p>Maharashtra, India</p>
+              <p>UTC +05:30</p>
+              <p>Open to Remote &amp; Global Teams</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-brand-wrap">
+            <img src="assets/vd-logo-dark-mode.svg" alt="VD" class="footer-logo">
+            <p>© 2025 Vedant Dhadge. Crafted with Monopo Saigon editorial discipline.</p>
+          </div>
+          <a href="#hero" class="nav-link" style="color: var(--color-felt-gray);">Back to Top ↑</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Bold & Rich Liquid Iridescent Shader Engine -->
+  <script src="assets/liquid-bkg.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize WebGL Liquid Iridescent Shader
+      if (typeof window.initLiquidShader === 'function') {
+        window.initLiquidShader('liquid-canvas');
+      }
+
+      // Dynamic Header Scroll Switcher (Adapts between light paper and dark obsidian)
+      const header = document.getElementById('header');
+      const labSection = document.getElementById('lab');
+      const contactSection = document.getElementById('contact');
+
+      function updateHeader() {
+        const scrollY = window.scrollY;
+
+        if (scrollY > 50) {
+          // Check if currently scrolling over an inverse dark band
+          let isDark = false;
+          if (labSection) {
+            const rect = labSection.getBoundingClientRect();
+            if (rect.top <= 66 && rect.bottom >= 66) isDark = true;
+          }
+          if (contactSection) {
+            const rect = contactSection.getBoundingClientRect();
+            if (rect.top <= 66 && rect.bottom >= 66) isDark = true;
+          }
+
+          if (isDark) {
+            header.classList.add('on-dark');
+            header.classList.remove('on-light');
+          } else {
+            header.classList.add('on-light');
+            header.classList.remove('on-dark');
+          }
+        } else {
+          header.classList.remove('on-light', 'on-dark');
         }
-        
-        // themeToggle.addEventListener('click', () => {
-        //     body.classList.toggle('dark');
-        //     const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
-        //     localStorage.setItem('theme', currentTheme);.
-        // });
+      }
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      updateHeader();
 
-
-        // GSAP Animations
-
-        // Navbar animation
-        gsap.from("#nav", {
-            duration: 0.7,
-            scaleX:1/100,
-            opacity: 0,
-            ease: "power4.out",
-            delay:0.5
-
-        });
-
-
+      // GSAP Animations with patient unhurried easing: cubic-bezier(0.19, 1, 0.22, 1)
+      if (window.gsap && window.ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Hero section animations
-        // gsap.timeline()
-        //     .from('.hero-content', {
-        //         duration: 1,
-        //         y: 100,
-        //         opacity: 0,
-        //         ease: 'power3.out'
-        //     })
-        //     .from('.status-section', {
-        //         duration: 1,
-        //         y: 50,
-        //         opacity: 0,
-        //         ease: 'power3.out'
-        //     }, '-=0.5');
-
-        // Project cards animation
-        gsap.utils.toArray('.project-card').forEach(card => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none reverse'
-                },
-                duration: 1,
-                y: 100,
-                opacity: 0,
-                ease: 'power3.out'
-            });
+        // Hero Entrance
+        gsap.from('.hero-display-headline', {
+          opacity: 0,
+          y: 40,
+          duration: 1.25,
+          ease: 'power3.out',
+          delay: 0.2
         });
 
-        // Resume section animation
-        gsap.utils.toArray('.resume-section').forEach(section => {
-            gsap.from(section, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none reverse'
-                },
-                duration: 1,
-                y: 50,
-                opacity: 0, 
-                ease: 'power3.out'
-            });
+        gsap.from('.hero-bottom-bar', {
+          opacity: 0,
+          y: 30,
+          duration: 1.0,
+          ease: 'power3.out',
+          delay: 0.35
         });
 
-        // Contact cards animation
-        gsap.utils.toArray('.contact-card').forEach(card => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none reverse'
-                },
-                duration: 1,
-                y: 50,
-                opacity: 0,
-                ease: 'power3.out'
-            });
+        // Project Rows Reveal
+        gsap.utils.toArray('.project-row').forEach(row => {
+          gsap.from(row, {
+            scrollTrigger: {
+              trigger: row,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1.0,
+            ease: 'power3.out'
+          });
         });
 
-        // Parallax effect for floating elements
-        gsap.utils.toArray('.floating').forEach(element => {
-            gsap.to(element, {
-                scrollTrigger: {
-                    trigger: element,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 1
-                },
-                y: -100,
-                ease: 'none'
-            });
+        // Lab Cards Reveal
+        gsap.utils.toArray('.archive-card').forEach((card, i) => {
+          gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            delay: i * 0.08,
+            ease: 'power3.out'
+          });
         });
+      }
 
-        // Navigation highlight
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('text-white', 'dark:text-stone-950', 'rounded-full', 'bg-black','dark:bg-white' , 'm-[-8px]','p-2','px-4', 'flex','items-center');
-                
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('text-white', 'dark:text-stone-950', 'rounded-full', 'bg-black','dark:bg-white' , 'm-[-8px]','p-2','px-4', 'flex','items-center');
-                }
-            });
+      // Smooth link scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (href && href !== '#') {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
         });
-    </script>
+      });
+    });
+  </script>
 </body>
+
 </html>
