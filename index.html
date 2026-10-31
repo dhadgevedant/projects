@@ -279,7 +279,7 @@
       </div>
 
       <!-- The phones spread out to the full width of the page -->
-      <div class="work-fluid-container" id="work-fluid-container" data-lenis-prevent>
+      <div class="work-fluid-container" id="work-fluid-container">
         <div class="staggered-phones-showcase" id="phones-showcase">
           <!-- Phone 01: Sartthi CA Practice Manager -->
           <article class="phone-project-card phone-col-1" data-index="0">
@@ -349,7 +349,7 @@
       <div class="mobile-swipe-hint" id="mobile-swipe-hint">
         <span id="mobile-phone-counter">01 / 03</span>
         <span>·</span>
-        <span>Swipe to explore</span>
+        <span>Scroll to explore</span>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14"></path>
           <path d="M12 5l7 7-7 7"></path>
@@ -716,14 +716,16 @@
       let lenis = null;
       if (typeof window.Lenis === 'function') {
         lenis = new Lenis({
-          duration: 1.15,
+          duration: 1.0,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           orientation: 'vertical',
           gestureOrientation: 'vertical',
           smoothWheel: true,
           wheelMultiplier: 1.0,
-          touchMultiplier: 1.2
+          touchMultiplier: 1.0,
+          syncTouch: false
         });
+        window.lenis = lenis;
 
         lenis.on('scroll', ScrollTrigger.update);
 
@@ -917,185 +919,70 @@
         });
 
         // --------------------------------------------------------------------
-        // Smooth Page Snapping at Horizontal Scroll Start & Stop (Elastic)
-        // --------------------------------------------------------------------
-        const workSection = document.getElementById('work');
-        if (workSection) {
-          ScrollTrigger.create({
-            trigger: workSection,
-            start: 'top 35%',
-            end: 'bottom 65%',
-            snap: {
-              snapTo: [0, 1], // Snaps when horizontal scroll starts (0) and stops (1)
-              duration: { min: 0.35, max: 0.8 },
-              delay: 0.08,
-              ease: 'elastic.out(1, 0.75)' // Stops elastically
-            }
-          });
-        }
-
-        // --------------------------------------------------------------------
-        // Mobile (<= 900px): Seamless Native Smooth Horizontal Scroll
-        // Mobiles remain always 100% visible, with elastic boundary stops
+        // Mobile (<= 900px): Pinned Horizontal Glide Driven by Vertical Thumb Scroll
+        // Thumb moves vertically -> Screen smoothly glides horizontally
+        // Ultra-light (scrub: 0.1), zero heaviness, seamless start and stop
         // --------------------------------------------------------------------
         mm.add("(max-width: 900px)", () => {
-          const container = document.getElementById('work-fluid-container');
+          const showcase = document.getElementById('phones-showcase');
           const cards = gsap.utils.toArray('.phone-project-card');
           const dots = gsap.utils.toArray('.mobile-nav-dot');
           const counter = document.getElementById('mobile-phone-counter');
-          const showcase = document.getElementById('phones-showcase');
+          const workSection = document.getElementById('work');
 
-          if (!container || cards.length === 0) return;
+          if (!showcase || cards.length === 0 || !workSection) return;
 
-          // Clear any conflicting transforms/opacities so phones are always 100% visible
+          // Clear any conflicting transforms so phones are 100% visible
           cards.forEach(card => {
             gsap.set(card, { clearProps: 'all' });
             card.style.opacity = '1';
           });
-          if (showcase) gsap.set(showcase, { clearProps: 'all' });
+          gsap.set(showcase, { clearProps: 'all' });
 
-          function setActiveIndex(idx) {
-            dots.forEach((dot, i) => {
-              dot.classList.toggle('is-active', i === idx);
-            });
-            if (counter) {
-              counter.textContent = `0${idx + 1} / 0${cards.length}`;
+          // Calculate travel distance so Phone 3 glides into full center view
+          const getScrollDistance = () => Math.max(300, showcase.scrollWidth - window.innerWidth + 48);
+
+          const horizontalTween = gsap.to(showcase, {
+            x: () => -getScrollDistance(),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: workSection,
+              start: 'top top',
+              end: () => '+=' + getScrollDistance(),
+              pin: true,
+              pinSpacing: true,
+              scrub: 0.1, // Ultra-light & direct: 0.1s lag smoothing, zero heaviness
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                const p = self.progress;
+                const idx = p < 0.35 ? 0 : (p < 0.72 ? 1 : 2);
+                dots.forEach((dot, i) => {
+                  dot.classList.toggle('is-active', i === idx);
+                });
+                if (counter) {
+                  counter.textContent = `0${idx + 1} / 0${cards.length}`;
+                }
+              }
             }
-          }
+          });
 
-          // Dot click smooth scroll navigation with elastic transition
+          // Dot click smooth scroll navigation
           dots.forEach((dot, i) => {
             dot.addEventListener('click', (e) => {
               e.preventDefault();
-              if (cards[i]) {
-                cards[i].scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'nearest',
-                  inline: 'center'
-                });
-                setActiveIndex(i);
+              const st = horizontalTween.scrollTrigger;
+              if (st) {
+                const progressTarget = i === 0 ? 0 : (i === 1 ? 0.5 : 1);
+                const targetY = st.start + (st.end - st.start) * progressTarget;
+                if (lenis) {
+                  lenis.scrollTo(targetY, { duration: 0.7, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+                } else {
+                  window.scrollTo({ top: targetY, behavior: 'smooth' });
+                }
               }
             });
           });
-
-          // Precision intersection tracking for 120Hz smooth touch swiping
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-                const idx = parseInt(entry.target.getAttribute('data-index') || '0', 10);
-                setActiveIndex(idx);
-              }
-            });
-          }, {
-            root: container,
-            threshold: [0.5, 0.75]
-          });
-
-          cards.forEach(card => observer.observe(card));
-
-          // Touch elastic spring overscroll at horizontal start and stop
-          let touchStartX = 0;
-          let isTouchDragging = false;
-
-          const onTouchStart = (e) => {
-            if (e.touches && e.touches.length === 1) {
-              touchStartX = e.touches[0].clientX;
-              isTouchDragging = true;
-            }
-          };
-
-          const onTouchMove = (e) => {
-            if (!isTouchDragging || !e.touches || e.touches.length !== 1) return;
-            const currentX = e.touches[0].clientX;
-            const deltaX = currentX - touchStartX;
-            const maxScroll = container.scrollWidth - container.clientWidth;
-
-            if (container.scrollLeft <= 0 && deltaX > 0) {
-              // Elastic spring resistance at START
-              const elasticOffset = Math.min(48, deltaX * 0.32);
-              gsap.set(showcase, { x: elasticOffset });
-            } else if (container.scrollLeft >= maxScroll - 2 && deltaX < 0) {
-              // Elastic spring resistance at STOP
-              const elasticOffset = Math.min(48, -deltaX * 0.32);
-              gsap.set(showcase, { x: -elasticOffset });
-            }
-          };
-
-          const onTouchEnd = () => {
-            if (isTouchDragging) {
-              isTouchDragging = false;
-              gsap.to(showcase, { x: 0, duration: 0.65, ease: 'elastic.out(1.1, 0.55)' });
-            }
-          };
-
-          container.addEventListener('touchstart', onTouchStart, { passive: true });
-          container.addEventListener('touchmove', onTouchMove, { passive: true });
-          container.addEventListener('touchend', onTouchEnd, { passive: true });
-
-          // Fluid mouse drag-to-scroll support with elastic boundary stops
-          let isDown = false;
-          let startX = 0;
-          let scrollLeft = 0;
-
-          const onMouseDown = (e) => {
-            isDown = true;
-            startX = e.pageX - container.offsetLeft;
-            scrollLeft = container.scrollLeft;
-            container.style.scrollBehavior = 'auto';
-          };
-          const onMouseLeave = () => {
-            if (!isDown) return;
-            isDown = false;
-            container.style.scrollBehavior = 'smooth';
-            gsap.to(showcase, { x: 0, duration: 0.65, ease: 'elastic.out(1.1, 0.55)' });
-          };
-          const onMouseUp = () => {
-            if (!isDown) return;
-            isDown = false;
-            container.style.scrollBehavior = 'smooth';
-            gsap.to(showcase, { x: 0, duration: 0.65, ease: 'elastic.out(1.1, 0.55)' });
-          };
-          const onMouseMove = (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 1.35;
-            const maxScroll = container.scrollWidth - container.clientWidth;
-            const targetScroll = scrollLeft - walk;
-
-            if (targetScroll < 0) {
-              // Elastic resistance at START
-              const overscroll = -targetScroll;
-              const elasticOffset = Math.min(50, overscroll * 0.3);
-              gsap.set(showcase, { x: elasticOffset });
-              container.scrollLeft = 0;
-            } else if (targetScroll > maxScroll) {
-              // Elastic resistance at STOP
-              const overscroll = targetScroll - maxScroll;
-              const elasticOffset = Math.min(50, overscroll * 0.3);
-              gsap.set(showcase, { x: -elasticOffset });
-              container.scrollLeft = maxScroll;
-            } else {
-              gsap.set(showcase, { x: 0 });
-              container.scrollLeft = targetScroll;
-            }
-          };
-
-          container.addEventListener('mousedown', onMouseDown);
-          container.addEventListener('mouseleave', onMouseLeave);
-          container.addEventListener('mouseup', onMouseUp);
-          container.addEventListener('mousemove', onMouseMove);
-
-          return () => {
-            observer.disconnect();
-            container.removeEventListener('touchstart', onTouchStart);
-            container.removeEventListener('touchmove', onTouchMove);
-            container.removeEventListener('touchend', onTouchEnd);
-            container.removeEventListener('mousedown', onMouseDown);
-            container.removeEventListener('mouseleave', onMouseLeave);
-            container.removeEventListener('mouseup', onMouseUp);
-            container.removeEventListener('mousemove', onMouseMove);
-          };
         });
 
         // Expertise Cards Reveal

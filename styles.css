@@ -1182,11 +1182,6 @@ html.lenis, html.lenis body {
 
 /* Mobile Seamless Smooth Horizontal Scroll */
 @media (max-width: 900px) {
-  .hero-display-headline {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.92);
-    paint-order: stroke fill;
-  }
-
   .work-section {
     position: relative;
     padding-top: clamp(40px, 7vw, 60px);
@@ -1203,39 +1198,19 @@ html.lenis, html.lenis body {
     padding-left: 0;
     padding-right: 0;
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    overscroll-behavior-x: auto;
-    cursor: grab;
-    touch-action: pan-x pan-y;
-  }
-
-  .work-fluid-container:active {
-    cursor: grabbing;
-  }
-
-  .work-fluid-container::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+    overflow: hidden;
   }
 
   .staggered-phones-showcase {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    gap: clamp(16px, 4vw, 24px);
+    gap: clamp(24px, 6vw, 40px);
     width: max-content;
-    /* Calculated padding so first and last cards snap perfectly to center of mobile viewport */
-    padding-left: max(20px, calc(50vw - clamp(130px, 38vw, 155px)));
-    padding-right: max(20px, calc(50vw - clamp(130px, 38vw, 155px)));
+    padding-left: clamp(20px, 6vw, 36px);
+    padding-right: clamp(48px, 16vw, 80px);
     margin-top: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     align-items: flex-start;
     will-change: transform;
   }
@@ -1247,21 +1222,18 @@ html.lenis, html.lenis body {
   }
 
   .phone-project-card {
-    flex: 0 0 clamp(260px, 76vw, 310px);
-    max-width: 310px;
+    flex: 0 0 clamp(270px, 78vw, 320px);
+    max-width: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    scroll-snap-align: center;
-    scroll-snap-stop: normal;
     opacity: 1 !important;
     transform: none !important;
-    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .phone-mockup-wrapper {
     width: 100%;
-    max-width: clamp(210px, 60vw, 250px);
+    max-width: clamp(220px, 64vw, 260px);
     margin: 0 auto;
     opacity: 1 !important;
     transform: none !important;
@@ -1277,7 +1249,7 @@ html.lenis, html.lenis body {
 
   .phone-project-info {
     width: 100%;
-    max-width: clamp(220px, 64vw, 260px);
+    max-width: clamp(230px, 68vw, 275px);
     margin-top: 16px;
     padding-top: 14px;
     opacity: 1 !important;

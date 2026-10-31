@@ -147,17 +147,23 @@
         color *= vignette;
         color = clamp(color, 0.0, 1.0);
 
-        // Dynamic Negative Typography Inversion
+        // Dynamic Negative Typography Inversion with Mathematically Aligned Border
         if (u_hasTextTexture == 1) {
           vec2 textUV = vec2(st.x, 1.0 - st.y);
-          float textMask = texture2D(u_textTexture, textUV).a;
+          vec4 textTex = texture2D(u_textTexture, textUV);
+          float fillMask = textTex.r;    // Text fill in Red channel
+          float strokeMask = textTex.g;  // Stroke border in Green channel
 
-          if (textMask > 0.0) {
+          if (fillMask > 0.0) {
             // True mathematical negative: exact complement of whatever is behind it
             vec3 negColor = vec3(1.0) - color;
+            color = mix(color, negColor, fillMask);
+          }
 
-            // Smooth anti-aliased edge blending
-            color = mix(color, negColor, textMask);
+          if (strokeMask > 0.0) {
+            // Crisp white border perfectly aligned on top of the text outline
+            vec3 borderColor = vec3(1.0, 1.0, 1.0);
+            color = mix(color, borderColor, strokeMask * 0.95);
           }
         }
 
@@ -263,8 +269,9 @@
         }
       }
 
+      const isMobile = window.innerWidth <= 900;
+
       textCtx.save();
-      textCtx.fillStyle = '#ffffff';
       textCtx.textAlign = 'center';
       textCtx.textBaseline = 'middle';
       textCtx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
@@ -274,6 +281,19 @@
 
       // Draw VEDANT and DHADGE in tight monumental editorial typography
       const lineGap = fontSize * 0.88;
+
+      // On mobile view: draw a thin white border directly on the glyph outline (Green channel)
+      if (isMobile) {
+        textCtx.strokeStyle = 'rgb(0, 255, 0)';
+        textCtx.lineWidth = Math.max(2.0, fontSize * 0.024);
+        textCtx.lineJoin = 'round';
+        textCtx.miterLimit = 2;
+        textCtx.strokeText('VEDANT', centerX, centerY - lineGap * 0.5);
+        textCtx.strokeText('DHADGE', centerX, centerY + lineGap * 0.5);
+      }
+
+      // Draw text fill in Red channel (fillMask)
+      textCtx.fillStyle = 'rgb(255, 0, 0)';
       textCtx.fillText('VEDANT', centerX, centerY - lineGap * 0.5);
       textCtx.fillText('DHADGE', centerX, centerY + lineGap * 0.5);
       textCtx.restore();
