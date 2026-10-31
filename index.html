@@ -277,10 +277,10 @@
       </div>
 
       <!-- The phones spread out to the full width of the page -->
-      <div class="work-fluid-container">
+      <div class="work-fluid-container" id="work-fluid-container">
         <div class="staggered-phones-showcase" id="phones-showcase">
           <!-- Phone 01: Sartthi CA Practice Manager -->
-          <article class="phone-project-card phone-col-1">
+          <article class="phone-project-card phone-col-1" data-index="0">
             <div class="phone-mockup-wrapper">
               <img src="assets/phone-sartthi.png" alt="Sartthi CA Practice Manager Mobile Interface" class="phone-mockup-img" loading="lazy">
             </div>
@@ -297,7 +297,7 @@
           </article>
 
           <!-- Phone 02: Malabar Heritage -->
-          <article class="phone-project-card phone-col-2">
+          <article class="phone-project-card phone-col-2" data-index="1">
             <div class="phone-mockup-wrapper">
               <img src="assets/phone-malabar.png" alt="Malabar Heritage Mobile Storefront" class="phone-mockup-img" loading="lazy">
             </div>
@@ -314,7 +314,7 @@
           </article>
 
           <!-- Phone 03: Impackt Packaging -->
-          <article class="phone-project-card phone-col-3">
+          <article class="phone-project-card phone-col-3" data-index="2">
             <div class="phone-mockup-wrapper">
               <img src="assets/phone-impackt.png" alt="Impackt Custom Packaging Engine" class="phone-mockup-img" loading="lazy">
             </div>
@@ -330,6 +330,28 @@
             </div>
           </article>
         </div>
+      </div>
+
+      <!-- Mobile Smooth Navigation Dots & Counter (Hidden on Desktop) -->
+      <div class="mobile-phones-nav" id="mobile-phones-nav" aria-label="Featured projects navigation">
+        <button class="mobile-nav-dot is-active" aria-label="Go to project 1: Sartthi CA Practice Manager" data-index="0">
+          <span class="dot-inner"></span>
+        </button>
+        <button class="mobile-nav-dot" aria-label="Go to project 2: Malabar Heritage" data-index="1">
+          <span class="dot-inner"></span>
+        </button>
+        <button class="mobile-nav-dot" aria-label="Go to project 3: Impackt Packaging" data-index="2">
+          <span class="dot-inner"></span>
+        </button>
+      </div>
+      <div class="mobile-swipe-hint" id="mobile-swipe-hint">
+        <span id="mobile-phone-counter">01 / 03</span>
+        <span>·</span>
+        <span>Swipe to explore</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"></path>
+          <path d="M12 5l7 7-7 7"></path>
+        </svg>
       </div>
 
       <!-- Bottom Archive Link Banner in standard container -->
@@ -871,99 +893,96 @@
         });
 
         // --------------------------------------------------------------------
-        // Mobile (<= 900px): Pinned Horizontal Scroll with Pop-up Phones
+        // Mobile (<= 900px): Seamless Native Smooth Horizontal Scroll
+        // Mobiles remain always 100% visible with zero choppy motion
         // --------------------------------------------------------------------
         mm.add("(max-width: 900px)", () => {
-          const showcase = document.getElementById('phones-showcase');
+          const container = document.getElementById('work-fluid-container');
           const cards = gsap.utils.toArray('.phone-project-card');
-          const workSection = document.getElementById('work');
+          const dots = gsap.utils.toArray('.mobile-nav-dot');
+          const counter = document.getElementById('mobile-phone-counter');
+          const showcase = document.getElementById('phones-showcase');
 
-          if (!showcase || cards.length === 0) return;
+          if (!container || cards.length === 0) return;
 
-          // Compute exact horizontal travel distance
-          const getScrollDistance = () => showcase.scrollWidth - window.innerWidth + 40;
-
-          // Horizontal scroll tween driven by vertical scroll scrubbing
-          const horizontalTween = gsap.to(showcase, {
-            x: () => -getScrollDistance(),
-            ease: 'none',
-            scrollTrigger: {
-              trigger: workSection,
-              start: 'top top',
-              end: () => '+=' + Math.max(800, getScrollDistance() * 1.5),
-              pin: true,
-              scrub: 0.8,
-              anticipatePin: 1,
-              invalidateOnRefresh: true
-            }
+          // Clear any conflicting transforms/opacities so phones are always 100% visible
+          cards.forEach(card => {
+            gsap.set(card, { clearProps: 'all' });
+            card.style.opacity = '1';
           });
+          if (showcase) gsap.set(showcase, { clearProps: 'all' });
 
-          // Card 0 (First Phone) initial entrance when reaching #work
-          gsap.fromTo(cards[0],
-            { scale: 0.88, y: 55, opacity: 0.25 },
-            {
-              scale: 1,
-              y: 0,
-              opacity: 1,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: workSection,
-                start: 'top 75%',
-                end: 'top top',
-                scrub: true
+          function setActiveIndex(idx) {
+            dots.forEach((dot, i) => {
+              dot.classList.toggle('is-active', i === idx);
+            });
+            if (counter) {
+              counter.textContent = `0${idx + 1} / 0${cards.length}`;
+            }
+          }
+
+          // Dot click smooth scroll navigation
+          dots.forEach((dot, i) => {
+            dot.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (cards[i]) {
+                cards[i].scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'nearest',
+                  inline: 'center'
+                });
+                setActiveIndex(i);
               }
-            }
-          );
-
-          // Card 0 slightly scales down as it slides left past center
-          gsap.to(cards[0], {
-            scale: 0.88,
-            opacity: 0.45,
-            ease: 'power1.inOut',
-            scrollTrigger: {
-              trigger: cards[0],
-              containerAnimation: horizontalTween,
-              start: 'left left',
-              end: 'right left',
-              scrub: true
-            }
+            });
           });
 
-          // Cards 1 and 2: popup as they scroll horizontally into center
-          cards.slice(1).forEach((card, idx) => {
-            gsap.fromTo(card,
-              { scale: 0.84, y: 65, opacity: 0.2 },
-              {
-                scale: 1,
-                y: 0,
-                opacity: 1,
-                ease: 'power2.out',
-                scrollTrigger: {
-                  trigger: card,
-                  containerAnimation: horizontalTween,
-                  start: 'left 95%',
-                  end: 'center 50%',
-                  scrub: true
-                }
+          // Precision intersection tracking for 120Hz smooth touch swiping
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                const idx = parseInt(entry.target.getAttribute('data-index') || '0', 10);
+                setActiveIndex(idx);
               }
-            );
-
-            // If not the last card, scale down as it exits to left
-            if (idx < cards.length - 2) {
-              gsap.to(card, {
-                scale: 0.88,
-                opacity: 0.45,
-                ease: 'power1.inOut',
-                scrollTrigger: {
-                  trigger: card,
-                  containerAnimation: horizontalTween,
-                  start: 'center 50%',
-                  end: 'right left',
-                  scrub: true
-                }
-              });
-            }
+            });
+          }, {
+            root: container,
+            threshold: [0.5, 0.75]
           });
+
+          cards.forEach(card => observer.observe(card));
+
+          // Fluid mouse drag-to-scroll support for desktop previewing
+          let isDown = false;
+          let startX = 0;
+          let scrollLeft = 0;
+
+          const onMouseDown = (e) => {
+            isDown = true;
+            startX = e.pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+          };
+          const onMouseLeave = () => { isDown = false; };
+          const onMouseUp = () => { isDown = false; };
+          const onMouseMove = (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 1.4;
+            container.scrollLeft = scrollLeft - walk;
+          };
+
+          container.addEventListener('mousedown', onMouseDown);
+          container.addEventListener('mouseleave', onMouseLeave);
+          container.addEventListener('mouseup', onMouseUp);
+          container.addEventListener('mousemove', onMouseMove);
+
+          return () => {
+            observer.disconnect();
+            container.removeEventListener('mousedown', onMouseDown);
+            container.removeEventListener('mouseleave', onMouseLeave);
+            container.removeEventListener('mouseup', onMouseUp);
+            container.removeEventListener('mousemove', onMouseMove);
+          };
         });
 
         // Expertise Cards Reveal

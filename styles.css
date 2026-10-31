@@ -1151,39 +1151,65 @@ body {
   gap: 10px;
 }
 
-/* Mobile Horizontal Pinned Scroll Track */
+/* Hide mobile navigation controls on desktop */
+@media (min-width: 901px) {
+  .mobile-phones-nav,
+  .mobile-swipe-hint {
+    display: none !important;
+  }
+}
+
+/* Mobile Seamless Smooth Horizontal Scroll */
 @media (max-width: 900px) {
   .work-section {
     position: relative;
-    padding-top: 50px;
-    padding-bottom: 70px;
+    padding-top: clamp(40px, 7vw, 60px);
+    padding-bottom: clamp(50px, 8vw, 80px);
     overflow: hidden;
   }
 
   .work-header-flex {
-    padding-bottom: 16px;
-    margin-bottom: 8px;
+    padding-bottom: 14px;
+    margin-bottom: 6px;
   }
 
   .work-fluid-container {
     padding-left: 0;
     padding-right: 0;
-    overflow: visible;
     width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+    cursor: grab;
+  }
+
+  .work-fluid-container:active {
+    cursor: grabbing;
+  }
+
+  .work-fluid-container::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
 
   .staggered-phones-showcase {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    gap: 28px;
+    gap: clamp(16px, 4vw, 24px);
     width: max-content;
-    padding-left: clamp(20px, 6vw, 32px);
-    padding-right: clamp(48px, 15vw, 80px);
-    margin-top: 28px;
-    margin-bottom: 20px;
+    /* Calculated padding so first and last cards snap perfectly to center of mobile viewport */
+    padding-left: max(20px, calc(50vw - clamp(130px, 38vw, 155px)));
+    padding-right: max(20px, calc(50vw - clamp(130px, 38vw, 155px)));
+    margin-top: 24px;
+    margin-bottom: 16px;
     align-items: flex-start;
-    will-change: transform;
   }
 
   .phone-col-1,
@@ -1193,32 +1219,43 @@ body {
   }
 
   .phone-project-card {
-    flex: 0 0 clamp(260px, 78vw, 310px);
+    flex: 0 0 clamp(260px, 76vw, 310px);
     max-width: 310px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform-origin: center bottom;
-    will-change: transform, opacity;
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .phone-mockup-wrapper {
     width: 100%;
-    max-width: clamp(215px, 62vw, 255px);
+    max-width: clamp(210px, 60vw, 250px);
     margin: 0 auto;
-    transform-origin: center bottom;
-    will-change: transform;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .phone-mockup-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.14)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.05));
+    opacity: 1 !important;
   }
 
   .phone-project-info {
     width: 100%;
-    max-width: clamp(225px, 66vw, 265px);
-    margin-top: 18px;
+    max-width: clamp(220px, 64vw, 260px);
+    margin-top: 16px;
     padding-top: 14px;
+    opacity: 1 !important;
   }
 
   .phone-project-title {
-    font-size: 18.5px;
+    font-size: 18px;
     margin-bottom: 6px;
   }
 
@@ -1230,6 +1267,69 @@ body {
 
   .phone-project-link {
     font-size: 11px;
+  }
+
+  /* Mobile Seamless Dots & Swipe Bar */
+  .mobile-phones-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    padding: 0 20px;
+  }
+
+  .mobile-nav-dot {
+    background: transparent;
+    border: none;
+    padding: 10px 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-nav-dot .dot-inner {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.22);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-nav-dot.is-active .dot-inner {
+    width: 26px;
+    border-radius: 8px;
+    background-color: var(--color-obsidian);
+  }
+
+  .mobile-swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-system-ui);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-felt-gray);
+    margin-top: 2px;
+    margin-bottom: 24px;
+  }
+
+  .mobile-swipe-hint svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+    animation: swipeHintPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes swipeHintPulse {
+    0%, 100% { transform: translateX(0); opacity: 0.6; }
+    50% { transform: translateX(4px); opacity: 1; }
   }
 }
 
