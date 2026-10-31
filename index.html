@@ -114,8 +114,11 @@
   </div>
 
   <main>
+    <!-- Spacer track providing 100vh document height so bottom sections scroll up naturally -->
+    <div class="hero-scroll-track" id="hero-scroll-track"></div>
+
     <!-- ==========================================================================
-         Hero Viewport — Bold & Rich Liquid Iridescent Atmosphere + Monumental Headline
+         Hero Viewport — Fixed at Top; Shrinks from 100vh into 66px Top Navbar
          ========================================================================== -->
     <section class="hero-viewport" id="hero">
       <!-- Full-Viewport Liquid Iridescent Canvas (Bold Oxblood, Amber Gold, Emerald Teal on Obsidian) -->
@@ -1006,11 +1009,13 @@
         ScrollTrigger.config({ ignoreMobileResize: true });
 
         // ====================================================================
-        // Hero-to-Navbar Morph & Reveal on Scroll
-        // At start (scroll 0): No navbar is visible. Hero is full screen.
-        // On scroll: Hero shrinks upwards into the top 66px header space;
-        // then the navbar background, VD logo, locale, and nav links appear.
+        // Hero Background Shrink into Navbar & Reveal on Scroll
+        // At start (scroll 0): No navbar visible. Hero is full screen.
+        // On scroll: Hero background physically shrinks from 100vh down into
+        // the top 66px navbar, while the bottom section (#manifesto) scrolls up.
+        // Then the VD logo, locale, and nav links appear on top of the hero bkg.
         // ====================================================================
+        const heroScrollTrack = document.getElementById('hero-scroll-track');
         const heroSection = document.getElementById('hero');
         const heroContent = heroSection ? heroSection.querySelector('.hero-content') : null;
         const heroHeadline = heroSection ? heroSection.querySelector('.hero-display-headline') : null;
@@ -1022,60 +1027,63 @@
         const navLinks = header ? header.querySelectorAll('.nav-menu li') : [];
         const navToggle = header ? header.querySelector('.nav-mobile-toggle') : null;
 
-        if (heroSection && header && heroContent) {
+        if (heroSection && header && heroContent && heroScrollTrack) {
           // Explicit initial state: No navbar at start
           gsap.set(header, { opacity: 0, y: -66, pointerEvents: 'none' });
           gsap.set([navBrand, navLocale, ...navLinks, navToggle].filter(Boolean), { opacity: 0, y: -10 });
 
           const heroMorphTl = gsap.timeline({
             scrollTrigger: {
-              trigger: heroSection,
+              trigger: heroScrollTrack,
               start: 'top top',
-              end: '+=450',
-              pin: true,
-              scrub: 0.3,
-              anticipatePin: 1
+              end: () => `+=${window.innerHeight - (window.innerWidth <= 768 ? 58 : 66)}`,
+              scrub: true
             }
           });
 
-          // 1. Secondary hero elements dissolve early (0% -> 35%)
+          // 1. Hero container & liquid background physically shrink from 100vh down to navbar height
+          heroMorphTl.fromTo(heroSection,
+            { height: () => window.innerHeight, borderBottomColor: 'rgba(255, 255, 255, 0)', boxShadow: '0 0 0 rgba(0,0,0,0)' },
+            { height: () => (window.innerWidth <= 768 ? 58 : 66), borderBottomColor: 'rgba(255, 255, 255, 0.14)', boxShadow: '0 8px 30px rgba(0,0,0,0.5)', ease: 'none', duration: 1 },
+            0
+          );
+
+          // 2. Secondary hero elements dissolve early (0% -> 30%)
           const secondaryHeroElements = [heroPills, heroBottom, heroBadge].filter(Boolean);
           if (secondaryHeroElements.length) {
             heroMorphTl.to(secondaryHeroElements, {
               opacity: 0,
               y: 20,
-              duration: 0.35,
+              duration: 0.3,
               ease: 'power1.out'
             }, 0);
           }
 
-          // 2. Hero content shrinks upwards towards top header (0% -> 80%)
+          // 3. Hero content headline scales down into the center of the shrinking 66px bar (0% -> 75%)
           heroMorphTl.to(heroContent, {
             scale: 0.25,
-            y: () => -(window.innerHeight * 0.5 - (window.innerWidth <= 768 ? 29 : 33)),
-            duration: 0.8,
-            ease: 'power2.inOut'
+            duration: 0.75,
+            ease: 'power1.inOut'
           }, 0);
 
-          // 3. Hero headline dissolves as it compresses into top bar (65% -> 85%)
+          // 4. Hero headline dissolves as hero reaches 66px (60% -> 80%)
           if (heroHeadline) {
             heroMorphTl.to(heroHeadline, {
               opacity: 0,
               duration: 0.2,
               ease: 'power1.out'
-            }, 0.65);
+            }, 0.6);
           }
 
-          // 4. Reveal navbar background and border (68% -> 90%)
+          // 5. Reveal header container and stagger in logo, locale, nav links, and toggle button (70% -> 100%)
           heroMorphTl.to(header, {
             opacity: 1,
             y: 0,
             pointerEvents: 'auto',
-            duration: 0.22,
+            duration: 0.25,
             ease: 'power2.out'
-          }, 0.68);
+          }, 0.7);
 
-          // 5. Stagger in the navbar logo, locale, links, and mobile toggle (75% -> 100%)
           const navItems = [navBrand, navLocale, ...navLinks, navToggle].filter(Boolean);
           if (navItems.length) {
             heroMorphTl.to(navItems, {
