@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects Archive — Vedant Dhadge | Full-Stack &amp; AI Engineer</title>
+  <meta name="description"
+    content="Comprehensive project archive and production platforms engineered by Vedant Dhadge, including high-concurrency ticketing, edge AI, and enterprise software.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/vd-logo-dark-mode.svg">
+
+  <!-- Core Editorial & Display Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- GSAP & ScrollTrigger for Cinematic Motion -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="page-sub">
+  <!-- ==========================================================================
+       Top Navigation Bar (Adaptive Light/Dark Mode)
+       ========================================================================== -->
+  <header class="monopo-header on-light" id="header">
+    <a href="index.html" class="nav-brand" aria-label="Vedant Dhadge Home">
+      <div class="nav-logo-box">
+        <img src="assets/vd-logo-dark-mode.svg" alt="VD Logo (Dark)" class="nav-logo logo-dark">
+        <img src="assets/vd-logo-light-mode.svg" alt="VD Logo (Light)" class="nav-logo logo-light">
+      </div>
+    </a>
+
+    <div class="nav-locale">
+      <span>EN</span>
+      <span>/</span>
+      <span>IN</span>
+      <span>/</span>
+      <span class="active">ARCHIVE</span>
+    </div>
+
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="index.html#work" class="nav-link">Work</a></li>
+        <li><a href="index.html#manifesto" class="nav-link">Manifesto</a></li>
+        <li><a href="index.html#lab" class="nav-link">Lab</a></li>
+        <li><a href="index.html#expertise" class="nav-link">Expertise</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="nav-mobile-toggle" id="mobile-menu-toggle" aria-label="Open Navigation">
+      MENU
+    </button>
+  </header>
+
+  <!-- ==========================================================================
+       Fullscreen Editorial Mobile Navigation Drawer
+       ========================================================================== -->
+  <div class="mobile-nav-overlay" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-nav-header">
+      <div class="nav-brand">
+        <div class="nav-logo-box">
+          <img src="assets/vd-logo-dark-mode.svg" alt="VD" class="nav-logo logo-dark">
+        </div>
+      </div>
+      <button class="mobile-nav-close" id="mobile-menu-close" aria-label="Close Navigation">
+        CLOSE ✕
+      </button>
+    </div>
+
+    <nav class="mobile-nav-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html#work" class="mobile-nav-link"><span class="mobile-nav-num">01</span><span>Featured Work</span></a></li>
+        <li><a href="index.html#manifesto" class="mobile-nav-link"><span class="mobile-nav-num">02</span><span>Manifesto</span></a></li>
+        <li><a href="index.html#lab" class="mobile-nav-link"><span class="mobile-nav-num">03</span><span>Lab Experiments</span></a></li>
+        <li><a href="index.html#expertise" class="mobile-nav-link"><span class="mobile-nav-num">04</span><span>Expertise</span></a></li>
+        <li><a href="projects.html" class="mobile-nav-link active"><span class="mobile-nav-num">05</span><span>All Projects Archive ↗</span></a></li>
+        <li><a href="about.html" class="mobile-nav-link"><span class="mobile-nav-num">06</span><span>About Me ↗</span></a></li>
+        <li><a href="#contact" class="mobile-nav-link"><span class="mobile-nav-num">07</span><span>Contact</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="mobile-nav-footer">
+      <div class="pill-tag pill-tag-dark"
+        style="margin-bottom: 12px; display: inline-flex; align-items: center; gap: 8px;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+        <span>Available for projects</span>
+      </div>
+      <p style="font-size: 13px; color: var(--color-felt-gray);">dhadgevedant@gmail.com</p>
+      <div style="display: flex; gap: 18px; margin-top: 10px;">
+        <a href="https://github.com/dhadgevedant" target="_blank" rel="noopener noreferrer"
+          style="color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 0.05em;">GitHub ↗</a>
+        <a href="https://linkedin.com/in/vedantdhadge" target="_blank" rel="noopener noreferrer"
+          style="color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 0.05em;">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         Page Hero (Paper Canvas)
+         ========================================================================== -->
+    <section class="page-hero">
+      <div class="monopo-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div class="section-label" style="margin-bottom: 0;">02 / Selected Works &amp; Archive</div>
+          <a href="index.html#work" class="nav-link" style="color: var(--color-felt-gray); font-size: 12px; letter-spacing: 0.06em;">
+            ← Back to Featured Showcase
+          </a>
+        </div>
+        <h1 class="page-hero-title">All Projects &amp; Systems</h1>
+        <p class="page-hero-subtitle">
+          A complete chronological archive of production platforms, high-concurrency ticketing architectures, privacy-first on-device AI, and automated digital tooling.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         All Archive Projects Grid (Full Fluid Width)
+         ========================================================================== -->
+    <section class="work-section" style="padding-top: 60px; padding-bottom: 120px;">
+      <div class="work-fluid-container">
+        <div class="work-header-flex">
+          <div>
+            <div class="section-label">Archive Catalog</div>
+            <h2 class="heading-anchor" style="margin-bottom: 0; font-size: clamp(24px, 2.5vw, 34px);">Engineering Systems</h2>
+          </div>
+          <p
+            style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray); letter-spacing: 0.08em; text-transform: uppercase;">
+            06 PRODUCTION &amp; OPEN-SOURCE BUILDS
+          </p>
+        </div>
+
+        <div class="project-list" style="margin-top: 48px;">
+          <!-- Project 01: Concert Ticket Booking Platform -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/Concert.jpeg" alt="Concert Ticket Booking Platform" loading="lazy">
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">View Case Study ↗</span>
+              </div>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 01 / 06 ]</span>
+              <span class="project-row-status">2024 · PRODUCTION SCALE</span>
+            </div>
+            <div>
+              <span class="project-row-category">High-Concurrency Web Architecture</span>
+              <h3 class="project-row-title">Concert Ticketing Platform</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ 3,000+ simultaneous checkout sessions &amp; dynamic QR verification
+            </div>
+            <p class="project-row-desc">
+              High-availability ticketing infrastructure supporting 3,000+ concurrent users for university festival
+              headlining Shirley Setia &amp; DJ Rubz. Engineered real-time seat reservation, category selection, secure
+              payment processing, and fast QR check-in verification without downtime.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">MERN Stack</span>
+                <span class="pill-tag">3K+ Users</span>
+                <span class="pill-tag">QR Verification</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 02: LocalAI -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/localai.jpeg" alt="LocalAI Platform Interface" loading="lazy">
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">Launch Application ↗</span>
+              </div>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 02 / 06 ]</span>
+              <span class="project-row-status">2025 · LIVE SYSTEM</span>
+            </div>
+            <div>
+              <span class="project-row-category">Privacy-First Edge AI</span>
+              <h3 class="project-row-title">LocalAI — On-Device LLM</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ Fully offline LLM pipelines with Apple Siri voice shortcut automation
+            </div>
+            <p class="project-row-desc">
+              Private on-device AI system running large language models locally on an isolated network. Engineered with
+              offline automation, absolute data sovereignty, zero telemetry, and integrated with Apple Siri for locally
+              processed voice intelligence.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">Ollama</span>
+                <span class="pill-tag">Apple Siri</span>
+                <span class="pill-tag">MERN</span>
+              </div>
+              <a href="https://localai.dhadge.in" target="_blank" rel="noopener noreferrer" class="ghost-pill-light">
+                Launch App ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 03: Invoice AI -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/invoiceAI.svg" alt="Invoice AI Architecture" loading="lazy">
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">View Repository ↗</span>
+              </div>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 03 / 06 ]</span>
+              <span class="project-row-status">2024 · OPEN SOURCE</span>
+            </div>
+            <div>
+              <span class="project-row-category">Intelligent Document Processing</span>
+              <h3 class="project-row-title">Invoice AI — OCR &amp; LLM</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ OpenCV contour bounding boxes + Ollama conversational query engine
+            </div>
+            <p class="project-row-desc">
+              AI-powered invoice analysis application that extracts text and identifies invoice fields with high
+              accuracy using optical character recognition, providing deep structural document intelligence.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">Python</span>
+                <span class="pill-tag">FastAPI</span>
+                <span class="pill-tag">React</span>
+              </div>
+              <a href="https://github.com/dhadgevedant/Invoice-AI" target="_blank" rel="noopener noreferrer"
+                class="ghost-pill-light">
+                GitHub Repo ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 04: Assignment Printer -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/assignmentPrinter.jpeg" alt="Assignment Printer Output" loading="lazy">
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">Explore Repository ↗</span>
+              </div>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 04 / 06 ]</span>
+              <span class="project-row-status">2024 · HARDWARE INTERFACE</span>
+            </div>
+            <div>
+              <span class="project-row-category">Generative Document Synthesis</span>
+              <h3 class="project-row-title">Assignment Printer</h3>
+            </div>
+            <div class="project-key-stat">
+                ✦ Stochastic baseline drift &amp; natural handwriting margin alignment
+            </div>
+            <p class="project-row-desc">
+              Clever Python tool that converts digital text into authentic handwritten output. Synthesizes natural human
+              inconsistencies, stochastic baseline drift, pressure variations, and aligns margins for direct printing
+              onto lined notebook pages.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">Python</span>
+                <span class="pill-tag">PIL</span>
+                <span class="pill-tag">Generative UI</span>
+              </div>
+              <a href="https://github.com/dhadgevedant/assignmentPrinter" target="_blank" rel="noopener noreferrer"
+                class="ghost-pill-light">
+                GitHub Repo ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 05: ProBunk Attendance Planner -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/proBunk.png" alt="ProBunk Dashboard" loading="lazy">
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">Explore Web App ↗</span>
+              </div>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 05 / 06 ]</span>
+              <span class="project-row-status">2024 · LIVE PWA</span>
+            </div>
+            <div>
+              <span class="project-row-category">Predictive Academic Analytics</span>
+              <h3 class="project-row-title">ProBunk — Attendance Planner</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ Timetable simulation algorithms for 75% attendance compliance
+            </div>
+            <p class="project-row-desc">
+              Algorithmic attendance tracking web application enabling university students to forecast percentages,
+              simulate future timetable absences, and maintain institutional 75% thresholds with predictive certainty.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">JavaScript</span>
+                <span class="pill-tag">Analytics</span>
+                <span class="pill-tag">PWA</span>
+              </div>
+              <a href="https://probunk.dhadge.in" target="_blank" rel="noopener noreferrer" class="ghost-pill-light">
+                Visit Platform ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 06: Prompt Tooling -->
+          <article class="project-row">
+            <div class="project-row-image">
+              <img src="assets/promptTooling.png" alt="Prompt Tooling Corporate Showcase" loading="lazy">
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">Visit Website ↗</span>
+              </div>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 06 / 06 ]</span>
+              <span class="project-row-status">2024 · CLIENT PLATFORM</span>
+            </div>
+            <div>
+              <span class="project-row-category">Industrial Portfolio &amp; Brand</span>
+              <h3 class="project-row-title">Prompt Tooling</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ Digital showcase for German high-precision industrial tooling
+            </div>
+            <p class="project-row-desc">
+              Digital showcase platform for an industrial precision tooling manufacturer specializing in high-tolerance
+              German equipment and manufacturing solutions in Ahilyanagar.
+            </p>
+            <div class="project-row-footer">
+              <div class="skills-pill-group" style="margin-top: 0;">
+                <span class="pill-tag">Responsive Design</span>
+                <span class="pill-tag">Brand Identity</span>
+                <span class="pill-tag">SEO</span>
+              </div>
+              <a href="https://prompttooling.dhadge.in" target="_blank" rel="noopener noreferrer"
+                class="ghost-pill-light">
+                Explore Website ↗
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Back to Homepage Navigation Box -->
+        <div style="margin-top: 80px; padding: 40px; background: rgba(0, 0, 0, 0.02); border: 1px solid rgba(0, 0, 0, 0.08); border-radius: var(--radius-cards); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+          <div>
+            <h4 style="font-size: 20px; font-weight: 500; margin: 0 0 6px 0; color: var(--color-obsidian);">View the Featured Commercial Platforms</h4>
+            <p style="font-size: 14px; color: var(--color-felt-gray); margin: 0;">Explore the full-width staggered interactive showcase featuring Sartthi CA, Malabar Heritage, and Impackt.</p>
+          </div>
+          <a href="index.html#work" class="ghost-pill-light" style="padding: 10px 24px; font-size: 13px;">
+            Return to Homepage Work Showcase ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Footer (Obsidian Full-Bleed Dark Band)
+         ========================================================================== -->
+    <footer class="monopo-footer" id="contact">
+      <div class="monopo-container">
+        <div class="footer-top">
+          <div>
+            <div class="section-label" style="color: var(--color-ash-mist);">Inquiries &amp; Collaboration</div>
+            <h2 class="footer-cta-title">
+              Let's create something<br>uncompromising.
+            </h2>
+          </div>
+          <div>
+            <a href="mailto:dhadgevedant@gmail.com" class="ghost-pill-dark">
+              dhadgevedant@gmail.com ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-grid">
+          <div>
+            <div class="footer-col-title">Services Provided</div>
+            <div class="footer-address-stack">
+              <p>Web &amp; App Development</p>
+              <p>Custom AI &amp; Chatbots</p>
+              <p>Document &amp; Image AI</p>
+              <p>Task &amp; Workflow Automation</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Direct Coordinates</div>
+            <div class="footer-address-stack">
+              <a href="mailto:dhadgevedant@gmail.com">dhadgevedant@gmail.com ↗</a>
+              <p>Ahilyanagar &amp; Pune, India</p>
+              <p>Open for Global &amp; Remote Roles</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Profiles &amp; Artifacts</div>
+            <div class="footer-address-stack">
+              <a href="https://github.com/dhadgevedant" target="_blank" rel="noopener noreferrer">GitHub / dhadgevedant
+                ↗</a>
+              <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" rel="noopener noreferrer">LinkedIn /
+                vedantdhadge ↗</a>
+              <a href="assets/VedantDhadge_Resume.pdf" target="_blank" download="VedantDhadge_Resume.pdf">Resume /
+                Curriculum Vitae (PDF) ↗</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Local Time &amp; Node</div>
+            <div class="footer-address-stack">
+              <p>Sanjivani College of Engineering</p>
+              <p>Maharashtra, India</p>
+              <div class="footer-clock-box">
+                <span class="clock-label">INDIA STANDARD TIME (UTC+5:30)</span>
+                <span id="live-ist-clock" class="clock-display">--:--:-- IST</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-brand-wrap">
+            <img src="assets/vd-logo-dark-mode.svg" alt="VD" class="footer-logo">
+            <p>© 2025 Vedant Dhadge. Crafted with architectural discipline &amp; editorial minimalism.</p>
+          </div>
+          <a href="index.html" class="nav-link" style="color: var(--color-felt-gray);">Back to Home ↑</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Mobile Navigation Drawer Controls
+      const mobileToggle = document.getElementById('mobile-menu-toggle');
+      const mobileClose = document.getElementById('mobile-menu-close');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      function openMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.add('is-active');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove('is-active');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
+      if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          closeMobileMenu();
+        });
+      });
+
+      // GSAP Animations
+      if (window.gsap && window.ScrollTrigger) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.project-row').forEach(row => {
+          gsap.fromTo(row,
+            { opacity: 0, y: 35 },
+            {
+              scrollTrigger: {
+                trigger: row,
+                start: 'top 90%',
+                once: true
+              },
+              opacity: 1,
+              y: 0,
+              duration: 0.85,
+              ease: 'power3.out'
+            }
+          );
+        });
+
+        ScrollTrigger.refresh();
+      }
+
+      // Real-Time IST Digital Clock
+      const clockEl = document.getElementById('live-ist-clock');
+      function updateISTClock() {
+        if (!clockEl) return;
+        const now = new Date();
+        const istString = now.toLocaleTimeString('en-US', {
+          timeZone: 'Asia/Kolkata',
+          hour12: true,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+        clockEl.textContent = `${istString} IST`;
+      }
+      setInterval(updateISTClock, 1000);
+      updateISTClock();
+    });
+  </script>
+</body>
+
+</html>

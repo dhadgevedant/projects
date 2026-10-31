@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Vedant Dhadge | Education, Background &amp; Leadership</title>
+  <meta name="description"
+    content="Background, education, GDG leadership, and honors of Vedant Dhadge — B.Tech Computer Engineering at Sanjivani College, Technoxian World Cup winner, and software engineer.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/vd-logo-dark-mode.svg">
+
+  <!-- Core Editorial & Display Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="page-sub">
+  <!-- ==========================================================================
+       Top Navigation Bar (Adaptive Light/Dark Mode)
+       ========================================================================== -->
+  <header class="monopo-header on-light" id="header">
+    <a href="index.html" class="nav-brand" aria-label="Vedant Dhadge Home">
+      <div class="nav-logo-box">
+        <img src="assets/vd-logo-dark-mode.svg" alt="VD Logo (Dark)" class="nav-logo logo-dark">
+        <img src="assets/vd-logo-light-mode.svg" alt="VD Logo (Light)" class="nav-logo logo-light">
+      </div>
+    </a>
+
+    <div class="nav-locale">
+      <span>EN</span>
+      <span>/</span>
+      <span>IN</span>
+      <span>/</span>
+      <a href="projects.html" style="color: inherit; text-decoration: none;">ARCHIVE</a>
+    </div>
+
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="index.html#work" class="nav-link">Work</a></li>
+        <li><a href="index.html#manifesto" class="nav-link">Manifesto</a></li>
+        <li><a href="index.html#lab" class="nav-link">Lab</a></li>
+        <li><a href="index.html#expertise" class="nav-link">Expertise</a></li>
+        <li><a href="about.html" class="nav-link active" style="color: var(--color-obsidian); font-weight: 600;">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="nav-mobile-toggle" id="mobile-menu-toggle" aria-label="Open Navigation">
+      MENU
+    </button>
+  </header>
+
+  <!-- ==========================================================================
+       Fullscreen Editorial Mobile Navigation Drawer
+       ========================================================================== -->
+  <div class="mobile-nav-overlay" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-nav-header">
+      <div class="nav-brand">
+        <div class="nav-logo-box">
+          <img src="assets/vd-logo-dark-mode.svg" alt="VD" class="nav-logo logo-dark">
+        </div>
+      </div>
+      <button class="mobile-nav-close" id="mobile-menu-close" aria-label="Close Navigation">
+        CLOSE ✕
+      </button>
+    </div>
+
+    <nav class="mobile-nav-body">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html#work" class="mobile-nav-link"><span class="mobile-nav-num">01</span><span>Featured Work</span></a></li>
+        <li><a href="index.html#manifesto" class="mobile-nav-link"><span class="mobile-nav-num">02</span><span>Manifesto</span></a></li>
+        <li><a href="index.html#lab" class="mobile-nav-link"><span class="mobile-nav-num">03</span><span>Lab Experiments</span></a></li>
+        <li><a href="index.html#expertise" class="mobile-nav-link"><span class="mobile-nav-num">04</span><span>Expertise</span></a></li>
+        <li><a href="projects.html" class="mobile-nav-link"><span class="mobile-nav-num">05</span><span>All Projects Archive ↗</span></a></li>
+        <li><a href="about.html" class="mobile-nav-link active"><span class="mobile-nav-num">06</span><span>About Me ↗</span></a></li>
+        <li><a href="#contact" class="mobile-nav-link"><span class="mobile-nav-num">07</span><span>Contact</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="mobile-nav-footer">
+      <div class="pill-tag pill-tag-dark"
+        style="margin-bottom: 12px; display: inline-flex; align-items: center; gap: 8px;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+        <span>Available for projects</span>
+      </div>
+      <p style="font-size: 13px; color: var(--color-felt-gray);">dhadgevedant@gmail.com</p>
+      <div style="display: flex; gap: 18px; margin-top: 10px;">
+        <a href="https://github.com/dhadgevedant" target="_blank" rel="noopener noreferrer"
+          style="color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 0.05em;">GitHub ↗</a>
+        <a href="https://linkedin.com/in/vedantdhadge" target="_blank" rel="noopener noreferrer"
+          style="color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 0.05em;">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         Page Hero (Paper Canvas)
+         ========================================================================== -->
+    <section class="page-hero">
+      <div class="monopo-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div class="section-label" style="margin-bottom: 0;">01 / Biography &amp; Background</div>
+          <a href="assets/VedantDhadge_Resume.pdf" target="_blank" download="VedantDhadge_Resume.pdf"
+            class="ghost-pill-light" style="padding: 10px 22px; font-size: 12.5px;">
+            <span style="margin-right: 6px;">↓</span> Download Resume (PDF)
+          </a>
+        </div>
+        <h1 class="page-hero-title">Vedant Dhadge</h1>
+        <p class="page-hero-subtitle">
+          Software Engineer, GDG Campus Lead, and World Cup Robotics Champion. Focused on building high-concurrency web systems, on-device AI pipelines, and architectural digital products.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         01 / Engineering Journey & Philosophy
+         ========================================================================== -->
+    <section class="manifesto-section" style="padding: 80px 0;">
+      <div class="monopo-container">
+        <div class="section-label">01 / Architectural Philosophy</div>
+        <h2 class="heading-whisper" style="font-size: clamp(26px, 3.2vw, 42px); line-height: 1.25;">
+          Engineering with discipline.<br>Designing with editorial silence.
+        </h2>
+
+        <div class="manifesto-grid" style="margin-top: 40px;">
+          <div class="editorial-reading-block">
+            <p>
+              I am a software engineer based in Maharashtra, India. My engineering work is grounded in the belief that software should be mathematically sound, resilient under load, and visually unencumbered. Rather than chasing ephemeral trends or adding layers of unnecessary bloat, I prioritize absolute system reliability, clean abstraction boundaries, and purposeful design.
+            </p>
+            <p>
+              Whether architecting ticketing infrastructure handling thousands of concurrent users during high-pressure live checkout events, developing privacy-first edge AI systems running offline via Ollama and Siri voice shortcuts, or directing robotics ground control telemetry at international championships, I approach every challenge with systemic precision.
+            </p>
+            <div class="manifesto-status-box">
+              <span class="status-indicator-dot"></span>
+              <span>Open for Software Engineering &amp; AI Roles Worldwide</span>
+            </div>
+          </div>
+
+          <div class="manifesto-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-val">8.2</div>
+              <div class="metric-label">Academic CGPA</div>
+              <div class="metric-sub">B.Tech Computer Engineering at Sanjivani College</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val">1st</div>
+              <div class="metric-label">World Cup Winner</div>
+              <div class="metric-sub">Technoxian World Cup 2025 Autonomous Robotics</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val">500+</div>
+              <div class="metric-label">Engineers Mentored</div>
+              <div class="metric-sub">Google Developer Group On-Campus Director</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val">3,000+</div>
+              <div class="metric-label">Concurrent Scale</div>
+              <div class="metric-sub">Zero-downtime concert ticketing architecture</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         02 / Formal Academic Education
+         ========================================================================== -->
+    <section class="manifesto-section" style="padding: 40px 0 80px; border-top: 1px solid rgba(0, 0, 0, 0.08);">
+      <div class="monopo-container">
+        <div class="section-label">02 / Academic Credentials</div>
+        <h2 class="heading-anchor">Formal Education</h2>
+
+        <div class="education-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <span class="credential-badge" style="margin-bottom: 8px;">UNDERGRADUATE DEGREE</span>
+              <h3 style="font-size: 24px; font-weight: 500; color: var(--color-obsidian); margin: 0 0 6px 0;">
+                Bachelor of Technology (B.Tech) in Computer Engineering
+              </h3>
+              <p style="font-size: 15px; color: var(--color-felt-gray); margin: 0;">
+                Sanjivani College of Engineering · Maharashtra, India
+              </p>
+            </div>
+            <div style="text-align: right;">
+              <span style="display: inline-block; font-size: 20px; font-weight: 600; color: #1a73e8; letter-spacing: -0.02em;">
+                CGPA 8.2 / 10.0
+              </span>
+              <p style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray); margin: 4px 0 0 0; text-transform: uppercase;">
+                Expected 2027 · Full-Time
+              </p>
+            </div>
+          </div>
+
+          <p style="font-size: 14.5px; line-height: 1.6; color: var(--color-felt-gray); margin-top: 20px;">
+            Pursuing a comprehensive curriculum encompassing algorithmic computation, machine learning pipelines, distributed systems, and low-level computer architecture. Active contributor to student technical initiatives and departmental software projects.
+          </p>
+
+          <h4 style="font-size: 13px; font-family: var(--font-system-ui); text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-obsidian); margin-top: 28px; margin-bottom: 12px;">
+            Core Coursework &amp; Academic Focus Areas
+          </h4>
+          <div class="coursework-grid">
+            <div class="coursework-item">Data Structures &amp; Algorithms</div>
+            <div class="coursework-item">Artificial Intelligence &amp; ML</div>
+            <div class="coursework-item">Database Management Systems</div>
+            <div class="coursework-item">Operating Systems &amp; Concurrency</div>
+            <div class="coursework-item">Computer Networks &amp; Security</div>
+            <div class="coursework-item">Software Engineering &amp; Architecture</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         03 / Honors, Experience & Community Leadership
+         ========================================================================== -->
+    <section class="manifesto-section" style="padding: 40px 0 100px; border-top: 1px solid rgba(0, 0, 0, 0.08);">
+      <div class="monopo-container">
+        <div class="section-label">03 / Experience &amp; Leadership</div>
+        <h2 class="heading-anchor">Honors &amp; Appointments</h2>
+
+        <div class="credentials-list" style="margin-top: 36px;">
+          <!-- 1: SARTTHI -->
+          <div class="credential-row">
+            <div>
+              <div class="credential-role">SARTTHI</div>
+              <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">Software Development Intern</div>
+              <span class="credential-badge">ENTERPRISE INTERNSHIP</span>
+            </div>
+            <div class="credential-desc">
+              Engineered frontend and backend features for Sartthi-CA &amp; Sartthi-Sales platforms. Maintained production support across 3 client enterprise accounts and streamlined corporate client onboarding workflows.
+            </div>
+            <div class="credential-year">2026</div>
+          </div>
+
+          <!-- 2: VISTARA -->
+          <div class="credential-row">
+            <div>
+              <div class="credential-role">VISTARA</div>
+              <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">Web Development Intern</div>
+              <span class="credential-badge">EDTECH PLATFORM</span>
+            </div>
+            <div class="credential-desc">
+              Developed live programming lab examination module, providing a LeetCode-like testing environment with AI anti-cheat answer analysis and automated unit test validation.
+            </div>
+            <div class="credential-year">2025</div>
+          </div>
+
+          <!-- 3: Technoxian World Cup -->
+          <div class="credential-row">
+            <div>
+              <div class="credential-role">Technoxian World Cup</div>
+              <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">🏆 1st Prize Winner</div>
+              <span class="credential-badge badge-gold">WORLD CHAMPION 2025</span>
+            </div>
+            <div class="credential-desc">
+              Integrated Drone Delivery website and autonomous theme bot solution, winning 1st place in the international robotics championship at the Technoxian World Cup.
+            </div>
+            <div class="credential-year">2025</div>
+          </div>
+
+          <!-- 4: Google Developer Group -->
+          <div class="credential-row">
+            <div>
+              <div class="credential-role">Google Developer Group</div>
+              <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">On-Campus Lead</div>
+              <span class="credential-badge">COMMUNITY LEADERSHIP</span>
+            </div>
+            <div class="credential-desc">
+              Directed college-level developer community with 500+ students across multiple academic branches, coordinating hackathons, open-source workshops, and cloud development events.
+            </div>
+            <div class="credential-year">2023 — 2024</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Footer (Obsidian Full-Bleed Dark Band)
+         ========================================================================== -->
+    <footer class="monopo-footer" id="contact">
+      <div class="monopo-container">
+        <div class="footer-top">
+          <div>
+            <div class="section-label" style="color: var(--color-ash-mist);">Inquiries &amp; Collaboration</div>
+            <h2 class="footer-cta-title">
+              Let's create something<br>uncompromising.
+            </h2>
+          </div>
+          <div>
+            <a href="mailto:dhadgevedant@gmail.com" class="ghost-pill-dark">
+              dhadgevedant@gmail.com ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-grid">
+          <div>
+            <div class="footer-col-title">Services Provided</div>
+            <div class="footer-address-stack">
+              <p>Web &amp; App Development</p>
+              <p>Custom AI &amp; Chatbots</p>
+              <p>Document &amp; Image AI</p>
+              <p>Task &amp; Workflow Automation</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Direct Coordinates</div>
+            <div class="footer-address-stack">
+              <a href="mailto:dhadgevedant@gmail.com">dhadgevedant@gmail.com ↗</a>
+              <p>Ahilyanagar &amp; Pune, India</p>
+              <p>Open for Global &amp; Remote Roles</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Profiles &amp; Artifacts</div>
+            <div class="footer-address-stack">
+              <a href="https://github.com/dhadgevedant" target="_blank" rel="noopener noreferrer">GitHub / dhadgevedant
+                ↗</a>
+              <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" rel="noopener noreferrer">LinkedIn /
+                vedantdhadge ↗</a>
+              <a href="assets/VedantDhadge_Resume.pdf" target="_blank" download="VedantDhadge_Resume.pdf">Resume /
+                Curriculum Vitae (PDF) ↗</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Local Time &amp; Node</div>
+            <div class="footer-address-stack">
+              <p>Sanjivani College of Engineering</p>
+              <p>Maharashtra, India</p>
+              <div class="footer-clock-box">
+                <span class="clock-label">INDIA STANDARD TIME (UTC+5:30)</span>
+                <span id="live-ist-clock" class="clock-display">--:--:-- IST</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-brand-wrap">
+            <img src="assets/vd-logo-dark-mode.svg" alt="VD" class="footer-logo">
+            <p>© 2025 Vedant Dhadge. Crafted with architectural discipline &amp; editorial minimalism.</p>
+          </div>
+          <a href="index.html" class="nav-link" style="color: var(--color-felt-gray);">Back to Home ↑</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Mobile Navigation Drawer Controls
+      const mobileToggle = document.getElementById('mobile-menu-toggle');
+      const mobileClose = document.getElementById('mobile-menu-close');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      function openMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.add('is-active');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove('is-active');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
+      if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          closeMobileMenu();
+        });
+      });
+
+      // Real-Time IST Digital Clock
+      const clockEl = document.getElementById('live-ist-clock');
+      function updateISTClock() {
+        if (!clockEl) return;
+        const now = new Date();
+        const istString = now.toLocaleTimeString('en-US', {
+          timeZone: 'Asia/Kolkata',
+          hour12: true,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+        clockEl.textContent = `${istString} IST`;
+      }
+      setInterval(updateISTClock, 1000);
+      updateISTClock();
+    });
+  </script>
+</body>
+
+</html>
