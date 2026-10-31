@@ -1019,6 +1019,187 @@ body {
   padding-bottom: 24px;
 }
 
+/* ==========================================================================
+   Staggered Vertical Phones Showcase (Desktop Parallax & Stagger)
+   ========================================================================== */
+.staggered-phones-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  align-items: flex-start;
+  margin-top: 70px;
+  padding-bottom: 40px;
+}
+
+/* Desktop-Only Staggered Vertical Offsets */
+@media (min-width: 901px) {
+  .phone-col-1 {
+    margin-top: 0px;
+  }
+
+  .phone-col-2 {
+    margin-top: 120px;
+  }
+
+  .phone-col-3 {
+    margin-top: 55px;
+  }
+}
+
+.phone-project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  will-change: transform, opacity;
+}
+
+.phone-mockup-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 310px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  will-change: transform;
+}
+
+.phone-mockup-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.12)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.phone-project-card:hover .phone-mockup-img {
+  transform: translateY(-8px) scale(1.025);
+  filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.18)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.08));
+}
+
+.phone-project-info {
+  width: 100%;
+  max-width: 310px;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding-top: 20px;
+}
+
+.phone-project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.phone-project-index {
+  font-family: var(--font-system-ui);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-felt-gray);
+  text-transform: uppercase;
+}
+
+.phone-project-badge {
+  font-family: var(--font-system-ui);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-obsidian);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.phone-project-title {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin-bottom: 8px;
+  color: var(--color-obsidian);
+}
+
+.phone-key-stat {
+  font-size: 12px;
+  font-family: var(--font-system-ui);
+  color: #1a73e8;
+  font-weight: 500;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.phone-project-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-felt-gray);
+  margin-bottom: 16px;
+}
+
+.phone-project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.phone-project-tags .pill-tag {
+  font-size: 11px;
+  padding: 4px 12px;
+}
+
+.phone-project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 18px;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-obsidian);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 75px;
+  transition: all 0.25s ease;
+  background: transparent;
+}
+
+.phone-project-btn:hover {
+  background: var(--color-obsidian);
+  color: var(--color-paper);
+  border-color: var(--color-obsidian);
+}
+
+/* Mobile & Tablet Fallback: Linear vertical stream */
+@media (max-width: 900px) {
+  .staggered-phones-showcase {
+    grid-template-columns: 1fr;
+    gap: 64px;
+    margin-top: 50px;
+  }
+
+  .phone-col-1,
+  .phone-col-2,
+  .phone-col-3 {
+    margin-top: 0 !important;
+  }
+
+  .phone-mockup-wrapper,
+  .phone-project-info {
+    max-width: 290px;
+  }
+}
+
 .project-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
