@@ -383,17 +383,17 @@
       </div>
     </section>
 
-    <!-- Elastic Squircle Section Transition (Protruding from white project section into black section) -->
-    <div class="squircle-elastic-divider" aria-hidden="true">
-      <svg class="squircle-elastic-svg" viewBox="0 0 1440 90" preserveAspectRatio="none">
-        <path id="squircle-morph-path" fill="#ffffff" d="M 0,0 L 1440,0 C 1140,0 1020,90 720,90 C 420,90 300,0 0,0 Z"></path>
-      </svg>
-    </div>
-
     <!-- ==========================================================================
          03 / What I Build (Obsidian Dark Band — Full-Bleed)
          ========================================================================== -->
     <section class="inverse-band" id="skills">
+      <!-- Elastic Squircle Section Transition (Protruding from white project section into black section) -->
+      <div class="squircle-elastic-divider" aria-hidden="true">
+        <svg class="squircle-elastic-svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path id="squircle-morph-path" fill="#ffffff" d="M 0,0 L 1440,0 C 1180,0 1080,120 860,120 L 580,120 C 360,120 260,0 0,0 Z"></path>
+        </svg>
+      </div>
+
       <a id="lab" style="position: absolute; opacity: 0; pointer-events: none;" aria-hidden="true"></a>
       <div class="monopo-container">
         <div class="lab-header-wrap">
@@ -1247,20 +1247,36 @@
 
         // Elastic Squircle Section Transition Rebound (Projects -> What I Build)
         const squircleDivider = document.querySelector('.squircle-elastic-divider');
-        if (squircleDivider) {
-          gsap.fromTo(squircleDivider,
-            { scaleY: 1 },
-            {
-              scaleY: 0,
-              ease: 'power2.inOut',
-              scrollTrigger: {
-                trigger: squircleDivider,
-                start: 'top 95%',
-                end: '+=350',
-                scrub: 0.6
-              }
+        const skillsSection = document.getElementById('skills');
+        if (squircleDivider && skillsSection) {
+          // Initialize state based on initial viewport position
+          const initialRect = skillsSection.getBoundingClientRect();
+          if (initialRect.top <= window.innerHeight * 0.52) {
+            gsap.set(squircleDivider, { scaleY: 0 });
+          } else {
+            gsap.set(squircleDivider, { scaleY: 1 });
+          }
+
+          ScrollTrigger.create({
+            trigger: skillsSection,
+            start: 'top 52%', // triggers when the top of What I Build is halfway into the viewport
+            onEnter: () => {
+              gsap.to(squircleDivider, {
+                scaleY: 0,
+                duration: 0.72,
+                ease: 'elastic.out(1.2, 0.38)',
+                overwrite: 'auto'
+              });
+            },
+            onLeaveBack: () => {
+              gsap.to(squircleDivider, {
+                scaleY: 1,
+                duration: 0.6,
+                ease: 'elastic.out(1.1, 0.42)',
+                overwrite: 'auto'
+              });
             }
-          );
+          });
         }
 
         // What I Build Cards Reveal
