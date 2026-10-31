@@ -52,7 +52,7 @@
       <ul class="nav-menu">
         <li><a href="#work" class="nav-link">Work</a></li>
         <li><a href="#manifesto" class="nav-link">Manifesto</a></li>
-        <li><a href="#lab" class="nav-link">Lab</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#expertise" class="nav-link">Expertise</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -84,7 +84,7 @@
         <li><a href="#work" class="mobile-nav-link"><span class="mobile-nav-num">01</span><span>Work</span></a></li>
         <li><a href="#manifesto" class="mobile-nav-link"><span
               class="mobile-nav-num">02</span><span>Manifesto</span></a></li>
-        <li><a href="#lab" class="mobile-nav-link"><span class="mobile-nav-num">03</span><span>Lab</span></a></li>
+        <li><a href="#skills" class="mobile-nav-link"><span class="mobile-nav-num">03</span><span>Skills &amp; Solutions</span></a></li>
         <li><a href="#expertise" class="mobile-nav-link"><span
               class="mobile-nav-num">04</span><span>Expertise</span></a></li>
         <li><a href="projects.html" class="mobile-nav-link"><span class="mobile-nav-num">05</span><span>All Projects
@@ -147,7 +147,7 @@
             </svg>
             <span>AI &amp; Chatbots</span>
           </a>
-          <a href="#lab" class="hero-service-pill">
+          <a href="#skills" class="hero-service-pill">
             <svg class="service-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
@@ -391,142 +391,263 @@
       </div>
     </section>
 
+    <!-- Elastic Squircle Section Transition (Protruding from white project section into black section) -->
+    <div class="squircle-elastic-divider" aria-hidden="true">
+      <svg class="squircle-elastic-svg" viewBox="0 0 1440 90" preserveAspectRatio="none">
+        <path id="squircle-morph-path" fill="#ffffff" d="M 0,0 L 1440,0 C 1140,0 1020,90 720,90 C 420,90 300,0 0,0 Z"></path>
+      </svg>
+    </div>
+
     <!-- ==========================================================================
-         03 / Engineering Lab & Archive (Obsidian Dark Band — Full-Bleed)
+         03 / What I Build (Obsidian Dark Band — Full-Bleed)
          ========================================================================== -->
-    <section class="inverse-band" id="lab">
+    <section class="inverse-band" id="skills">
+      <a id="lab" style="position: absolute; opacity: 0; pointer-events: none;" aria-hidden="true"></a>
       <div class="monopo-container">
         <div class="lab-header-wrap">
-          <div class="section-label" style="margin-bottom: 0;">03 / Engineering Lab &amp; Archive</div>
+          <div class="section-label" style="margin-bottom: 0;">03 / What I Build</div>
           <span class="lab-live-pill">
             <span class="status-pulse-teal"></span>
-            ACTIVE EXPERIMENTAL R&amp;D
+            AVAILABLE FOR ROLES &amp; FREELANCE CONTRACTS
           </span>
         </div>
-        <h2 class="heading-anchor">System Tools &amp; Experiments</h2>
+        <h2 class="heading-anchor">What I Build</h2>
 
-        <p class="editorial-reading-block" style="margin-bottom: 40px;">
-          Explorations in low-level utilities, automation scripts, encrypted communication pipes, and competitive
-          award-winning prototypes.
+        <p class="editorial-reading-block" style="margin-bottom: 48px; max-width: 680px;">
+          End-to-end full-stack platforms, sovereign on-device AI pipelines, and high-concurrency systems engineered for production scale, velocity, and reliability.
         </p>
 
-        <!-- Archive Grid (Strict 0px Corners, Hairline Borders) -->
-        <div class="archive-grid">
-          <div class="archive-card">
+        <!-- Consolidated 4-Card What I Build Grid -->
+        <div class="what-i-build-grid">
+          <!-- Card 01 -->
+          <div class="build-card">
             <div>
-              <div class="archive-card-top">
-                <div class="archive-card-num">EXP · 01 // 2025</div>
-                <span class="status-pulse-teal" title="Operational"></span>
-              </div>
-              <h4 class="archive-card-title">VISTARA Lab Exam</h4>
-              <div class="archive-card-sub">AI Anti-Cheat Assessment Module</div>
-              <p class="archive-card-desc">
-                Developed live programming lab examination module, providing a LeetCode-like testing environment with AI
-                anti-cheat answer analysis.
+              <div class="build-card-num">01 // SAAS &amp; WEB PLATFORMS</div>
+              <h3 class="build-card-title">Full-Stack Web &amp; SaaS Products</h3>
+              <p class="build-card-desc">
+                End-to-end development of modern web applications, enterprise client dashboards, and customer portals. Engineered with secure multi-tenant authentication, transactional databases, automated billing, and high-converting responsive interfaces.
               </p>
             </div>
-            <div class="archive-innovation-bullet">
-              ✦ Automated test-case execution &amp; code plagiarism detection
-            </div>
+            <div class="build-card-stack">Next.js · React · Node.js · PostgreSQL · FastAPI · Stripe</div>
           </div>
 
-          <div class="archive-card">
+          <!-- Card 02 -->
+          <div class="build-card">
             <div>
-              <div class="archive-card-top">
-                <div class="archive-card-num">EXP · 02 // 2026</div>
-                <span class="status-pulse-teal" title="Operational"></span>
-              </div>
-              <h4 class="archive-card-title">SARTTHI Platform</h4>
-              <div class="archive-card-sub">Enterprise Engineering Architecture</div>
-              <p class="archive-card-desc">
-                Engineered frontend and backend features for Sartthi-CA &amp; Sartthi-Sales platforms across 3 corporate
-                accounts.
+              <div class="build-card-num">02 // AI &amp; AUTOMATION</div>
+              <h3 class="build-card-title">Applied AI &amp; Workflow Automation</h3>
+              <p class="build-card-desc">
+                Private, zero-telemetry local LLM deployments (Ollama), context-aware RAG pipelines, automated document and invoice OCR extraction, and autonomous background bots eliminating repetitive manual operations.
               </p>
             </div>
-            <div class="archive-innovation-bullet">
-              ✦ Multi-tenant enterprise dashboard &amp; secure account services
-            </div>
+            <div class="build-card-stack">Ollama · Python · LangChain · OpenCV · Vector DBs · Playwright</div>
           </div>
 
-          <div class="archive-card">
+          <!-- Card 03 -->
+          <div class="build-card">
             <div>
-              <div class="archive-card-top">
-                <div class="archive-card-num">EXP · 03 // 2025</div>
-                <span class="status-pulse-teal" title="Award Winning"></span>
-              </div>
-              <h4 class="archive-card-title">Autonomous Drone Delivery</h4>
-              <div class="archive-card-sub" style="color: #ffb800;">🏆 Technoxian World Cup Winner</div>
-              <p class="archive-card-desc">
-                Integrated autonomous Drone Delivery platform and theme bot solution, winning 1st place internationally
-                at the Technoxian World Cup.
+              <div class="build-card-num">03 // SCALE &amp; INFRASTRUCTURE</div>
+              <h3 class="build-card-title">Scalable APIs &amp; High-Concurrency Backends</h3>
+              <p class="build-card-desc">
+                Decoupled microservice architectures, real-time WebSocket state synchronization, and sub-100ms Redis caching layers battle-tested under 3,000+ simultaneous checkout bursts without downtime or latency spikes.
               </p>
             </div>
-            <div class="archive-innovation-bullet">
-              ✦ Hardware telemetry synchronization &amp; ground control station web app
-            </div>
+            <div class="build-card-stack">FastAPI · Express · Redis · Docker · MongoDB · Nginx</div>
           </div>
 
-          <div class="archive-card">
+          <!-- Card 04 -->
+          <div class="build-card">
             <div>
-              <div class="archive-card-top">
-                <div class="archive-card-num">EXP · 04 // 2024</div>
-                <span class="status-pulse-teal" title="Operational"></span>
-              </div>
-              <h4 class="archive-card-title">WinLens Suite</h4>
-              <div class="archive-card-sub">Desktop Automation &amp; OCR Framework</div>
-              <p class="archive-card-desc">
-                System-level productivity framework streamlining desktop workflows, macro bindings, and rapid screen OCR
-                analysis.
+              <div class="build-card-num">04 // EXPERIENCE &amp; MOTION</div>
+              <h3 class="build-card-title">Interactive UI/UX &amp; Creative Engineering</h3>
+              <p class="build-card-desc">
+                Distinctive, high-converting digital showcases featuring fluid 60fps GPU WebGL shaders, Lenis/GSAP scroll physics, accessible semantic HTML, and strict mobile containment for flawless handheld navigation.
               </p>
             </div>
-            <div class="archive-innovation-bullet">
-              ✦ Low-latency desktop screen capture &amp; hotkey extraction macros
-            </div>
+            <div class="build-card-stack">WebGL / GLSL · GSAP · Lenis · Modern CSS · Figma-to-Code</div>
           </div>
         </div>
 
-        <!-- Categorized Technical Repertoire Matrix -->
-        <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.15);">
-          <div class="section-label">Core Technical Repertoire &amp; Systems Matrix</div>
-          <div class="repertoire-matrix">
-            <div>
-              <div class="repertoire-col-title">01 / Languages &amp; Core</div>
-              <div class="repertoire-pills">
-                <span class="repertoire-item">Python 3.11+</span>
-                <span class="repertoire-item">JavaScript (ESNext)</span>
-                <span class="repertoire-item">TypeScript</span>
-                <span class="repertoire-item">C++ / C</span>
-                <span class="repertoire-item">SQL &amp; NoSQL</span>
+        <!-- Multilayered Tech Stack Ribbon (Minimal SVGs with Rectangular Badges) -->
+        <div class="tech-icons-section">
+          <div class="tech-icons-header">
+            <span class="tech-icons-title">Frameworks &amp; Core Technologies</span>
+          </div>
+
+          <!-- Layer 1: Leftward Infinite Drift -->
+          <div class="tech-ribbon-row">
+            <div class="tech-ribbon-track track-left">
+              <!-- Set 1 -->
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2" fill="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg>
+                <span class="tech-badge-name">React</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.5 14.5l-5.6-7.8v7.8H8V7.5h1.9l5.6 7.8V7.5h1.9v9h-1.9z"/></svg>
+                <span class="tech-badge-name">Next.js</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 8.5h6v1.8H9.4V17H7.6v-6.7H5.5V8.5zm8.2 5.5c.6.4 1.3.6 2 .6.8 0 1.3-.3 1.3-.8 0-.5-.4-.7-1.4-1-1.4-.4-2.3-1-2.3-2.1 0-1.3 1.1-2.2 2.6-2.2.9 0 1.7.2 2.3.6l-.5 1.5c-.5-.3-1.1-.5-1.8-.5-.7 0-1.1.3-1.1.7 0 .5.4.7 1.4 1 1.5.4 2.3 1 2.3 2.2 0 1.4-1.1 2.3-2.8 2.3-1 0-2-.3-2.6-.7l.6-1.6z"/></svg>
+                <span class="tech-badge-name">TypeScript</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 16.5c.5.5 1.2.7 2 .7 1.5 0 2.2-.8 2.2-2.3V9.5h-1.8v5.3c0 .7-.3 1-1 1-.4 0-.8-.1-1.1-.3l-.3 1zm6.5-1c.6.6 1.4.9 2.3.9 1 0 1.7-.5 1.7-1.2 0-.8-.7-1.1-1.7-1.5-1.4-.5-2.5-1.1-2.5-2.4 0-1.3 1-2.2 2.6-2.2 1 0 1.8.3 2.4.8l-.5 1.3c-.5-.4-1.2-.6-1.9-.6-.8 0-1.3.4-1.3.9 0 .6.5.9 1.5 1.3 1.5.5 2.7 1.1 2.7 2.5 0 1.4-1.1 2.4-2.9 2.4-1.1 0-2.1-.4-2.8-1l.4-1.2z"/></svg>
+                <span class="tech-badge-name">JavaScript</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M11.9 2c-3.1 0-4.9.4-4.9 2.2V6h5v1.5H5.8C3.5 7.5 2 9 2 12s1.5 4.5 3.8 4.5h1.5v-2.2c0-1.8 1.8-2.3 4.6-2.3h4.6V7c0-2.3-1.5-5-4.6-5zm-1.8 2.3a.8.8 0 110 1.5.8.8 0 010-1.5zM12.1 22c3.1 0 4.9-.4 4.9-2.2V18h-5v-1.5h6.2c2.3 0 3.8-1.5 3.8-4.5s-1.5-4.5-3.8-4.5h-1.5v2.2c0 1.8-1.8 2.3-4.6 2.3H7.5V17c0 2.3 1.5 5 4.6 5zm1.8-2.3a.8.8 0 110-1.5.8.8 0 010 1.5z"/></svg>
+                <span class="tech-badge-name">Python</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12.5 4L7 13h5l-1 7 7-10h-5.5z"/></svg>
+                <span class="tech-badge-name">FastAPI</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/><path d="M12 22V12M12 12L3.5 7M12 12l8.5-5"/></svg>
+                <span class="tech-badge-name">Node.js</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3v12c0 1.7-3.6 3-8 3s-8-1.3-8-3V6z"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3M4 15c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+                <span class="tech-badge-name">PostgreSQL</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C12 2 6 9 6 15c0 3.3 2.7 6 6 6s6-2.7 6-6c0-6-6-13-6-13zm0 17.5c-2.5 0-4.5-2-4.5-4.5 0-3.5 3.5-8.5 4.5-10.2 1 1.7 4.5 6.7 4.5 10.2 0 2.5-2 4.5-4.5 4.5z"/></svg>
+                <span class="tech-badge-name">MongoDB</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 12l10 5 10-5M2 17l10 5 10-5"/></svg>
+                <span class="tech-badge-name">Redis</span>
+              </div>
+
+              <!-- Duplicate for seamless loop -->
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2" fill="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg>
+                <span class="tech-badge-name">React</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.5 14.5l-5.6-7.8v7.8H8V7.5h1.9l5.6 7.8V7.5h1.9v9h-1.9z"/></svg>
+                <span class="tech-badge-name">Next.js</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 8.5h6v1.8H9.4V17H7.6v-6.7H5.5V8.5zm8.2 5.5c.6.4 1.3.6 2 .6.8 0 1.3-.3 1.3-.8 0-.5-.4-.7-1.4-1-1.4-.4-2.3-1-2.3-2.1 0-1.3 1.1-2.2 2.6-2.2.9 0 1.7.2 2.3.6l-.5 1.5c-.5-.3-1.1-.5-1.8-.5-.7 0-1.1.3-1.1.7 0 .5.4.7 1.4 1 1.5.4 2.3 1 2.3 2.2 0 1.4-1.1 2.3-2.8 2.3-1 0-2-.3-2.6-.7l.6-1.6z"/></svg>
+                <span class="tech-badge-name">TypeScript</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 16.5c.5.5 1.2.7 2 .7 1.5 0 2.2-.8 2.2-2.3V9.5h-1.8v5.3c0 .7-.3 1-1 1-.4 0-.8-.1-1.1-.3l-.3 1zm6.5-1c.6.6 1.4.9 2.3.9 1 0 1.7-.5 1.7-1.2 0-.8-.7-1.1-1.7-1.5-1.4-.5-2.5-1.1-2.5-2.4 0-1.3 1-2.2 2.6-2.2 1 0 1.8.3 2.4.8l-.5 1.3c-.5-.4-1.2-.6-1.9-.6-.8 0-1.3.4-1.3.9 0 .6.5.9 1.5 1.3 1.5.5 2.7 1.1 2.7 2.5 0 1.4-1.1 2.4-2.9 2.4-1.1 0-2.1-.4-2.8-1l.4-1.2z"/></svg>
+                <span class="tech-badge-name">JavaScript</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M11.9 2c-3.1 0-4.9.4-4.9 2.2V6h5v1.5H5.8C3.5 7.5 2 9 2 12s1.5 4.5 3.8 4.5h1.5v-2.2c0-1.8 1.8-2.3 4.6-2.3h4.6V7c0-2.3-1.5-5-4.6-5zm-1.8 2.3a.8.8 0 110 1.5.8.8 0 010-1.5zM12.1 22c3.1 0 4.9-.4 4.9-2.2V18h-5v-1.5h6.2c2.3 0 3.8-1.5 3.8-4.5s-1.5-4.5-3.8-4.5h-1.5v2.2c0 1.8-1.8 2.3-4.6 2.3H7.5V17c0 2.3 1.5 5 4.6 5zm1.8-2.3a.8.8 0 110-1.5.8.8 0 010 1.5z"/></svg>
+                <span class="tech-badge-name">Python</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12.5 4L7 13h5l-1 7 7-10h-5.5z"/></svg>
+                <span class="tech-badge-name">FastAPI</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/><path d="M12 22V12M12 12L3.5 7M12 12l8.5-5"/></svg>
+                <span class="tech-badge-name">Node.js</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3v12c0 1.7-3.6 3-8 3s-8-1.3-8-3V6z"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3M4 15c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+                <span class="tech-badge-name">PostgreSQL</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C12 2 6 9 6 15c0 3.3 2.7 6 6 6s6-2.7 6-6c0-6-6-13-6-13zm0 17.5c-2.5 0-4.5-2-4.5-4.5 0-3.5 3.5-8.5 4.5-10.2 1 1.7 4.5 6.7 4.5 10.2 0 2.5-2 4.5-4.5 4.5z"/></svg>
+                <span class="tech-badge-name">MongoDB</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 12l10 5 10-5M2 17l10 5 10-5"/></svg>
+                <span class="tech-badge-name">Redis</span>
               </div>
             </div>
-            <div>
-              <div class="repertoire-col-title">02 / Full-Stack &amp; Services</div>
-              <div class="repertoire-pills">
-                <span class="repertoire-item">React &amp; Next.js</span>
-                <span class="repertoire-item">Node.js &amp; Express</span>
-                <span class="repertoire-item">FastAPI</span>
-                <span class="repertoire-item">MongoDB &amp; PostgreSQL</span>
-                <span class="repertoire-item">REST &amp; WebSockets</span>
+          </div>
+
+          <!-- Layer 2: Rightward Infinite Drift -->
+          <div class="tech-ribbon-row" style="margin-top: 14px;">
+            <div class="tech-ribbon-track track-right">
+              <!-- Set 1 -->
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M22 13c-.4-.1-1.7-.2-2.7.4-.5-.8-1.3-1.4-2.3-1.4-.2 0-.4 0-.6.1-.5-1.5-1.9-2.6-3.6-2.6-1.1 0-2.1.5-2.8 1.3-.4-.1-.7-.2-1.1-.2-.8 0-1.5.3-2.1.8-.4-.3-.9-.4-1.4-.4H2v3c0 4.4 3.6 8 8 8h6c4.4 0 7.8-3.4 8-7.7.1-.4 0-.8-.1-1.1-.6-.2-1.3-.2-1.9-.2zM5 11h2v2H5zm3 0h2v2H8zm3 0h2v2h-2zm-3-3h2v2H8zm3 0h2v2h-2zm3 3h2v2h-2zm0-3h2v2h-2z"/></svg>
+                <span class="tech-badge-name">Docker</span>
               </div>
-            </div>
-            <div>
-              <div class="repertoire-col-title">03 / AI &amp; Vision Systems</div>
-              <div class="repertoire-pills">
-                <span class="repertoire-item">Ollama &amp; Local LLMs</span>
-                <span class="repertoire-item">OpenCV &amp; Vision</span>
-                <span class="repertoire-item">RAG Pipelines</span>
-                <span class="repertoire-item">Apple Siri Integration</span>
-                <span class="repertoire-item">Vector Embeddings</span>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C9.5 2 7.5 4.5 7.5 7.5c0 1.2.4 2.3 1 3.2-.8 1-1.5 2.5-1.5 4.3 0 2.2 1.3 4 3 4.7-.6.7-1 1.5-1 2.3h6c0-.8-.4-1.6-1-2.3 1.7-.7 3-2.5 3-4.7 0-1.8-.7-3.3-1.5-4.3.6-.9 1-2 1-3.2C16.5 4.5 14.5 2 12 2zm-1.5 5.5a1 1 0 110-2 1 1 0 010 2zm3 0a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                <span class="tech-badge-name">Linux</span>
               </div>
-            </div>
-            <div>
-              <div class="repertoire-col-title">04 / Tooling &amp; Infrastructure</div>
-              <div class="repertoire-pills">
-                <span class="repertoire-item">Git &amp; GitHub</span>
-                <span class="repertoire-item">Playwright Automation</span>
-                <span class="repertoire-item">Linux / Shell Scripting</span>
-                <span class="repertoire-item">WebGL &amp; GLSL Shaders</span>
-                <span class="repertoire-item">Docker &amp; Cloud Workflows</span>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M8 7l8 1M8 17l8-6"/></svg>
+                <span class="tech-badge-name">Git</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 21 7 21 17 12 22 3 17 3 7"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="21" y2="7"/><line x1="12" y1="12" x2="3" y2="7"/></svg>
+                <span class="tech-badge-name">WebGL</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 8a5 5 0 100 8"/><path d="M14 12h3M15.5 10.5v3M18.5 12h3M20 10.5v3"/></svg>
+                <span class="tech-badge-name">C++</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="7" r="4"/><circle cx="7" cy="16" r="4"/><circle cx="17" cy="16" r="4"/></svg>
+                <span class="tech-badge-name">OpenCV</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 6c-3 0-4.8 1.5-5.4 4.5 1.2-1.5 2.7-2.1 4.5-1.8 1 .2 1.8 1 2.6 1.8 1.3 1.3 2.9 2.9 6.3 2.9 3 0 4.8-1.5 5.4-4.5-1.2 1.5-2.7 2.1-4.5 1.8-1-.2-1.8-1-2.6-1.8-1.3-1.3-2.9-2.9-6.3-2.9zm-6 6c-3 0-4.8 1.5-5.4 4.5 1.2-1.5 2.7-2.1 4.5-1.8 1 .2 1.8 1 2.6 1.8 1.3 1.3 2.9 2.9 6.3 2.9 3 0 4.8-1.5 5.4-4.5-1.2 1.5-2.7 2.1-4.5 1.8-1-.2-1.8-1-2.6-1.8-1.3-1.3-2.9-2.9-6.3-2.9z"/></svg>
+                <span class="tech-badge-name">Tailwind CSS</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 3l1.5 15L12 21l6.5-3L20 3H4z"/><path d="M16.5 7H7.5l.4 4h8l-.5 5-3.4 1-3.4-1-.2-2"/></svg>
+                <span class="tech-badge-name">HTML5</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 3l1.5 15L12 21l6.5-3L20 3H4z"/><path d="M16.5 7H7.5l.3 3.5h8.4l-.5 5.5-3.7 1-3.7-1-.3-2.5"/></svg>
+                <span class="tech-badge-name">CSS3</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                <span class="tech-badge-name">WebSockets</span>
+              </div>
+
+              <!-- Duplicate for seamless loop -->
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M22 13c-.4-.1-1.7-.2-2.7.4-.5-.8-1.3-1.4-2.3-1.4-.2 0-.4 0-.6.1-.5-1.5-1.9-2.6-3.6-2.6-1.1 0-2.1.5-2.8 1.3-.4-.1-.7-.2-1.1-.2-.8 0-1.5.3-2.1.8-.4-.3-.9-.4-1.4-.4H2v3c0 4.4 3.6 8 8 8h6c4.4 0 7.8-3.4 8-7.7.1-.4 0-.8-.1-1.1-.6-.2-1.3-.2-1.9-.2zM5 11h2v2H5zm3 0h2v2H8zm3 0h2v2h-2zm-3-3h2v2H8zm3 0h2v2h-2zm3 3h2v2h-2zm0-3h2v2h-2z"/></svg>
+                <span class="tech-badge-name">Docker</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C9.5 2 7.5 4.5 7.5 7.5c0 1.2.4 2.3 1 3.2-.8 1-1.5 2.5-1.5 4.3 0 2.2 1.3 4 3 4.7-.6.7-1 1.5-1 2.3h6c0-.8-.4-1.6-1-2.3 1.7-.7 3-2.5 3-4.7 0-1.8-.7-3.3-1.5-4.3.6-.9 1-2 1-3.2C16.5 4.5 14.5 2 12 2zm-1.5 5.5a1 1 0 110-2 1 1 0 010 2zm3 0a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                <span class="tech-badge-name">Linux</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M8 7l8 1M8 17l8-6"/></svg>
+                <span class="tech-badge-name">Git</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 21 7 21 17 12 22 3 17 3 7"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="21" y2="7"/><line x1="12" y1="12" x2="3" y2="7"/></svg>
+                <span class="tech-badge-name">WebGL</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 8a5 5 0 100 8"/><path d="M14 12h3M15.5 10.5v3M18.5 12h3M20 10.5v3"/></svg>
+                <span class="tech-badge-name">C++</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="7" r="4"/><circle cx="7" cy="16" r="4"/><circle cx="17" cy="16" r="4"/></svg>
+                <span class="tech-badge-name">OpenCV</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 6c-3 0-4.8 1.5-5.4 4.5 1.2-1.5 2.7-2.1 4.5-1.8 1 .2 1.8 1 2.6 1.8 1.3 1.3 2.9 2.9 6.3 2.9 3 0 4.8-1.5 5.4-4.5-1.2 1.5-2.7 2.1-4.5 1.8-1-.2-1.8-1-2.6-1.8-1.3-1.3-2.9-2.9-6.3-2.9zm-6 6c-3 0-4.8 1.5-5.4 4.5 1.2-1.5 2.7-2.1 4.5-1.8 1 .2 1.8 1 2.6 1.8 1.3 1.3 2.9 2.9 6.3 2.9 3 0 4.8-1.5 5.4-4.5-1.2 1.5-2.7 2.1-4.5 1.8-1-.2-1.8-1-2.6-1.8-1.3-1.3-2.9-2.9-6.3-2.9z"/></svg>
+                <span class="tech-badge-name">Tailwind CSS</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 3l1.5 15L12 21l6.5-3L20 3H4z"/><path d="M16.5 7H7.5l.4 4h8l-.5 5-3.4 1-3.4-1-.2-2"/></svg>
+                <span class="tech-badge-name">HTML5</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 3l1.5 15L12 21l6.5-3L20 3H4z"/><path d="M16.5 7H7.5l.3 3.5h8.4l-.5 5.5-3.7 1-3.7-1-.3-2.5"/></svg>
+                <span class="tech-badge-name">CSS3</span>
+              </div>
+              <div class="tech-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                <span class="tech-badge-name">WebSockets</span>
               </div>
             </div>
           </div>
@@ -543,6 +664,9 @@
           <div>
             <div class="section-label">04 / Technical Capabilities</div>
             <h2 class="heading-anchor" style="margin-bottom: 0;">Engineering Expertise</h2>
+            <p class="editorial-reading-block" style="margin-top: 14px; margin-bottom: 0; max-width: 620px;">
+              Production architectural patterns, edge AI runtimes, and distributed infrastructure engineered for resilient real-world performance.
+            </p>
           </div>
           <a href="about.html" class="ghost-pill-light" style="padding: 10px 24px; font-size: 13px;">
             About Vedant &amp; Education ↗
@@ -558,6 +682,18 @@
               Building high-performance production web applications engineered for speed, clean code maintainability,
               and seamless mobile responsiveness.
             </p>
+            <div class="domain-pipeline-box">
+              <div class="domain-pipeline-title">PRODUCTION ARCHITECTURE PIPELINE</div>
+              <div class="pipeline-track">
+                <span class="pipeline-node">Client Portal</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">Next.js Edge</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">FastAPI Async</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">PostgreSQL ACID</span>
+              </div>
+            </div>
             <ul class="expertise-capabilities">
               <li>Multi-tenant enterprise client portals &amp; compliance pipelines</li>
               <li>Real-time WebSocket synchronization &amp; transactional state</li>
@@ -581,6 +717,18 @@
               Designing privacy-first machine intelligence systems operating on local infrastructure with absolute data
               sovereignty and zero telemetry.
             </p>
+            <div class="domain-pipeline-box">
+              <div class="domain-pipeline-title">PRIVACY-FIRST INFERENCE PIPELINE</div>
+              <div class="pipeline-track">
+                <span class="pipeline-node">Doc / Camera</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">OpenCV OCR</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">Ollama Local</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">Vector RAG</span>
+              </div>
+            </div>
             <ul class="expertise-capabilities">
               <li>On-device Ollama LLM pipelines with Siri voice automation</li>
               <li>Optical Character Recognition (OCR) &amp; document parsing</li>
@@ -603,6 +751,18 @@
               Architecting zero-downtime ticketing and transactional systems capable of absorbing heavy peak-traffic
               checkout bursts under live production stress.
             </p>
+            <div class="domain-pipeline-box">
+              <div class="domain-pipeline-title">HIGH-CONCURRENCY PIPELINE</div>
+              <div class="pipeline-track">
+                <span class="pipeline-node">3k+ Influx</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">Nginx Proxy</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">Redis In-Memory</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">Dynamic QR Hash</span>
+              </div>
+            </div>
             <ul class="expertise-capabilities">
               <li>3,000+ simultaneous checkout sessions with zero latency</li>
               <li>Cryptographic dynamic QR verification check-in engines</li>
@@ -625,6 +785,18 @@
               Bridging the gap between software logic and physical hardware, desktop macro orchestration, and real-time
               telemetry protocols.
             </p>
+            <div class="domain-pipeline-box">
+              <div class="domain-pipeline-title">HARDWARE TELEMETRY PIPELINE</div>
+              <div class="pipeline-track">
+                <span class="pipeline-node">Ground Station</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">Telemetry Sync</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">Firmware Bridge</span>
+                <span class="pipeline-arrow">➔</span>
+                <span class="pipeline-node">WebGL HUD</span>
+              </div>
+            </div>
             <ul class="expertise-capabilities">
               <li>Technoxian World Cup autonomous drone ground station telemetry</li>
               <li>System-level desktop macro frameworks &amp; screen OCR tools</li>
@@ -791,10 +963,9 @@
         });
       });
 
-      // Adaptive Header color swap on scroll (Throttled with requestAnimationFrame to eliminate main-thread layout thrashing)
+      // Adaptive Header color swap on scroll (Throttled with requestAnimationFrame)
       const header = document.getElementById('header');
-      const labSection = document.getElementById('lab');
-      const contactSection = document.getElementById('contact');
+      const darkSections = document.querySelectorAll('.inverse-band, .monopo-footer');
       let headerRafId = null;
       let isDarkState = false;
 
@@ -803,16 +974,12 @@
         const scrollY = window.scrollY;
 
         if (scrollY > 50) {
-          // Avoid expensive getBoundingClientRect layout calls during hero and featured projects scrolling
           let isDark = false;
-          if (scrollY > 1500) {
-            if (labSection) {
-              const rect = labSection.getBoundingClientRect();
-              if (rect.top <= 66 && rect.bottom >= 66) isDark = true;
-            }
-            if (!isDark && contactSection) {
-              const rect = contactSection.getBoundingClientRect();
-              if (rect.top <= 66 && rect.bottom >= 66) isDark = true;
+          for (let i = 0; i < darkSections.length; i++) {
+            const rect = darkSections[i].getBoundingClientRect();
+            if (rect.top <= 66 && rect.bottom >= 66) {
+              isDark = true;
+              break;
             }
           }
 
@@ -1123,6 +1290,43 @@
           });
         });
 
+        // Elastic Squircle Section Transition Rebound (Projects -> What I Build)
+        const squircleDivider = document.querySelector('.squircle-elastic-divider');
+        if (squircleDivider) {
+          gsap.fromTo(squircleDivider,
+            { scaleY: 1 },
+            {
+              scaleY: 0,
+              ease: 'power2.inOut',
+              scrollTrigger: {
+                trigger: squircleDivider,
+                start: 'top 95%',
+                end: '+=350',
+                scrub: 0.6
+              }
+            }
+          );
+        }
+
+        // What I Build Cards Reveal
+        gsap.utils.toArray('.build-card').forEach((card, i) => {
+          gsap.fromTo(card,
+            { opacity: 0, y: 30 },
+            {
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 92%',
+                once: true
+              },
+              opacity: 1,
+              y: 0,
+              duration: 0.75,
+              delay: (i % 2) * 0.1,
+              ease: 'power3.out'
+            }
+          );
+        });
+
         // Expertise Cards Reveal
         gsap.utils.toArray('.expertise-card').forEach((card, i) => {
           gsap.fromTo(card,
@@ -1142,26 +1346,32 @@
           );
         });
 
-        // Lab Cards Reveal
-        gsap.utils.toArray('.archive-card').forEach((card, i) => {
-          gsap.fromTo(card,
-            { opacity: 0, y: 30 },
-            {
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 92%',
-                once: true
-              },
-              opacity: 1,
-              y: 0,
-              duration: 0.75,
-              delay: (i % 2) * 0.1,
-              ease: 'power3.out'
-            }
-          );
-        });
-
         ScrollTrigger.refresh();
+      }
+
+      // Dynamic Cursor Spotlight Tracking on What I Build Cards
+      const buildCards = document.querySelectorAll('.build-card');
+      buildCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+      });
+
+      // Magnetic Cursor Interaction on CTA Pills (Fine pointer desktop)
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.querySelectorAll('.ghost-pill-light, .ghost-pill-dark, .ghost-pill-hero').forEach(btn => {
+          btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) * 0.28;
+            const y = (e.clientY - rect.top - rect.height / 2) * 0.28;
+            gsap.to(btn, { x, y, duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
+          });
+          btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1.1, 0.4)', overwrite: 'auto' });
+          });
+        });
       }
 
       // Real-Time IST Digital Clock
