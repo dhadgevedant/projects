@@ -994,26 +994,32 @@
           // Calculate travel distance so Phone 3 glides perfectly into center view
           const getScrollDistance = () => Math.max(300, showcase.scrollWidth - window.innerWidth);
 
-          // Dedicated Entrance and Exit resting buffers:
-          // 1. Entrance Buffer: Soft vertical deceleration (y: 46px -> 0px via power2.out)
-          //    absorbs incoming vertical momentum so the page coasts softly to a stop without a hard wall.
-          // 2. Horizontal glide starts slowly with power2.inOut ease-in, transitioning seamlessly from the settling motion.
-          // 3. Exit Buffer: Stops softly at Phone 3, requiring another deliberate swipe to unpin & exit.
-          const getEntryBuffer = () => Math.round(Math.max(280, window.innerHeight * 0.40));
-          const getExitBuffer = () => Math.round(Math.max(280, window.innerHeight * 0.40));
+          // Slower scroll sensitivity and individual project pauses:
+          // 1. Pause 1 (Phone 1): Soft vertical settling (y: 46 -> 0) into Phone 1, followed by a steady hold pause.
+          // 2. Glide 1 (Phone 1 -> Phone 2): Generous scroll travel with power2.inOut ease (slow exit & slow entrance).
+          // 3. Pause 2 (Phone 2): Steady hold pause centered directly on Project 02.
+          // 4. Glide 2 (Phone 2 -> Phone 3): Generous scroll travel with power2.inOut ease (slow exit & slow entrance).
+          // 5. Pause 3 (Phone 3): Steady hold pause centered directly on Project 03 before unpinning.
+          const getPause1 = () => Math.round(Math.max(280, window.innerHeight * 0.38));
+          const getGlide1 = () => Math.round(Math.max(420, window.innerHeight * 0.55));
+          const getPause2 = () => Math.round(Math.max(280, window.innerHeight * 0.38));
+          const getGlide2 = () => Math.round(Math.max(420, window.innerHeight * 0.55));
+          const getPause3 = () => Math.round(Math.max(280, window.innerHeight * 0.38));
+          const getTotalScroll = () => getPause1() + getGlide1() + getPause2() + getGlide2() + getPause3();
 
           let currentIdx = -1;
 
-          const entryDist = getEntryBuffer();
-          const exitDist = getExitBuffer();
-          const moveDist = getScrollDistance();
-          const hStartOffset = entryDist * 0.75;
+          const pause1 = getPause1();
+          const glide1 = getGlide1();
+          const pause2 = getPause2();
+          const glide2 = getGlide2();
+          const pause3 = getPause3();
 
           const mobileTimeline = gsap.timeline({
             scrollTrigger: {
               trigger: pinContainer,
               start: 'top top',
-              end: () => `+=${getEntryBuffer() * 0.75 + getScrollDistance() + getExitBuffer()}`,
+              end: () => `+=${getTotalScroll()}`,
               pin: pinContainer,
               pinSpacing: true,
               anticipatePin: 1,
@@ -1023,23 +1029,24 @@
               preventOverlaps: true,
               onUpdate: (self) => {
                 const p = self.progress;
-                const currentEntry = getEntryBuffer();
-                const currentExit = getExitBuffer();
-                const currentMove = getScrollDistance();
-                const currentHStart = currentEntry * 0.75;
-                const currentTotal = currentHStart + currentMove + currentExit;
+                const currentP1 = getPause1();
+                const currentG1 = getGlide1();
+                const currentP2 = getPause2();
+                const currentG2 = getGlide2();
+                const currentP3 = getPause3();
+                const currentTotal = currentP1 + currentG1 + currentP2 + currentG2 + currentP3;
 
-                const startRatio = currentHStart / currentTotal;
-                const endRatio = (currentHStart + currentMove) / currentTotal;
+                // Thresholds halfway through each glide phase
+                const t1 = (currentP1 + currentG1 * 0.5) / currentTotal;
+                const t2 = (currentP1 + currentG1 + currentP2 + currentG2 * 0.5) / currentTotal;
 
                 let idx = 0;
-                if (p <= startRatio) {
+                if (p < t1) {
                   idx = 0;
-                } else if (p >= endRatio) {
-                  idx = 2;
+                } else if (p < t2) {
+                  idx = 1;
                 } else {
-                  const moveProgress = (p - startRatio) / (endRatio - startRatio);
-                  idx = moveProgress < 0.35 ? 0 : (moveProgress < 0.72 ? 1 : 2);
+                  idx = 2;
                 }
 
                 if (idx !== currentIdx) {
@@ -1055,23 +1062,32 @@
             }
           });
 
-          // 1. Entrance soft vertical deceleration:
-          // Pinned element absorbs incoming vertical swipe momentum, coasting smoothly upward into resting place
+          // 1. Entrance soft vertical deceleration into Phone 1:
           mobileTimeline.fromTo(showcase,
             { y: 46 },
-            { y: 0, ease: 'power2.out', duration: entryDist },
+            { y: 0, ease: 'power2.out', duration: pause1 },
             0
           );
 
-          // 2. Horizontal glide: Starts slowly (power2.inOut ease-in) and glides gracefully into Phone 3
-          mobileTimeline.to(showcase, {
-            x: () => -getScrollDistance(),
-            ease: 'power2.inOut',
-            duration: moveDist
-          }, hStartOffset);
+          // 2. Glide 1: Smooth horizontal slide from Project 1 to Project 2 (slow ease-in & slow ease-out)
+          mobileTimeline.fromTo(showcase,
+            { x: 0 },
+            { x: () => -getScrollDistance() * 0.5, ease: 'power2.inOut', duration: glide1 },
+            pause1
+          );
 
-          // 3. Exit rest buffer: Phone 3 rests before unpinning
-          mobileTimeline.to({}, { duration: exitDist }, hStartOffset + moveDist);
+          // 3. Pause 2: Project 02 slow stopping pause
+          mobileTimeline.to({}, { duration: pause2 }, pause1 + glide1);
+
+          // 4. Glide 2: Smooth horizontal slide from Project 2 to Project 3 (slow ease-in & slow ease-out)
+          mobileTimeline.fromTo(showcase,
+            { x: () => -getScrollDistance() * 0.5 },
+            { x: () => -getScrollDistance(), ease: 'power2.inOut', duration: glide2 },
+            pause1 + glide1 + pause2
+          );
+
+          // 5. Pause 3: Project 03 slow stopping pause before unpinning
+          mobileTimeline.to({}, { duration: pause3 }, pause1 + glide1 + pause2 + glide2);
 
           // Dot click smooth scroll navigation
           dots.forEach((dot, i) => {
@@ -1079,17 +1095,22 @@
               e.preventDefault();
               const st = mobileTimeline.scrollTrigger;
               if (st) {
-                const currentEntry = getEntryBuffer();
-                const currentExit = getExitBuffer();
-                const currentMove = getScrollDistance();
-                const currentHStart = currentEntry * 0.75;
+                const currentP1 = getPause1();
+                const currentG1 = getGlide1();
+                const currentP2 = getPause2();
+                const currentG2 = getGlide2();
+                const currentP3 = getPause3();
+
                 let targetY;
                 if (i === 0) {
-                  targetY = st.start + currentHStart * 0.5;
+                  // Center of Pause 1 (fully settled on Phone 1)
+                  targetY = st.start + currentP1 * 0.7;
                 } else if (i === 1) {
-                  targetY = st.start + currentHStart + currentMove * 0.5;
+                  // Center of Pause 2 (settled on Phone 2)
+                  targetY = st.start + currentP1 + currentG1 + currentP2 * 0.5;
                 } else {
-                  targetY = st.start + currentHStart + currentMove + currentExit * 0.5;
+                  // Center of Pause 3 (settled on Phone 3)
+                  targetY = st.start + currentP1 + currentG1 + currentP2 + currentG2 + currentP3 * 0.5;
                 }
 
                 if (window.lenis) {
