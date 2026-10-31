@@ -782,40 +782,61 @@
         });
       });
 
-      // Adaptive Header color swap on scroll
+      // Adaptive Header color swap on scroll (Throttled with requestAnimationFrame to eliminate main-thread layout thrashing)
       const header = document.getElementById('header');
       const labSection = document.getElementById('lab');
       const contactSection = document.getElementById('contact');
+      let headerRafId = null;
+      let isDarkState = false;
 
       function updateHeader() {
         if (!header) return;
         const scrollY = window.scrollY;
 
         if (scrollY > 50) {
-          // Check if currently scrolling over an inverse dark band
+          // Avoid expensive getBoundingClientRect layout calls during hero and featured projects scrolling
           let isDark = false;
-          if (labSection) {
-            const rect = labSection.getBoundingClientRect();
-            if (rect.top <= 66 && rect.bottom >= 66) isDark = true;
-          }
-          if (contactSection) {
-            const rect = contactSection.getBoundingClientRect();
-            if (rect.top <= 66 && rect.bottom >= 66) isDark = true;
+          if (scrollY > 1500) {
+            if (labSection) {
+              const rect = labSection.getBoundingClientRect();
+              if (rect.top <= 66 && rect.bottom >= 66) isDark = true;
+            }
+            if (!isDark && contactSection) {
+              const rect = contactSection.getBoundingClientRect();
+              if (rect.top <= 66 && rect.bottom >= 66) isDark = true;
+            }
           }
 
-          if (isDark) {
-            header.classList.add('on-dark');
-            header.classList.remove('on-light');
-          } else {
-            header.classList.add('on-light');
-            header.classList.remove('on-dark');
+          if (isDark !== isDarkState) {
+            isDarkState = isDark;
+            if (isDark) {
+              header.classList.add('on-dark');
+              header.classList.remove('on-light');
+            } else {
+              header.classList.add('on-light');
+              header.classList.remove('on-dark');
+            }
+          } else if (!header.classList.contains('on-light') && !header.classList.contains('on-dark')) {
+            header.classList.add(isDark ? 'on-dark' : 'on-light');
           }
         } else {
-          header.classList.remove('on-light', 'on-dark');
+          if (header.classList.contains('on-light') || header.classList.contains('on-dark')) {
+            header.classList.remove('on-light', 'on-dark');
+          }
+          isDarkState = false;
         }
       }
 
-      window.addEventListener('scroll', updateHeader, { passive: true });
+      function throttledHeaderUpdate() {
+        if (!headerRafId) {
+          headerRafId = requestAnimationFrame(() => {
+            updateHeader();
+            headerRafId = null;
+          });
+        }
+      }
+
+      window.addEventListener('scroll', throttledHeaderUpdate, { passive: true });
       updateHeader();
 
       // GSAP Animations with patient unhurried easing: cubic-bezier(0.19, 1, 0.22, 1)
@@ -937,6 +958,14 @@
         // Thumb moves vertically -> Screen smoothly glides horizontally
         // Ultra-light (scrub: 0.1), zero heaviness, seamless start and stop
         // --------------------------------------------------------------------
+        // --------------------------------------------------------------------
+        // Mobile (<= 900px): Pinned Horizontal Glide Driven by Vertical Thumb Scroll
+        // GPU Composited, Strict Containment & Layout Boundaries
+        // Dedicated Entrance & Exit Resting Buffers:
+        // - Reaching the section: stops at start (Phone 1). Next swipe glides horizontally.
+        // - Reaching the end: stops at Phone 3. A longer swipe exits the section.
+        // - Scrub damping (0.25s) absorbs thumb-lift inertia physics without stutter.
+        // --------------------------------------------------------------------
         mm.add("(max-width: 900px)", () => {
           const showcase = document.getElementById('phones-showcase');
           const cards = gsap.utils.toArray('.phone-project-card');
@@ -956,22 +985,51 @@
           // Calculate travel distance so Phone 3 glides perfectly into center view
           const getScrollDistance = () => Math.max(300, showcase.scrollWidth - window.innerWidth);
 
+          // Dedicated Entrance and Exit resting buffers:
+          // 1. When reaching start, section stops & rests at Phone 1. Next swipe starts horizontal scroll.
+          // 2. When reaching Phone 3, section stops & rests at Phone 3. A longer swipe is required to unpin & exit.
+          const getEntryBuffer = () => Math.round(Math.max(280, window.innerHeight * 0.42));
+          const getExitBuffer = () => Math.round(Math.max(280, window.innerHeight * 0.42));
+
           let currentIdx = -1;
 
-          const horizontalTween = gsap.to(showcase, {
-            x: () => -getScrollDistance(),
-            ease: 'none',
+          const entryDist = getEntryBuffer();
+          const exitDist = getExitBuffer();
+          const moveDist = getScrollDistance();
+          const totalDist = entryDist + moveDist + exitDist;
+
+          const mobileTimeline = gsap.timeline({
             scrollTrigger: {
               trigger: pinContainer,
-              start: 'top top', // Pin to full viewport height (phone starts below 58px header via padding-top)
-              end: () => '+=' + getScrollDistance(),
+              start: 'top top',
+              end: () => `+=${getEntryBuffer() + getScrollDistance() + getExitBuffer()}`,
               pin: pinContainer,
               pinSpacing: true,
-              scrub: true, // 1:1 direct tracking with finger — zero lag, zero choppiness
+              scrub: 0.25, // 0.25s lerp dampens thumb-lift momentum hitching completely
               invalidateOnRefresh: true,
+              fastScrollEnd: false,
+              preventOverlaps: true,
               onUpdate: (self) => {
                 const p = self.progress;
-                const idx = p < 0.35 ? 0 : (p < 0.72 ? 1 : 2);
+                const currentEntry = getEntryBuffer();
+                const currentExit = getExitBuffer();
+                const currentMove = getScrollDistance();
+                const currentTotal = currentEntry + currentMove + currentExit;
+
+                const entryRatio = currentEntry / currentTotal;
+                const exitRatio = currentExit / currentTotal;
+                const moveRatio = currentMove / currentTotal;
+
+                let idx = 0;
+                if (p <= entryRatio) {
+                  idx = 0;
+                } else if (p >= 1 - exitRatio) {
+                  idx = 2;
+                } else {
+                  const moveProgress = (p - entryRatio) / moveRatio;
+                  idx = moveProgress < 0.35 ? 0 : (moveProgress < 0.72 ? 1 : 2);
+                }
+
                 if (idx !== currentIdx) {
                   currentIdx = idx;
                   dots.forEach((dot, i) => {
@@ -985,14 +1043,37 @@
             }
           });
 
+          // 1. Entrance rest buffer: Phone 1 remains stationary at x: 0
+          mobileTimeline.to({}, { duration: entryDist });
+
+          // 2. Horizontal glide: Phones glide across from 0 to -getScrollDistance()
+          mobileTimeline.to(showcase, {
+            x: () => -getScrollDistance(),
+            ease: 'none',
+            duration: moveDist
+          });
+
+          // 3. Exit rest buffer: Phone 3 remains stationary at -getScrollDistance()
+          mobileTimeline.to({}, { duration: exitDist });
+
           // Dot click smooth scroll navigation
           dots.forEach((dot, i) => {
             dot.addEventListener('click', (e) => {
               e.preventDefault();
-              const st = horizontalTween.scrollTrigger;
+              const st = mobileTimeline.scrollTrigger;
               if (st) {
-                const progressTarget = i === 0 ? 0 : (i === 1 ? 0.5 : 1);
-                const targetY = st.start + (st.end - st.start) * progressTarget;
+                const currentEntry = getEntryBuffer();
+                const currentExit = getExitBuffer();
+                const currentMove = getScrollDistance();
+                let targetY;
+                if (i === 0) {
+                  targetY = st.start + currentEntry * 0.5;
+                } else if (i === 1) {
+                  targetY = st.start + currentEntry + currentMove * 0.5;
+                } else {
+                  targetY = st.start + currentEntry + currentMove + currentExit * 0.5;
+                }
+
                 if (window.lenis) {
                   window.lenis.scrollTo(targetY, { duration: 0.7, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
                 } else {

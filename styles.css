@@ -109,16 +109,19 @@ html {
   color: var(--color-obsidian);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
   overflow-x: hidden;
   background-color: var(--surface-paper);
   color: var(--color-obsidian);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Lenis Smooth Scroll Configuration */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -608,7 +611,8 @@ html.lenis, html.lenis body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-tags); /* 75px */
+  border-radius: var(--radius-tags);
+  /* 75px */
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   user-select: none;
@@ -972,8 +976,17 @@ html.lenis, html.lenis body {
 }
 
 @keyframes pulseLight {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
 }
 
 .manifesto-metrics-grid {
@@ -1217,6 +1230,14 @@ html.lenis, html.lenis body {
     box-sizing: border-box;
     background-color: var(--surface-paper);
     z-index: 10;
+    contain: layout paint;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
   }
 
   .work-fluid-container {
@@ -1224,8 +1245,14 @@ html.lenis, html.lenis body {
     padding-right: 0;
     width: 100%;
     overflow: hidden;
-    transform: translateZ(0);
+    box-sizing: border-box;
+    contain: layout paint;
+    -webkit-overflow-scrolling: touch;
     -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     flex: 1 1 auto;
     display: flex;
     align-items: flex-start;
@@ -1237,6 +1264,8 @@ html.lenis, html.lenis body {
     flex-wrap: nowrap;
     gap: clamp(16px, 4.5vw, 28px);
     width: max-content;
+    box-sizing: border-box;
+    contain: layout paint;
     padding-left: calc((100vw - var(--mobile-card-w)) / 2);
     padding-right: calc((100vw - var(--mobile-card-w)) / 2);
     margin-top: 6px;
@@ -1257,13 +1286,19 @@ html.lenis, html.lenis body {
 
   .phone-project-card {
     flex: 0 0 var(--mobile-card-w);
+    width: var(--mobile-card-w);
+    min-width: var(--mobile-card-w);
     max-width: var(--mobile-card-w);
+    box-sizing: border-box;
+    contain: layout paint;
     display: flex;
     flex-direction: column;
     align-items: center;
     opacity: 1 !important;
     transform: translateZ(0) !important;
     -webkit-transform: translateZ(0) !important;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   .phone-mockup-wrapper {
@@ -1271,6 +1306,9 @@ html.lenis, html.lenis body {
     aspect-ratio: 471 / 1024;
     width: auto;
     max-width: clamp(230px, 68vw, 270px);
+    box-sizing: border-box;
+    contain: layout paint;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1278,6 +1316,8 @@ html.lenis, html.lenis body {
     opacity: 1 !important;
     transform: translateZ(0) !important;
     -webkit-transform: translateZ(0) !important;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   .phone-mockup-img {
@@ -1294,6 +1334,8 @@ html.lenis, html.lenis body {
   .phone-project-info {
     width: 100%;
     max-width: clamp(245px, 70vw, 290px);
+    box-sizing: border-box;
+    contain: layout;
     margin-top: 8px;
     padding-top: 8px;
     opacity: 1 !important;
@@ -1320,13 +1362,16 @@ html.lenis, html.lenis body {
     .phone-mockup-wrapper {
       height: clamp(310px, 51vh, 390px);
     }
+
     .phone-project-info {
       margin-top: 4px;
       padding-top: 4px;
     }
+
     .phone-project-desc {
       margin-bottom: 4px;
     }
+
     .mobile-phones-nav {
       margin-top: 4px;
       margin-bottom: 2px;
@@ -1342,6 +1387,7 @@ html.lenis, html.lenis body {
     margin-top: 8px;
     margin-bottom: 4px;
     padding: 0 20px;
+    contain: layout paint;
   }
 
   .mobile-nav-dot {
@@ -1382,6 +1428,7 @@ html.lenis, html.lenis body {
     color: var(--color-felt-gray);
     margin-top: 2px;
     margin-bottom: 24px;
+    contain: layout paint;
   }
 
   .mobile-swipe-hint svg {
@@ -1392,8 +1439,17 @@ html.lenis, html.lenis body {
   }
 
   @keyframes swipeHintPulse {
-    0%, 100% { transform: translateX(0); opacity: 0.6; }
-    50% { transform: translateX(4px); opacity: 1; }
+
+    0%,
+    100% {
+      transform: translateX(0);
+      opacity: 0.6;
+    }
+
+    50% {
+      transform: translateX(4px);
+      opacity: 1;
+    }
   }
 }
 
