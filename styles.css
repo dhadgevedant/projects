@@ -1151,17 +1151,39 @@ body {
   gap: 10px;
 }
 
-/* Mobile & Tablet Fallback */
+/* Mobile Horizontal Pinned Scroll Track */
 @media (max-width: 900px) {
+  .work-section {
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 70px;
+    overflow: hidden;
+  }
+
+  .work-header-flex {
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+  }
+
   .work-fluid-container {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 0;
+    padding-right: 0;
+    overflow: visible;
+    width: 100%;
   }
 
   .staggered-phones-showcase {
-    grid-template-columns: 1fr;
-    gap: 64px;
-    margin-top: 48px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 28px;
+    width: max-content;
+    padding-left: clamp(20px, 6vw, 32px);
+    padding-right: clamp(48px, 15vw, 80px);
+    margin-top: 28px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+    will-change: transform;
   }
 
   .phone-col-1,
@@ -1170,9 +1192,44 @@ body {
     margin-top: 0 !important;
   }
 
-  .phone-mockup-wrapper,
+  .phone-project-card {
+    flex: 0 0 clamp(260px, 78vw, 310px);
+    max-width: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: center bottom;
+    will-change: transform, opacity;
+  }
+
+  .phone-mockup-wrapper {
+    width: 100%;
+    max-width: clamp(215px, 62vw, 255px);
+    margin: 0 auto;
+    transform-origin: center bottom;
+    will-change: transform;
+  }
+
   .phone-project-info {
-    max-width: 300px;
+    width: 100%;
+    max-width: clamp(225px, 66vw, 265px);
+    margin-top: 18px;
+    padding-top: 14px;
+  }
+
+  .phone-project-title {
+    font-size: 18.5px;
+    margin-bottom: 6px;
+  }
+
+  .phone-project-desc {
+    font-size: 12.5px;
+    line-height: 1.48;
+    margin-bottom: 12px;
+  }
+
+  .phone-project-link {
+    font-size: 11px;
   }
 }
 

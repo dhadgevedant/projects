@@ -770,8 +770,13 @@
           delay: 0.35
         });
 
-        // Staggered Vertical Phones: Opposing Slide Reveal on Scroll (Above / Below / Above)
-        if (window.innerWidth > 900) {
+        // Responsive ScrollTrigger MatchMedia
+        const mm = gsap.matchMedia();
+
+        // --------------------------------------------------------------------
+        // Desktop (> 900px): Opposing Slide Entrance & Continuous Parallax Scrub
+        // --------------------------------------------------------------------
+        mm.add("(min-width: 901px)", () => {
           const phoneCards = gsap.utils.toArray('.phone-project-card');
           if (phoneCards.length >= 3) {
             // Col 1: slides down smoothly from ABOVE
@@ -863,25 +868,103 @@
               });
             }
           }
-        } else {
-          // Mobile & Tablet: Clean fade-in without desktop stagger
-          gsap.utils.toArray('.phone-project-card').forEach(card => {
+        });
+
+        // --------------------------------------------------------------------
+        // Mobile (<= 900px): Pinned Horizontal Scroll with Pop-up Phones
+        // --------------------------------------------------------------------
+        mm.add("(max-width: 900px)", () => {
+          const showcase = document.getElementById('phones-showcase');
+          const cards = gsap.utils.toArray('.phone-project-card');
+          const workSection = document.getElementById('work');
+
+          if (!showcase || cards.length === 0) return;
+
+          // Compute exact horizontal travel distance
+          const getScrollDistance = () => showcase.scrollWidth - window.innerWidth + 40;
+
+          // Horizontal scroll tween driven by vertical scroll scrubbing
+          const horizontalTween = gsap.to(showcase, {
+            x: () => -getScrollDistance(),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: workSection,
+              start: 'top top',
+              end: () => '+=' + Math.max(800, getScrollDistance() * 1.5),
+              pin: true,
+              scrub: 0.8,
+              anticipatePin: 1,
+              invalidateOnRefresh: true
+            }
+          });
+
+          // Card 0 (First Phone) initial entrance when reaching #work
+          gsap.fromTo(cards[0],
+            { scale: 0.88, y: 55, opacity: 0.25 },
+            {
+              scale: 1,
+              y: 0,
+              opacity: 1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: workSection,
+                start: 'top 75%',
+                end: 'top top',
+                scrub: true
+              }
+            }
+          );
+
+          // Card 0 slightly scales down as it slides left past center
+          gsap.to(cards[0], {
+            scale: 0.88,
+            opacity: 0.45,
+            ease: 'power1.inOut',
+            scrollTrigger: {
+              trigger: cards[0],
+              containerAnimation: horizontalTween,
+              start: 'left left',
+              end: 'right left',
+              scrub: true
+            }
+          });
+
+          // Cards 1 and 2: popup as they scroll horizontally into center
+          cards.slice(1).forEach((card, idx) => {
             gsap.fromTo(card,
-              { opacity: 0, y: 35 },
+              { scale: 0.84, y: 65, opacity: 0.2 },
               {
+                scale: 1,
+                y: 0,
+                opacity: 1,
+                ease: 'power2.out',
                 scrollTrigger: {
                   trigger: card,
-                  start: 'top 88%',
-                  once: true
-                },
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power3.out'
+                  containerAnimation: horizontalTween,
+                  start: 'left 95%',
+                  end: 'center 50%',
+                  scrub: true
+                }
               }
             );
+
+            // If not the last card, scale down as it exits to left
+            if (idx < cards.length - 2) {
+              gsap.to(card, {
+                scale: 0.88,
+                opacity: 0.45,
+                ease: 'power1.inOut',
+                scrollTrigger: {
+                  trigger: card,
+                  containerAnimation: horizontalTween,
+                  start: 'center 50%',
+                  end: 'right left',
+                  scrub: true
+                }
+              });
+            }
           });
-        }
+        });
 
         // Expertise Cards Reveal
         gsap.utils.toArray('.expertise-card').forEach((card, i) => {
