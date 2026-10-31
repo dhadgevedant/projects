@@ -259,10 +259,11 @@
     </section>
 
     <!-- ==========================================================================
-         02 / Selected Works (Editorial Full-Bleed Showcase — Staggered Vertical Phones)
+         02 / Selected Works (Editorial Showcase — Staggered Vertical Phones)
          ========================================================================== -->
     <section class="work-section" id="work">
-      <div class="work-fluid-container">
+      <!-- Section Header in standard container (matches other sections) -->
+      <div class="monopo-container">
         <div class="work-header-flex">
           <div>
             <div class="section-label">02 / Selected Works</div>
@@ -273,8 +274,10 @@
             ARCHIVE 2025 — 2026 · 03 LIVE PLATFORMS
           </p>
         </div>
+      </div>
 
-        <!-- Staggered Vertical Phones Showcase (Full-Width Desktop Parallax & Deep Stagger) -->
+      <!-- The phones spread out to the full width of the page -->
+      <div class="work-fluid-container">
         <div class="staggered-phones-showcase" id="phones-showcase">
           <!-- Phone 01: Sartthi CA Practice Manager -->
           <article class="phone-project-card phone-col-1">
@@ -327,10 +330,10 @@
             </div>
           </article>
         </div>
+      </div>
 
-        <!-- ======================================================================
-             02.2 / Dedicated Archive Page Link Banner
-             ====================================================================== -->
+      <!-- Bottom Archive Link Banner in standard container -->
+      <div class="monopo-container">
         <div class="other-projects-banner" id="other-projects">
           <div class="banner-text">
             <span class="banner-label">02.2 / Archive &amp; Production Platforms</span>
@@ -767,29 +770,13 @@
           delay: 0.35
         });
 
-        // Staggered Vertical Phones: Move Into Place on Scroll (Desktop Deep Stagger)
+        // Staggered Vertical Phones: Opposing Slide Reveal on Scroll (Above / Below / Above)
         if (window.innerWidth > 900) {
           const phoneCards = gsap.utils.toArray('.phone-project-card');
           if (phoneCards.length >= 3) {
-            // Col 1: glides up smoothly into place
+            // Col 1: slides down smoothly from ABOVE
             gsap.fromTo(phoneCards[0],
-              { opacity: 0, y: 110 },
-              {
-                scrollTrigger: {
-                  trigger: '#work',
-                  start: 'top 75%',
-                  once: true
-                },
-                opacity: 1,
-                y: 0,
-                duration: 1.15,
-                ease: 'power3.out'
-              }
-            );
-
-            // Col 2 (deeply staggered lower): deeper entrance from below
-            gsap.fromTo(phoneCards[1],
-              { opacity: 0, y: 260 },
+              { opacity: 0, y: -220 },
               {
                 scrollTrigger: {
                   trigger: '#work',
@@ -799,14 +786,13 @@
                 opacity: 1,
                 y: 0,
                 duration: 1.35,
-                delay: 0.12,
                 ease: 'power3.out'
               }
             );
 
-            // Col 3 (mid staggered): moves up into place
-            gsap.fromTo(phoneCards[2],
-              { opacity: 0, y: 180 },
+            // Col 2 (center phone): slides up smoothly from BELOW
+            gsap.fromTo(phoneCards[1],
+              { opacity: 0, y: 320 },
               {
                 scrollTrigger: {
                   trigger: '#work',
@@ -815,8 +801,25 @@
                 },
                 opacity: 1,
                 y: 0,
-                duration: 1.25,
-                delay: 0.22,
+                duration: 1.45,
+                delay: 0.1,
+                ease: 'power3.out'
+              }
+            );
+
+            // Col 3: slides down smoothly from ABOVE
+            gsap.fromTo(phoneCards[2],
+              { opacity: 0, y: -220 },
+              {
+                scrollTrigger: {
+                  trigger: '#work',
+                  start: 'top 75%',
+                  once: true
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.35,
+                delay: 0.18,
                 ease: 'power3.out'
               }
             );
