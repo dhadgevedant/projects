@@ -1020,29 +1020,42 @@ body {
 }
 
 /* ==========================================================================
-   Staggered Vertical Phones Showcase (Desktop Parallax & Stagger)
+   Full-Width Work Showcase & Deeply Staggered Vertical Phones
    ========================================================================== */
+.work-section {
+  width: 100%;
+  padding-bottom: clamp(100px, 12vw, 180px);
+}
+
+.work-fluid-container {
+  width: 100%;
+  max-width: 100%;
+  padding-left: clamp(24px, 5.5vw, 100px);
+  padding-right: clamp(24px, 5.5vw, 100px);
+  box-sizing: border-box;
+}
+
 .staggered-phones-showcase {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 36px;
+  gap: clamp(24px, 4vw, 72px);
   align-items: flex-start;
-  margin-top: 70px;
-  padding-bottom: 40px;
+  margin-top: 75px;
+  width: 100%;
 }
 
-/* Desktop-Only Staggered Vertical Offsets */
+/* Deep Desktop Stagger Offsets */
 @media (min-width: 901px) {
   .phone-col-1 {
     margin-top: 0px;
   }
 
   .phone-col-2 {
-    margin-top: 120px;
+    margin-top: clamp(200px, 20vw, 310px);
   }
 
   .phone-col-3 {
-    margin-top: 55px;
+    margin-top: clamp(95px, 10vw, 155px);
   }
 }
 
@@ -1051,13 +1064,14 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
+  width: 100%;
   will-change: transform, opacity;
 }
 
 .phone-mockup-wrapper {
   position: relative;
   width: 100%;
-  max-width: 310px;
+  max-width: clamp(280px, 26vw, 395px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1069,123 +1083,89 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.12)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
+  filter: drop-shadow(0 26px 40px rgba(0, 0, 0, 0.14)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.06));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
   user-select: none;
   -webkit-user-select: none;
 }
 
 .phone-project-card:hover .phone-mockup-img {
-  transform: translateY(-8px) scale(1.025);
-  filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.18)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.08));
+  transform: translateY(-10px) scale(1.028);
+  filter: drop-shadow(0 36px 52px rgba(0, 0, 0, 0.19)) drop-shadow(0 10px 22px rgba(0, 0, 0, 0.09));
 }
 
+/* Ultra-Minimalist Editorial Description */
 .phone-project-info {
   width: 100%;
-  max-width: 310px;
-  margin-top: 32px;
+  max-width: clamp(280px, 26vw, 395px);
+  margin-top: 26px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 18px;
 }
 
 .phone-project-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.phone-project-index {
   font-family: var(--font-system-ui);
   font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--color-felt-gray);
-  text-transform: uppercase;
-}
-
-.phone-project-badge {
-  font-family: var(--font-system-ui);
-  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-obsidian);
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 3px 8px;
-  border-radius: 4px;
+  color: var(--color-felt-gray);
+  margin-bottom: 6px;
 }
 
 .phone-project-title {
-  font-size: 20px;
+  font-size: clamp(20px, 1.6vw, 25px);
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.25;
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
   color: var(--color-obsidian);
-}
-
-.phone-key-stat {
-  font-size: 12px;
-  font-family: var(--font-system-ui);
-  color: #1a73e8;
-  font-weight: 500;
-  margin-bottom: 8px;
-  line-height: 1.35;
 }
 
 .phone-project-desc {
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 13.5px;
+  line-height: 1.55;
   color: var(--color-felt-gray);
-  margin-bottom: 16px;
+  margin: 0 0 16px 0;
 }
 
-.phone-project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 16px;
-}
-
-.phone-project-tags .pill-tag {
-  font-size: 11px;
-  padding: 4px 12px;
-}
-
-.phone-project-btn {
+.phone-project-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 18px;
+  font-family: var(--font-system-ui);
   font-size: 11.5px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color-obsidian);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 75px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+  padding-bottom: 2px;
   transition: all 0.25s ease;
-  background: transparent;
 }
 
-.phone-project-btn:hover {
-  background: var(--color-obsidian);
-  color: var(--color-paper);
-  border-color: var(--color-obsidian);
+.phone-project-link:hover {
+  border-bottom-color: var(--color-obsidian);
+  gap: 10px;
 }
 
-/* Mobile & Tablet Fallback: Linear vertical stream */
+/* Mobile & Tablet Fallback */
 @media (max-width: 900px) {
+  .work-fluid-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   .staggered-phones-showcase {
     grid-template-columns: 1fr;
     gap: 64px;
-    margin-top: 50px;
+    margin-top: 48px;
   }
 
   .phone-col-1,
@@ -1196,7 +1176,7 @@ body {
 
   .phone-mockup-wrapper,
   .phone-project-info {
-    max-width: 290px;
+    max-width: 300px;
   }
 }
 

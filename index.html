@@ -254,10 +254,10 @@
     </section>
 
     <!-- ==========================================================================
-         02 / Selected Works (Editorial Gallery — 2-Column Desktop Grid)
+         02 / Selected Works (Editorial Full-Bleed Showcase — Staggered Vertical Phones)
          ========================================================================== -->
     <section class="work-section" id="work">
-      <div class="monopo-container">
+      <div class="work-fluid-container">
         <div class="work-header-flex">
           <div>
             <div class="section-label">02 / Selected Works</div>
@@ -269,7 +269,7 @@
           </p>
         </div>
 
-        <!-- Staggered Vertical Phones Showcase (Desktop Parallax & Stagger) -->
+        <!-- Staggered Vertical Phones Showcase (Full-Width Desktop Parallax & Deep Stagger) -->
         <div class="staggered-phones-showcase" id="phones-showcase">
           <!-- Phone 01: Sartthi CA Practice Manager -->
           <article class="phone-project-card phone-col-1">
@@ -277,22 +277,12 @@
               <img src="assets/phone-sartthi.png" alt="Sartthi CA Practice Manager Mobile Interface" class="phone-mockup-img" loading="lazy">
             </div>
             <div class="phone-project-info">
-              <div class="phone-project-meta">
-                <span class="phone-project-index">[ 01 / 03 ]</span>
-                <span class="phone-project-badge">2026 · ENTERPRISE CRM</span>
-              </div>
+              <span class="phone-project-meta">01 / Enterprise CRM</span>
               <h3 class="phone-project-title">Sartthi CA Practice Manager</h3>
-              <div class="phone-key-stat">✦ Task Pipeline · Multi-tenant client compliance</div>
               <p class="phone-project-desc">
-                Multi-tenant practice management platform and task pipeline for chartered accountants, automating client compliance workflows and GST tracking.
+                Multi-tenant practice management &amp; automated client compliance pipeline.
               </p>
-              <div class="phone-project-tags">
-                <span class="pill-tag">React</span>
-                <span class="pill-tag">Node.js</span>
-                <span class="pill-tag">FastAPI</span>
-                <span class="pill-tag">MongoDB</span>
-              </div>
-              <a href="https://ca.sartthicrm.com" target="_blank" rel="noopener noreferrer" class="phone-project-btn">
+              <a href="https://ca.sartthicrm.com" target="_blank" rel="noopener noreferrer" class="phone-project-link">
                 ca.sartthicrm.com ↗
               </a>
             </div>
@@ -304,21 +294,12 @@
               <img src="assets/phone-malabar.png" alt="Malabar Heritage Mobile Storefront" class="phone-mockup-img" loading="lazy">
             </div>
             <div class="phone-project-info">
-              <div class="phone-project-meta">
-                <span class="phone-project-index">[ 02 / 03 ]</span>
-                <span class="phone-project-badge">2025 · D2C E-COMMERCE</span>
-              </div>
+              <span class="phone-project-meta">02 / D2C Storefront</span>
               <h3 class="phone-project-title">Malabar Heritage</h3>
-              <div class="phone-key-stat">✦ Farm-to-table Kerala spice blends &amp; mobile cart</div>
               <p class="phone-project-desc">
-                Direct-to-consumer digital storefront for authentic Kerala farm spices, engineered with instant mobile cart sync and seamless catalog navigation.
+                Authentic Kerala farm spice storefront with instant mobile cart &amp; checkout.
               </p>
-              <div class="phone-project-tags">
-                <span class="pill-tag">Full-Stack Web</span>
-                <span class="pill-tag">E-Commerce</span>
-                <span class="pill-tag">Mobile UX</span>
-              </div>
-              <a href="#work" class="phone-project-btn">
+              <a href="#work" class="phone-project-link">
                 Explore Storefront ↗
               </a>
             </div>
@@ -330,22 +311,13 @@
               <img src="assets/phone-impackt.png" alt="Impackt Custom Packaging Engine" class="phone-mockup-img" loading="lazy">
             </div>
             <div class="phone-project-info">
-              <div class="phone-project-meta">
-                <span class="phone-project-index">[ 03 / 03 ]</span>
-                <span class="phone-project-badge">2025 · PRODUCTION PLATFORM</span>
-              </div>
+              <span class="phone-project-meta">03 / Packaging Engine</span>
               <h3 class="phone-project-title">Impackt (Neat Prints)</h3>
-              <div class="phone-key-stat">✦ Custom digital pouch manufacturing &amp; pricing engine</div>
               <p class="phone-project-desc">
-                Digital on-demand pouch manufacturing and custom packaging platform featuring real-time pricing calculations and automated print pipeline.
+                On-demand custom pouch manufacturing engine with real-time pricing calculation.
               </p>
-              <div class="phone-project-tags">
-                <span class="pill-tag">Web Platform</span>
-                <span class="pill-tag">Manufacturing</span>
-                <span class="pill-tag">Print Engine</span>
-              </div>
-              <a href="#work" class="phone-project-btn">
-                View Platform ↗
+              <a href="#work" class="phone-project-link">
+                Explore Platform ↗
               </a>
             </div>
           </article>
@@ -745,65 +717,77 @@
           delay: 0.35
         });
 
-        // Staggered Vertical Phones: Move Into Place on Scroll (Desktop)
+        // Staggered Vertical Phones: Move Into Place on Scroll (Desktop Deep Stagger)
         if (window.innerWidth > 900) {
           const phoneCards = gsap.utils.toArray('.phone-project-card');
           if (phoneCards.length >= 3) {
             // Col 1: glides up smoothly into place
             gsap.fromTo(phoneCards[0],
-              { opacity: 0, y: 90 },
+              { opacity: 0, y: 110 },
               {
                 scrollTrigger: {
                   trigger: '#work',
-                  start: 'top 72%',
-                  once: true
-                },
-                opacity: 1,
-                y: 0,
-                duration: 1.1,
-                ease: 'power3.out'
-              }
-            );
-
-            // Col 2 (center phone, staggered lower): moves up into place with slight delay
-            gsap.fromTo(phoneCards[1],
-              { opacity: 0, y: 170 },
-              {
-                scrollTrigger: {
-                  trigger: '#work',
-                  start: 'top 72%',
-                  once: true
-                },
-                opacity: 1,
-                y: 0,
-                duration: 1.25,
-                delay: 0.12,
-                ease: 'power3.out'
-              }
-            );
-
-            // Col 3: moves up into place
-            gsap.fromTo(phoneCards[2],
-              { opacity: 0, y: 130 },
-              {
-                scrollTrigger: {
-                  trigger: '#work',
-                  start: 'top 72%',
+                  start: 'top 75%',
                   once: true
                 },
                 opacity: 1,
                 y: 0,
                 duration: 1.15,
+                ease: 'power3.out'
+              }
+            );
+
+            // Col 2 (deeply staggered lower): deeper entrance from below
+            gsap.fromTo(phoneCards[1],
+              { opacity: 0, y: 260 },
+              {
+                scrollTrigger: {
+                  trigger: '#work',
+                  start: 'top 75%',
+                  once: true
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.35,
+                delay: 0.12,
+                ease: 'power3.out'
+              }
+            );
+
+            // Col 3 (mid staggered): moves up into place
+            gsap.fromTo(phoneCards[2],
+              { opacity: 0, y: 180 },
+              {
+                scrollTrigger: {
+                  trigger: '#work',
+                  start: 'top 75%',
+                  once: true
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.25,
                 delay: 0.22,
                 ease: 'power3.out'
               }
             );
 
-            // Subtle continuous parallax motion while scrolling through #work
+            // Continuous parallax motion while scrolling through #work
             const wrappers = gsap.utils.toArray('.phone-mockup-wrapper');
+            if (wrappers[0]) {
+              gsap.to(wrappers[0], {
+                y: -30,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: '#work',
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  scrub: 1.2
+                }
+              });
+            }
             if (wrappers[1]) {
               gsap.to(wrappers[1], {
-                y: -40,
+                y: -75,
                 ease: 'none',
                 scrollTrigger: {
                   trigger: '#work',
@@ -815,7 +799,7 @@
             }
             if (wrappers[2]) {
               gsap.to(wrappers[2], {
-                y: -20,
+                y: -45,
                 ease: 'none',
                 scrollTrigger: {
                   trigger: '#work',
