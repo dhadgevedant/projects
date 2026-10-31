@@ -54,6 +54,7 @@
       uniform vec2 u_mouse;
       uniform sampler2D u_textTexture;
       uniform int u_hasTextTexture;
+      uniform int u_isMobile;
 
       // 2D Simplex noise
       vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -147,23 +148,20 @@
         color *= vignette;
         color = clamp(color, 0.0, 1.0);
 
-        // Dynamic Negative Typography Inversion with Mathematically Aligned Border
+        // Dynamic Negative Typography Inversion (Lighter on mobile for high legibility without borders)
         if (u_hasTextTexture == 1) {
           vec2 textUV = vec2(st.x, 1.0 - st.y);
           vec4 textTex = texture2D(u_textTexture, textUV);
           float fillMask = textTex.r;    // Text fill in Red channel
-          float strokeMask = textTex.g;  // Stroke border in Green channel
 
           if (fillMask > 0.0) {
             // True mathematical negative: exact complement of whatever is behind it
             vec3 negColor = vec3(1.0) - color;
+            if (u_isMobile == 1) {
+              // Same negative color identity, but lifted & lightened on mobile for clean visibility without borders
+              negColor = mix(pow(negColor, vec3(0.80)), vec3(1.0), 0.28);
+            }
             color = mix(color, negColor, fillMask);
-          }
-
-          if (strokeMask > 0.0) {
-            // Crisp black border on mobile for bold contrast
-            vec3 borderColor = vec3(0.0, 0.0, 0.0);
-            color = mix(color, borderColor, strokeMask * 1.0);
           }
         }
 
@@ -213,6 +211,7 @@
     const mouseLoc = gl.getUniformLocation(program, 'u_mouse');
     const textTexLoc = gl.getUniformLocation(program, 'u_textTexture');
     const hasTextLoc = gl.getUniformLocation(program, 'u_hasTextTexture');
+    const isMobileLoc = gl.getUniformLocation(program, 'u_isMobile');
 
     // Setup Text Texture Buffer
     const textCanvas = document.createElement('canvas');
@@ -282,16 +281,6 @@
       // Draw VEDANT and DHADGE in tight monumental editorial typography
       const lineGap = fontSize * 0.88;
 
-      // On mobile view: draw a thin white border directly on the glyph outline (Green channel)
-      if (isMobile) {
-        textCtx.strokeStyle = 'rgb(0, 255, 0)';
-        textCtx.lineWidth = Math.max(2.0, fontSize * 0.024);
-        textCtx.lineJoin = 'round';
-        textCtx.miterLimit = 2;
-        textCtx.strokeText('VEDANT', centerX, centerY - lineGap * 0.5);
-        textCtx.strokeText('DHADGE', centerX, centerY + lineGap * 0.5);
-      }
-
       // Draw text fill in Red channel (fillMask)
       textCtx.fillStyle = 'rgb(255, 0, 0)';
       textCtx.fillText('VEDANT', centerX, centerY - lineGap * 0.5);
@@ -349,6 +338,7 @@
       gl.bindTexture(gl.TEXTURE_2D, textTexture);
       gl.uniform1i(textTexLoc, 0);
       gl.uniform1i(hasTextLoc, 1);
+      gl.uniform1i(isMobileLoc, (window.innerWidth <= 900) ? 1 : 0);
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       requestAnimationFrame(render);
