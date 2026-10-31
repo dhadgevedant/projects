@@ -117,6 +117,27 @@ body {
   color: var(--color-obsidian);
 }
 
+/* Lenis Smooth Scroll Configuration */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 ::selection {
   background: var(--color-obsidian);
   color: var(--color-paper);
@@ -1161,6 +1182,11 @@ body {
 
 /* Mobile Seamless Smooth Horizontal Scroll */
 @media (max-width: 900px) {
+  .hero-display-headline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.92);
+    paint-order: stroke fill;
+  }
+
   .work-section {
     position: relative;
     padding-top: clamp(40px, 7vw, 60px);
@@ -1184,8 +1210,9 @@ body {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    overscroll-behavior-x: contain;
+    overscroll-behavior-x: auto;
     cursor: grab;
+    touch-action: pan-x pan-y;
   }
 
   .work-fluid-container:active {
@@ -1210,6 +1237,7 @@ body {
     margin-top: 24px;
     margin-bottom: 16px;
     align-items: flex-start;
+    will-change: transform;
   }
 
   .phone-col-1,
@@ -1228,6 +1256,7 @@ body {
     scroll-snap-stop: normal;
     opacity: 1 !important;
     transform: none !important;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .phone-mockup-wrapper {
@@ -1296,7 +1325,7 @@ body {
     height: 8px;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.22);
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .mobile-nav-dot.is-active .dot-inner {

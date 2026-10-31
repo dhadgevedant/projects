@@ -22,6 +22,8 @@
   <!-- GSAP Animation Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Lenis Butter-Smooth Scroll Engine -->
+  <script src="assets/lenis.min.js"></script>
 </head>
 
 <body>
@@ -277,7 +279,7 @@
       </div>
 
       <!-- The phones spread out to the full width of the page -->
-      <div class="work-fluid-container" id="work-fluid-container">
+      <div class="work-fluid-container" id="work-fluid-container" data-lenis-prevent>
         <div class="staggered-phones-showcase" id="phones-showcase">
           <!-- Phone 01: Sartthi CA Practice Manager -->
           <article class="phone-project-card phone-col-1" data-index="0">
@@ -710,6 +712,28 @@
 
   <script>
     window.addEventListener('DOMContentLoaded', () => {
+      // Initialize Lenis Butter-Smooth Scroll Engine
+      let lenis = null;
+      if (typeof window.Lenis === 'function') {
+        lenis = new Lenis({
+          duration: 1.15,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          wheelMultiplier: 1.0,
+          touchMultiplier: 1.2
+        });
+
+        lenis.on('scroll', ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+      }
+
       // Initialize WebGL Liquid Iridescent Shader
       if (typeof window.initLiquidShader === 'function') {
         window.initLiquidShader('liquid-canvas');
@@ -893,8 +917,26 @@
         });
 
         // --------------------------------------------------------------------
+        // Smooth Page Snapping at Horizontal Scroll Start & Stop (Elastic)
+        // --------------------------------------------------------------------
+        const workSection = document.getElementById('work');
+        if (workSection) {
+          ScrollTrigger.create({
+            trigger: workSection,
+            start: 'top 35%',
+            end: 'bottom 65%',
+            snap: {
+              snapTo: [0, 1], // Snaps when horizontal scroll starts (0) and stops (1)
+              duration: { min: 0.35, max: 0.8 },
+              delay: 0.08,
+              ease: 'elastic.out(1, 0.75)' // Stops elastically
+            }
+          });
+        }
+
+        // --------------------------------------------------------------------
         // Mobile (<= 900px): Seamless Native Smooth Horizontal Scroll
-        // Mobiles remain always 100% visible with zero choppy motion
+        // Mobiles remain always 100% visible, with elastic boundary stops
         // --------------------------------------------------------------------
         mm.add("(max-width: 900px)", () => {
           const container = document.getElementById('work-fluid-container');
@@ -921,7 +963,7 @@
             }
           }
 
-          // Dot click smooth scroll navigation
+          // Dot click smooth scroll navigation with elastic transition
           dots.forEach((dot, i) => {
             dot.addEventListener('click', (e) => {
               e.preventDefault();
@@ -951,7 +993,46 @@
 
           cards.forEach(card => observer.observe(card));
 
-          // Fluid mouse drag-to-scroll support for desktop previewing
+          // Touch elastic spring overscroll at horizontal start and stop
+          let touchStartX = 0;
+          let isTouchDragging = false;
+
+          const onTouchStart = (e) => {
+            if (e.touches && e.touches.length === 1) {
+              touchStartX = e.touches[0].clientX;
+              isTouchDragging = true;
+            }
+          };
+
+          const onTouchMove = (e) => {
+            if (!isTouchDragging || !e.touches || e.touches.length !== 1) return;
+            const currentX = e.touches[0].clientX;
+            const deltaX = currentX - touchStartX;
+            const maxScroll = container.scrollWidth - container.clientWidth;
+
+            if (container.scrollLeft <= 0 && deltaX > 0) {
+              // Elastic spring resistance at START
+              const elasticOffset = Math.min(48, deltaX * 0.32);
+              gsap.set(showcase, { x: elasticOffset });
+            } else if (container.scrollLeft >= maxScroll - 2 && deltaX < 0) {
+              // Elastic spring resistance at STOP
+              const elasticOffset = Math.min(48, -deltaX * 0.32);
+              gsap.set(showcase, { x: -elasticOffset });
+            }
+          };
+
+          const onTouchEnd = () => {
+            if (isTouchDragging) {
+              isTouchDragging = false;
+              gsap.to(showcase, { x: 0, duration: 0.65, ease: 'elastic.out(1.1, 0.55)' });
+            }
+          };
+
+          container.addEventListener('touchstart', onTouchStart, { passive: true });
+          container.addEventListener('touchmove', onTouchMove, { passive: true });
+          container.addEventListener('touchend', onTouchEnd, { passive: true });
+
+          // Fluid mouse drag-to-scroll support with elastic boundary stops
           let isDown = false;
           let startX = 0;
           let scrollLeft = 0;
@@ -960,15 +1041,44 @@
             isDown = true;
             startX = e.pageX - container.offsetLeft;
             scrollLeft = container.scrollLeft;
+            container.style.scrollBehavior = 'auto';
           };
-          const onMouseLeave = () => { isDown = false; };
-          const onMouseUp = () => { isDown = false; };
+          const onMouseLeave = () => {
+            if (!isDown) return;
+            isDown = false;
+            container.style.scrollBehavior = 'smooth';
+            gsap.to(showcase, { x: 0, duration: 0.65, ease: 'elastic.out(1.1, 0.55)' });
+          };
+          const onMouseUp = () => {
+            if (!isDown) return;
+            isDown = false;
+            container.style.scrollBehavior = 'smooth';
+            gsap.to(showcase, { x: 0, duration: 0.65, ease: 'elastic.out(1.1, 0.55)' });
+          };
           const onMouseMove = (e) => {
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 1.4;
-            container.scrollLeft = scrollLeft - walk;
+            const walk = (x - startX) * 1.35;
+            const maxScroll = container.scrollWidth - container.clientWidth;
+            const targetScroll = scrollLeft - walk;
+
+            if (targetScroll < 0) {
+              // Elastic resistance at START
+              const overscroll = -targetScroll;
+              const elasticOffset = Math.min(50, overscroll * 0.3);
+              gsap.set(showcase, { x: elasticOffset });
+              container.scrollLeft = 0;
+            } else if (targetScroll > maxScroll) {
+              // Elastic resistance at STOP
+              const overscroll = targetScroll - maxScroll;
+              const elasticOffset = Math.min(50, overscroll * 0.3);
+              gsap.set(showcase, { x: -elasticOffset });
+              container.scrollLeft = maxScroll;
+            } else {
+              gsap.set(showcase, { x: 0 });
+              container.scrollLeft = targetScroll;
+            }
           };
 
           container.addEventListener('mousedown', onMouseDown);
@@ -978,6 +1088,9 @@
 
           return () => {
             observer.disconnect();
+            container.removeEventListener('touchstart', onTouchStart);
+            container.removeEventListener('touchmove', onTouchMove);
+            container.removeEventListener('touchend', onTouchEnd);
             container.removeEventListener('mousedown', onMouseDown);
             container.removeEventListener('mouseleave', onMouseLeave);
             container.removeEventListener('mouseup', onMouseUp);
@@ -1051,15 +1164,23 @@
         }
       }
 
-      // Smooth link scrolling
+      // Smooth link scrolling with Lenis
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           const href = this.getAttribute('href');
           if (href && href !== '#') {
-            e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
+              e.preventDefault();
+              if (lenis) {
+                lenis.scrollTo(target, {
+                  offset: -20,
+                  duration: 1.15,
+                  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                });
+              } else {
+                target.scrollIntoView({ behavior: 'smooth' });
+              }
             }
           }
         });
