@@ -390,12 +390,8 @@
          03 / What I Build (Obsidian Dark Band — Full-Bleed)
          ========================================================================== -->
     <section class="inverse-band" id="skills">
-      <!-- Hero WebGL Liquid Bleed Horizon (Iridescent Chromatic Refraction Edge) -->
-      <div class="liquid-bleed-horizon" id="bleed-horizon" aria-hidden="true">
-        <div class="bleed-halo" id="bleed-halo"></div>
-        <div class="bleed-line" id="bleed-line"></div>
-        <div class="bleed-flare" id="bleed-flare"></div>
-      </div>
+      <!-- Default Obsidian Black Backdrop: uncurtains as navbar expands into section -->
+      <div class="skills-black-curtain" id="skills-black-curtain" aria-hidden="true"></div>
 
       <a id="lab" style="position: absolute; opacity: 0; pointer-events: none;" aria-hidden="true"></a>
       <div class="monopo-container">
@@ -1340,13 +1336,14 @@
         // Navbar Expands into Background of What I Build (#skills)
         // ====================================================================
         const skillsSection = document.getElementById('skills');
+        const skillsCurtain = document.getElementById('skills-black-curtain');
         const expertiseSection = document.getElementById('expertise');
 
         if (heroSection && skillsSection) {
           const navH = () => (window.innerWidth <= 768 ? 58 : 66);
           const fullH = () => window.innerHeight;
 
-          // 1. As What I Build arrives at the top, the 66px navbar expands down to 100vh
+          // 1. As What I Build arrives at the top, the 66px navbar expands down into it
           const skillsExpandTl = gsap.timeline({
             scrollTrigger: {
               trigger: skillsSection,
@@ -1364,8 +1361,17 @@
 
           skillsExpandTl.fromTo(heroSection,
             { height: navH },
-            { height: fullH, ease: 'none', duration: 1 }
+            { height: fullH, ease: 'none', duration: 1 },
+            0
           );
+
+          if (skillsCurtain) {
+            skillsExpandTl.fromTo(skillsCurtain,
+              { clipPath: 'inset(0% 0% 0% 0%)' },
+              { clipPath: 'inset(100% 0% 0% 0%)', ease: 'none', duration: 1 },
+              0
+            );
+          }
 
           // 2. As What I Build finishes and Expertise arrives, shrink back from 100vh to 66px
           if (expertiseSection) {
@@ -1386,7 +1392,8 @@
 
             skillsShrinkTl.fromTo(heroSection,
               { height: fullH },
-              { height: navH, ease: 'none', duration: 1 }
+              { height: navH, ease: 'none', duration: 1 },
+              0
             );
           }
         }

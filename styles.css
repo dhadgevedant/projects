@@ -1807,6 +1807,23 @@ html.lenis body {
   padding: 120px 0;
   position: relative;
   z-index: 101;
+  overflow: hidden;
+}
+
+/* Default Obsidian Black Backdrop: uncurtains as navbar expands into section */
+.skills-black-curtain {
+  position: absolute;
+  inset: 0;
+  background-color: var(--surface-obsidian);
+  z-index: 1;
+  pointer-events: none;
+  clip-path: inset(0% 0% 0% 0%);
+  will-change: clip-path;
+}
+
+.inverse-band > .monopo-container {
+  position: relative;
+  z-index: 2;
 }
 
 .inverse-band .section-label {
