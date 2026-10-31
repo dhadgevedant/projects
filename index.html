@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
   <title>Vedant Dhadge — Developer &amp; Designer</title>
   <link rel="icon" type="image/svg+xml" href="assets/vd-logo-dark-mode.svg" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/svg+xml" href="assets/vd-logo-light-mode.svg" media="(prefers-color-scheme: light)">
@@ -288,7 +289,7 @@
               <div class="phone-mockup-wrapper">
                 <picture class="phone-mockup-picture">
                   <source srcset="assets/phone-sartthi.webp" type="image/webp">
-                  <img src="assets/phone-sartthi.png" alt="Sartthi CA Practice Manager Mobile Interface" class="phone-mockup-img" loading="lazy" width="471" height="1024">
+                  <img src="assets/phone-sartthi.png" alt="Sartthi CA Practice Manager Mobile Interface" class="phone-mockup-img" loading="eager" width="471" height="1024">
                 </picture>
               </div>
               <div class="phone-project-info">
@@ -308,7 +309,7 @@
               <div class="phone-mockup-wrapper">
                 <picture class="phone-mockup-picture">
                   <source srcset="assets/phone-malabar.webp" type="image/webp">
-                  <img src="assets/phone-malabar.png" alt="Malabar Heritage Mobile Storefront" class="phone-mockup-img" loading="lazy" width="471" height="1024">
+                  <img src="assets/phone-malabar.png" alt="Malabar Heritage Mobile Storefront" class="phone-mockup-img" loading="eager" width="471" height="1024">
                 </picture>
               </div>
               <div class="phone-project-info">
@@ -328,7 +329,7 @@
               <div class="phone-mockup-wrapper">
                 <picture class="phone-mockup-picture">
                   <source srcset="assets/phone-impackt.webp" type="image/webp">
-                  <img src="assets/phone-impackt.png" alt="Impackt Custom Packaging Engine" class="phone-mockup-img" loading="lazy" width="471" height="1024">
+                  <img src="assets/phone-impackt.png" alt="Impackt Custom Packaging Engine" class="phone-mockup-img" loading="eager" width="471" height="1024">
                 </picture>
               </div>
               <div class="phone-project-info">
@@ -962,7 +963,7 @@
             ease: 'none',
             scrollTrigger: {
               trigger: pinContainer,
-              start: 'top 58px', // Pin when the mobile phone image hits the top (below fixed header)
+              start: 'top top', // Pin to full viewport height (phone starts below 58px header via padding-top)
               end: () => '+=' + getScrollDistance(),
               pin: pinContainer,
               pinSpacing: true,
