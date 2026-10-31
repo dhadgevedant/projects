@@ -1059,21 +1059,19 @@
             }, 0);
           }
 
-          // 3. Hero content headline scales down into the center of the shrinking 66px bar (0% -> 75%)
+          // 3. Hero text zooms in while staying centered as the background shrinks (0% -> 60%)
           heroMorphTl.to(heroContent, {
-            scale: 0.25,
-            duration: 0.75,
-            ease: 'power1.inOut'
+            scale: 1.35,
+            duration: 0.55,
+            ease: 'power1.out'
           }, 0);
 
-          // 4. Hero headline dissolves as hero reaches 66px (60% -> 80%)
-          if (heroHeadline) {
-            heroMorphTl.to(heroHeadline, {
-              opacity: 0,
-              duration: 0.2,
-              ease: 'power1.out'
-            }, 0.6);
-          }
+          // 4. Hero text smoothly dissolves into the atmosphere as it zooms in (20% -> 55%)
+          heroMorphTl.to(heroContent, {
+            opacity: 0,
+            duration: 0.35,
+            ease: 'power1.out'
+          }, 0.2);
 
           // 5. Reveal header container and stagger in logo, locale, nav links, and toggle button (70% -> 100%)
           heroMorphTl.to(header, {
