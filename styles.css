@@ -1720,7 +1720,7 @@ html.lenis body {
 .inverse-band {
   background-color: var(--surface-obsidian);
   color: var(--color-paper);
-  padding: 120px 0;
+  padding: clamp(140px, 16vw, 240px) 0 120px;
   position: relative;
 }
 
@@ -1769,14 +1769,14 @@ html.lenis body {
 }
 
 /* ==========================================================================
-   Section Transition: Elastic Squircle Invasion (Projects -> What I Build)
+   Section Transition: Seamless Elastic Squircle Invasion (Projects -> What I Build)
    ========================================================================== */
 .squircle-elastic-divider {
   position: absolute;
-  top: 0;
+  top: -1px;
   left: 0;
   width: 100%;
-  height: clamp(70px, 9vw, 130px);
+  height: clamp(140px, 16vw, 240px);
   overflow: visible;
   pointer-events: none;
   transform-origin: top center;
@@ -1788,7 +1788,6 @@ html.lenis body {
   width: 100%;
   height: 100%;
   display: block;
-  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.55));
 }
 
 /* ==========================================================================
