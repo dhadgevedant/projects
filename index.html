@@ -387,11 +387,11 @@
          03 / What I Build (Obsidian Dark Band — Full-Bleed)
          ========================================================================== -->
     <section class="inverse-band" id="skills">
-      <!-- Elastic Squircle Section Transition (Protruding from white project section into black section) -->
-      <div class="squircle-elastic-divider" aria-hidden="true">
-        <svg class="squircle-elastic-svg" viewBox="0 0 1440 90" preserveAspectRatio="none">
-          <path id="squircle-morph-path" fill="#ffffff" d="M 0,0 L 1440,0 C 1370,0 1310,90 1180,90 L 260,90 C 130,90 70,0 0,0 Z"></path>
-        </svg>
+      <!-- Hero WebGL Liquid Bleed Horizon (Iridescent Chromatic Refraction Edge) -->
+      <div class="liquid-bleed-horizon" id="bleed-horizon" aria-hidden="true">
+        <div class="bleed-halo" id="bleed-halo"></div>
+        <div class="bleed-line" id="bleed-line"></div>
+        <div class="bleed-flare" id="bleed-flare"></div>
       </div>
 
       <a id="lab" style="position: absolute; opacity: 0; pointer-events: none;" aria-hidden="true"></a>
@@ -1245,38 +1245,75 @@
           mobileTimeline.to({}, { duration: pause3 }, pause1 + glide1 + pause2 + glide2);
         });
 
-        // Elastic Squircle Section Transition Rebound (Projects -> What I Build)
-        const squircleDivider = document.querySelector('.squircle-elastic-divider');
+        // Hero WebGL Liquid Bleed Horizon (Projects -> What I Build)
+        const bleedHorizon = document.getElementById('bleed-horizon');
+        const bleedLine = document.getElementById('bleed-line');
+        const bleedHalo = document.getElementById('bleed-halo');
+        const bleedFlare = document.getElementById('bleed-flare');
         const skillsSection = document.getElementById('skills');
-        if (squircleDivider && skillsSection) {
-          // Initialize state based on initial viewport position
-          const initialRect = skillsSection.getBoundingClientRect();
-          if (initialRect.top <= window.innerHeight * 0.52) {
-            gsap.set(squircleDivider, { scaleY: 0 });
-          } else {
-            gsap.set(squircleDivider, { scaleY: 1 });
-          }
 
-          ScrollTrigger.create({
-            trigger: skillsSection,
-            start: 'top 52%', // triggers when the top of What I Build is halfway into the viewport
-            onEnter: () => {
-              gsap.to(squircleDivider, {
-                scaleY: 0,
-                duration: 0.72,
-                ease: 'elastic.out(1.2, 0.38)',
-                overwrite: 'auto'
-              });
-            },
-            onLeaveBack: () => {
-              gsap.to(squircleDivider, {
-                scaleY: 1,
-                duration: 0.6,
-                ease: 'elastic.out(1.1, 0.42)',
-                overwrite: 'auto'
-              });
+        if (bleedHorizon && skillsSection) {
+          // 1. Expand laser line as horizon approaches viewport
+          gsap.fromTo(bleedLine,
+            { scaleX: 0, opacity: 0 },
+            {
+              scaleX: 1,
+              opacity: 1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: skillsSection,
+                start: 'top 95%',
+                end: 'top 55%',
+                scrub: 0.4
+              }
+            }
+          );
+
+          // 2. Chromatic halo blooms as boundary enters
+          gsap.fromTo(bleedHalo,
+            { opacity: 0, scaleY: 0.3 },
+            {
+              opacity: 1,
+              scaleY: 1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: skillsSection,
+                start: 'top 85%',
+                end: 'top 52%',
+                scrub: 0.4
+              }
+            }
+          );
+
+          // 3. Ambient halo softly dissolves into deep obsidian void as user reads section
+          gsap.to(bleedHalo, {
+            opacity: 0.2,
+            ease: 'power1.out',
+            scrollTrigger: {
+              trigger: skillsSection,
+              start: 'top 48%',
+              end: 'top 15%',
+              scrub: 0.4
             }
           });
+
+          // 4. Subtle specular flare drift along horizon
+          if (bleedFlare) {
+            gsap.fromTo(bleedFlare,
+              { xPercent: -150, opacity: 0.3 },
+              {
+                xPercent: 150,
+                opacity: 1,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: skillsSection,
+                  start: 'top 90%',
+                  end: 'top 30%',
+                  scrub: 0.8
+                }
+              }
+            );
+          }
         }
 
         // What I Build Cards Reveal

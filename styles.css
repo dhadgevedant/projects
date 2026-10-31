@@ -1720,7 +1720,7 @@ html.lenis body {
 .inverse-band {
   background-color: var(--surface-obsidian);
   color: var(--color-paper);
-  padding: clamp(90px, 10vw, 130px) 0 120px;
+  padding: 120px 0;
   position: relative;
 }
 
@@ -1769,25 +1769,91 @@ html.lenis body {
 }
 
 /* ==========================================================================
-   Section Transition: Seamless Elastic Squircle Invasion (Projects -> What I Build)
+   Section Transition: Hero WebGL Liquid Bleed Horizon (Projects -> What I Build)
    ========================================================================== */
-.squircle-elastic-divider {
+.liquid-bleed-horizon {
   position: absolute;
-  top: -1px;
+  top: 0;
   left: 0;
   width: 100%;
-  height: clamp(60px, 6.5vw, 95px);
-  overflow: visible;
+  height: 80px;
   pointer-events: none;
-  transform-origin: top center;
   z-index: 10;
-  will-change: transform;
+  overflow: visible;
 }
 
-.squircle-elastic-svg {
+/* Hairline Horizon Liquid Core */
+.bleed-line {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
-  display: block;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    rgba(16, 198, 132, 0.1) 0%,
+    rgba(16, 198, 132, 0.9) 20%,
+    rgba(255, 220, 85, 1) 45%,
+    rgba(255, 155, 18, 0.95) 68%,
+    rgba(190, 24, 24, 0.85) 88%,
+    rgba(190, 24, 24, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: bleedLineDrift 8s linear infinite;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+/* Soft Volumetric Iridescent Halo extending down into obsidian section */
+.bleed-halo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  background: radial-gradient(
+    ellipse 65% 100% at 50% 0%,
+    rgba(16, 198, 132, 0.28) 0%,
+    rgba(255, 155, 18, 0.2) 35%,
+    rgba(190, 24, 24, 0.12) 62%,
+    transparent 100%
+  );
+  filter: blur(16px);
+  pointer-events: none;
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+/* Traveling Chromatic Specular Flare */
+.bleed-flare {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 140px;
+  height: 14px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 220, 85, 0.75) 40%,
+    rgba(255, 155, 18, 0.3) 70%,
+    transparent 100%
+  );
+  filter: blur(4px);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+@keyframes bleedLineDrift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* ==========================================================================
