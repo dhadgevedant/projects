@@ -1206,14 +1206,14 @@ html.lenis, html.lenis body {
   .mobile-work-pin-container {
     width: 100%;
     position: relative;
-    --mobile-card-w: clamp(260px, 76vw, 310px);
+    --mobile-card-w: clamp(280px, 80vw, 340px);
     height: 100dvh;
-    min-height: 560px;
+    min-height: 580px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-top: 58px;
-    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
     box-sizing: border-box;
     background-color: var(--surface-paper);
     z-index: 10;
@@ -1228,19 +1228,19 @@ html.lenis, html.lenis body {
     -webkit-transform: translateZ(0);
     flex: 1 1 auto;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .staggered-phones-showcase {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    gap: clamp(18px, 5vw, 32px);
+    gap: clamp(16px, 4.5vw, 28px);
     width: max-content;
     padding-left: calc((100vw - var(--mobile-card-w)) / 2);
     padding-right: calc((100vw - var(--mobile-card-w)) / 2);
-    margin-top: 4px;
-    margin-bottom: 8px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     align-items: flex-start;
     will-change: transform;
     transform: translate3d(0, 0, 0);
@@ -1267,10 +1267,10 @@ html.lenis, html.lenis body {
   }
 
   .phone-mockup-wrapper {
-    width: 100%;
-    max-width: clamp(190px, 50vw, 225px);
+    height: clamp(340px, 58vh, 540px);
     aspect-ratio: 471 / 1024;
-    max-height: min(410px, 45vh);
+    width: auto;
+    max-width: clamp(230px, 68vw, 270px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1285,7 +1285,7 @@ html.lenis, html.lenis body {
     height: 100%;
     object-fit: contain;
     display: block;
-    filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.12));
+    filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.14));
     opacity: 1 !important;
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
@@ -1293,9 +1293,9 @@ html.lenis, html.lenis body {
 
   .phone-project-info {
     width: 100%;
-    max-width: clamp(225px, 64vw, 260px);
-    margin-top: 10px;
-    padding-top: 10px;
+    max-width: clamp(245px, 70vw, 290px);
+    margin-top: 8px;
+    padding-top: 8px;
     opacity: 1 !important;
   }
 
@@ -1307,13 +1307,30 @@ html.lenis, html.lenis body {
 
   .phone-project-desc {
     font-size: 12px;
-    line-height: 1.4;
-    margin-bottom: 10px;
+    line-height: 1.38;
+    margin-bottom: 8px;
   }
 
   .phone-project-link {
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 600;
+  }
+
+  @media (max-height: 700px) {
+    .phone-mockup-wrapper {
+      height: clamp(310px, 51vh, 390px);
+    }
+    .phone-project-info {
+      margin-top: 4px;
+      padding-top: 4px;
+    }
+    .phone-project-desc {
+      margin-bottom: 4px;
+    }
+    .mobile-phones-nav {
+      margin-top: 4px;
+      margin-bottom: 2px;
+    }
   }
 
   /* Mobile Seamless Dots & Swipe Bar */
