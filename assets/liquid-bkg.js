@@ -282,8 +282,9 @@
 
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+      const hero = document.getElementById('hero');
+      const width = hero ? hero.clientWidth : window.innerWidth;
+      const height = hero ? hero.clientHeight : window.innerHeight;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       gl.viewport(0, 0, canvas.width, canvas.height);

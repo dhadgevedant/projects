@@ -67,7 +67,9 @@
   <div class="mobile-nav-overlay" id="mobile-menu" aria-hidden="true">
     <div class="mobile-nav-header">
       <div class="nav-brand">
-        <img src="assets/vd-logo-dark-mode.svg" alt="VD" class="nav-logo" style="height: 22px; width: auto;">
+        <div class="nav-logo-box">
+          <img src="assets/vd-logo-dark-mode.svg" alt="VD" class="nav-logo logo-dark">
+        </div>
         <span class="nav-wordmark">VEDANT DHADGE</span>
       </div>
       <button class="mobile-nav-close" id="mobile-menu-close" aria-label="Close Navigation">
@@ -111,9 +113,6 @@
 
       <!-- Monumental Editorial Typography (Dynamically Inverting Opposite Color) -->
       <div class="hero-content">
-        <div class="hero-mobile-logo-wrap">
-          <img src="assets/vd-logo-dark-mode.svg" alt="VD Logo" class="hero-mobile-logo">
-        </div>
         <h1 class="hero-display-headline">
           VEDANT<br>DHADGE
         </h1>
@@ -161,46 +160,66 @@
          ========================================================================== -->
     <section class="manifesto-section" id="manifesto">
       <div class="monopo-container">
-        <div class="section-label">01 / Manifesto</div>
+        <div class="section-label">01 / Architectural Manifesto</div>
 
         <h2 class="heading-whisper">
-          Engineering with architectural discipline. Designing with editorial silence.
+          Engineering with architectural discipline.<br>
+          Designing with editorial silence.
         </h2>
 
-        <div class="editorial-reading-block">
-          <p>
-            I build software platforms, automation tools, and web applications that value performance as much as graphic
-            clarity. From architecting high-traffic ticketing infrastructures handling thousands of concurrent users, to
-            crafting privacy-first on-device AI tools, every system is engineered to feel weightless and purposeful.
-          </p>
-          <p>
-            Based in India, leading student developer ecosystems as Google Developer Group Lead, and engineering tools
-            for desktop and web.
-          </p>
-        </div>
+        <div class="manifesto-grid">
+          <div class="editorial-reading-block">
+            <p>
+              I build high-availability software platforms, intelligent automation engines, and privacy-first AI tools that value mathematical precision as much as graphic clarity. From architecting ticketing backends supporting thousands of concurrent users under peak loads, to engineering on-device LLMs running in complete offline isolation, every system is designed to be resilient, unbloated, and purposeful.
+            </p>
+            <p>
+              Leading developer ecosystems as Google Developer Group Lead, winning competitive engineering championships, and building tools for web, desktop, and embedded systems.
+            </p>
+            <div class="manifesto-status-box">
+              <span class="status-indicator-dot"></span>
+              <span>Available for Full-Stack &amp; AI Engineering Roles · 2025/2026</span>
+            </div>
+          </div>
 
-        <div style="margin-top: 48px;">
-          <span class="pill-tag">
-            ● Open for Full-Stack, AI &amp; Product Engineering Roles
-          </span>
+          <!-- Impact Metrics Grid -->
+          <div class="manifesto-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-val">3,000+</div>
+              <div class="metric-label">Concurrent Scale</div>
+              <div class="metric-sub">Concert ticketing platform zero-downtime architecture</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val">100%</div>
+              <div class="metric-label">On-Device Privacy</div>
+              <div class="metric-sub">Offline Ollama LLM pipelines with Apple Siri voice automation</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val">1st Prize</div>
+              <div class="metric-label">World Cup Winner</div>
+              <div class="metric-sub">Technoxian World Cup 2025 Autonomous Drone Delivery</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val">8.2 / 10</div>
+              <div class="metric-label">Academic CGPA</div>
+              <div class="metric-sub">B.Tech Computer Engineering · Sanjivani College</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ==========================================================================
-         02 / Selected Works (Editorial Gallery — Radical 0px Images, 1078px Container)
+         02 / Selected Works (Editorial Gallery — 2-Column Desktop Grid)
          ========================================================================== -->
     <section class="work-section" id="work">
       <div class="monopo-container">
-        <div
-          style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.12); padding-bottom: 24px;">
+        <div class="work-header-flex">
           <div>
             <div class="section-label">02 / Selected Works</div>
             <h2 class="heading-anchor" style="margin-bottom: 0;">Featured Projects</h2>
           </div>
-          <p
-            style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray); letter-spacing: 0.05em; text-transform: uppercase;">
-            (2023 — 2025)
+          <p style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray); letter-spacing: 0.08em; text-transform: uppercase;">
+            ARCHIVE 2023 — 2025 · 06 ARTIFACTS
           </p>
         </div>
 
@@ -209,13 +228,20 @@
           <article class="project-row">
             <div class="project-row-image">
               <img src="assets/Concert.jpeg" alt="Concert Ticket Booking Platform" loading="lazy">
-            </div>
-            <div class="project-row-meta">
-              <div>
-                <span class="project-row-category">01 · High-Concurrency Web Architecture</span>
-                <h3 class="project-row-title">Concert Ticketing Platform</h3>
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">View Case Study ↗</span>
               </div>
-              <span style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2024</span>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 01 / 06 ]</span>
+              <span class="project-row-status">2024 · PRODUCTION SCALE</span>
+            </div>
+            <div>
+              <span class="project-row-category">High-Concurrency Web Architecture</span>
+              <h3 class="project-row-title">Concert Ticketing Platform</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ 3,000+ simultaneous checkout sessions &amp; dynamic QR verification
             </div>
             <p class="project-row-desc">
               High-availability ticketing infrastructure supporting 3,000+ concurrent users for university festival headlining Shirley Setia &amp; DJ Rubz. Engineered real-time seat reservation, category selection, secure payment processing, and fast QR check-in verification without downtime.
@@ -233,13 +259,20 @@
           <article class="project-row">
             <div class="project-row-image">
               <img src="assets/localai.jpeg" alt="LocalAI Platform Interface" loading="lazy">
-            </div>
-            <div class="project-row-meta">
-              <div>
-                <span class="project-row-category">02 · Privacy-First Edge AI</span>
-                <h3 class="project-row-title">LocalAI — On-Device LLM</h3>
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">Launch Application ↗</span>
               </div>
-              <span style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2025</span>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 02 / 06 ]</span>
+              <span class="project-row-status">2025 · LIVE SYSTEM</span>
+            </div>
+            <div>
+              <span class="project-row-category">Privacy-First Edge AI</span>
+              <h3 class="project-row-title">LocalAI — On-Device LLM</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ Fully offline LLM pipelines with Apple Siri voice shortcut automation
             </div>
             <p class="project-row-desc">
               Private on-device AI system running large language models locally on an isolated network. Engineered with offline automation, absolute data sovereignty, zero telemetry, and integrated with Apple Siri for locally processed voice intelligence.
@@ -260,13 +293,20 @@
           <article class="project-row">
             <div class="project-row-image">
               <img src="assets/invoiceAI.svg" alt="Invoice AI Architecture" loading="lazy">
-            </div>
-            <div class="project-row-meta">
-              <div>
-                <span class="project-row-category">03 · Intelligent Document Processing</span>
-                <h3 class="project-row-title">Invoice AI — OCR &amp; LLM</h3>
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">View Repository ↗</span>
               </div>
-              <span style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2024</span>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 03 / 06 ]</span>
+              <span class="project-row-status">2024 · OPEN SOURCE</span>
+            </div>
+            <div>
+              <span class="project-row-category">Intelligent Document Processing</span>
+              <h3 class="project-row-title">Invoice AI — OCR &amp; LLM</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ OpenCV contour bounding boxes + Ollama conversational query engine
             </div>
             <p class="project-row-desc">
               AI-powered invoice analysis application that extracts text and identifies invoice fields with OCR and OpenCV-based bounding box detection. Integrated with Ollama LLMs for contextual conversational search, automatic categorization, and document history management.
@@ -278,7 +318,7 @@
                 <span class="pill-tag">Python &amp; LLM</span>
               </div>
               <a href="https://github.com/dhadgevedant" target="_blank" rel="noopener noreferrer" class="ghost-pill-light">
-                GitHub Repository ↗
+                GitHub Repo ↗
               </a>
             </div>
           </article>
@@ -287,13 +327,20 @@
           <article class="project-row">
             <div class="project-row-image">
               <img src="assets/assignmentPrinter.jpeg" alt="Assignment Printer Output" loading="lazy">
-            </div>
-            <div class="project-row-meta">
-              <div>
-                <span class="project-row-category">04 · Generative Document Synthesis</span>
-                <h3 class="project-row-title">Assignment Printer</h3>
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">View Repository ↗</span>
               </div>
-              <span style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2024</span>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 04 / 06 ]</span>
+              <span class="project-row-status">2024 · GENERATIVE TOOL</span>
+            </div>
+            <div>
+              <span class="project-row-category">Generative Document Synthesis</span>
+              <h3 class="project-row-title">Assignment Printer</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ Stochastic baseline drift &amp; pressure simulation for lined ruled pages
             </div>
             <p class="project-row-desc">
               Python tool that converts digital text into authentic handwritten output. Synthesizes natural human inconsistencies, stochastic baseline drift, pressure variations, and aligns margins for direct printing onto lined notebook pages.
@@ -305,7 +352,7 @@
                 <span class="pill-tag">Generative UI</span>
               </div>
               <a href="https://github.com/dhadgevedant/assignmentPrinter" target="_blank" rel="noopener noreferrer" class="ghost-pill-light">
-                GitHub Repository ↗
+                GitHub Repo ↗
               </a>
             </div>
           </article>
@@ -314,13 +361,20 @@
           <article class="project-row">
             <div class="project-row-image">
               <img src="assets/proBunk.png" alt="ProBunk Dashboard" loading="lazy">
-            </div>
-            <div class="project-row-meta">
-              <div>
-                <span class="project-row-category">05 · Predictive Academic Analytics</span>
-                <h3 class="project-row-title">ProBunk — Attendance Planner</h3>
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">Explore Web App ↗</span>
               </div>
-              <span style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2024</span>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 05 / 06 ]</span>
+              <span class="project-row-status">2024 · LIVE PWA</span>
+            </div>
+            <div>
+              <span class="project-row-category">Predictive Academic Analytics</span>
+              <h3 class="project-row-title">ProBunk — Attendance Planner</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ Timetable simulation algorithms for 75% attendance compliance
             </div>
             <p class="project-row-desc">
               Algorithmic attendance tracking web application enabling university students to forecast percentages, simulate future timetable absences, and maintain institutional 75% thresholds with predictive certainty.
@@ -341,13 +395,20 @@
           <article class="project-row">
             <div class="project-row-image">
               <img src="assets/promptTooling.png" alt="Prompt Tooling Corporate Showcase" loading="lazy">
-            </div>
-            <div class="project-row-meta">
-              <div>
-                <span class="project-row-category">06 · Industrial Portfolio &amp; Brand</span>
-                <h3 class="project-row-title">Prompt Tooling</h3>
+              <div class="project-image-overlay">
+                <span class="project-hover-pill">Visit Website ↗</span>
               </div>
-              <span style="font-size: 12px; font-family: var(--font-system-ui); color: var(--color-felt-gray);">2024</span>
+            </div>
+            <div class="project-row-meta-top">
+              <span class="project-row-index">[ 06 / 06 ]</span>
+              <span class="project-row-status">2024 · CLIENT PLATFORM</span>
+            </div>
+            <div>
+              <span class="project-row-category">Industrial Portfolio &amp; Brand</span>
+              <h3 class="project-row-title">Prompt Tooling</h3>
+            </div>
+            <div class="project-key-stat">
+              ✦ Digital showcase for German high-precision industrial tooling
             </div>
             <p class="project-row-desc">
               Digital showcase platform for an industrial precision tooling manufacturer specializing in high-tolerance German equipment and manufacturing solutions in Ahilyanagar.
@@ -372,7 +433,13 @@
          ========================================================================== -->
     <section class="inverse-band" id="lab">
       <div class="monopo-container">
-        <div class="section-label">03 / Engineering Lab</div>
+        <div class="lab-header-wrap">
+          <div class="section-label" style="margin-bottom: 0;">03 / Engineering Lab &amp; Archive</div>
+          <span class="lab-live-pill">
+            <span class="status-pulse-teal"></span>
+            ACTIVE EXPERIMENTAL R&amp;D
+          </span>
+        </div>
         <h2 class="heading-anchor">System Tools &amp; Experiments</h2>
 
         <p class="editorial-reading-block" style="margin-bottom: 40px;">
@@ -382,56 +449,118 @@
         <!-- Archive Grid (Strict 0px Corners, Hairline Borders) -->
         <div class="archive-grid">
           <div class="archive-card">
-            <div class="archive-card-num">EXP · 01</div>
-            <h4 class="archive-card-title">VISTARA Lab Exam</h4>
-            <div class="archive-card-sub">LeetCode-Style Platform</div>
-            <p class="archive-card-desc">
-              Developed live programming lab examination module with AI-based answer analysis and multiple anti-cheating detection mechanisms.
-            </p>
+            <div>
+              <div class="archive-card-top">
+                <div class="archive-card-num">EXP · 01 // 2025</div>
+                <span class="status-pulse-teal" title="Operational"></span>
+              </div>
+              <h4 class="archive-card-title">VISTARA Lab Exam</h4>
+              <div class="archive-card-sub">AI Anti-Cheat Assessment Module</div>
+              <p class="archive-card-desc">
+                Developed live programming lab examination module, providing a LeetCode-like testing environment with AI anti-cheat answer analysis.
+              </p>
+            </div>
+            <div class="archive-innovation-bullet">
+              ✦ Automated test-case execution &amp; code plagiarism detection
+            </div>
           </div>
 
           <div class="archive-card">
-            <div class="archive-card-num">EXP · 02</div>
-            <h4 class="archive-card-title">SARTTHI Platform</h4>
-            <div class="archive-card-sub">Enterprise Engineering</div>
-            <p class="archive-card-desc">
-              Engineered frontend and backend features for Sartthi-CA &amp; Sartthi-Sales platforms across 3 client corporate accounts.
-            </p>
+            <div>
+              <div class="archive-card-top">
+                <div class="archive-card-num">EXP · 02 // 2026</div>
+                <span class="status-pulse-teal" title="Operational"></span>
+              </div>
+              <h4 class="archive-card-title">SARTTHI Platform</h4>
+              <div class="archive-card-sub">Enterprise Engineering Architecture</div>
+              <p class="archive-card-desc">
+                Engineered frontend and backend features for Sartthi-CA &amp; Sartthi-Sales platforms across 3 corporate accounts.
+              </p>
+            </div>
+            <div class="archive-innovation-bullet">
+              ✦ Multi-tenant enterprise dashboard &amp; secure account services
+            </div>
           </div>
 
           <div class="archive-card">
-            <div class="archive-card-num">EXP · 03</div>
-            <h4 class="archive-card-title">Drone Delivery</h4>
-            <div class="archive-card-sub">🏆 Technoxian World Cup Winner</div>
-            <p class="archive-card-desc">
-              Integrated autonomous Drone Delivery platform and theme bot solution, winning 1st place at the Technoxian World Cup.
-            </p>
+            <div>
+              <div class="archive-card-top">
+                <div class="archive-card-num">EXP · 03 // 2025</div>
+                <span class="status-pulse-teal" title="Award Winning"></span>
+              </div>
+              <h4 class="archive-card-title">Autonomous Drone Delivery</h4>
+              <div class="archive-card-sub" style="color: #ffb800;">🏆 Technoxian World Cup Winner</div>
+              <p class="archive-card-desc">
+                Integrated autonomous Drone Delivery platform and theme bot solution, winning 1st place internationally at the Technoxian World Cup.
+              </p>
+            </div>
+            <div class="archive-innovation-bullet">
+              ✦ Hardware telemetry synchronization &amp; ground control station web app
+            </div>
           </div>
 
           <div class="archive-card">
-            <div class="archive-card-num">EXP · 04</div>
-            <h4 class="archive-card-title">WinLens Suite</h4>
-            <div class="archive-card-sub">Desktop Automation</div>
-            <p class="archive-card-desc">
-              System-level productivity framework streamlining desktop workflows, macro bindings, and rapid screen OCR analysis.
-            </p>
+            <div>
+              <div class="archive-card-top">
+                <div class="archive-card-num">EXP · 04 // 2024</div>
+                <span class="status-pulse-teal" title="Operational"></span>
+              </div>
+              <h4 class="archive-card-title">WinLens Suite</h4>
+              <div class="archive-card-sub">Desktop Automation &amp; OCR Framework</div>
+              <p class="archive-card-desc">
+                System-level productivity framework streamlining desktop workflows, macro bindings, and rapid screen OCR analysis.
+              </p>
+            </div>
+            <div class="archive-innovation-bullet">
+              ✦ Low-latency desktop screen capture &amp; hotkey extraction macros
+            </div>
           </div>
         </div>
 
-        <!-- Technical Repertoire / Stack -->
+        <!-- Categorized Technical Repertoire Matrix -->
         <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.15);">
-          <div class="section-label">Core Technical Repertoire</div>
-          <div class="skills-pill-group">
-            <span class="pill-tag pill-tag-dark">Python</span>
-            <span class="pill-tag pill-tag-dark">FastAPI</span>
-            <span class="pill-tag pill-tag-dark">Express</span>
-            <span class="pill-tag pill-tag-dark">React</span>
-            <span class="pill-tag pill-tag-dark">Generative AI</span>
-            <span class="pill-tag pill-tag-dark">Ollama</span>
-            <span class="pill-tag pill-tag-dark">RAG &amp; AI Agents</span>
-            <span class="pill-tag pill-tag-dark">MongoDB</span>
-            <span class="pill-tag pill-tag-dark">PostgreSQL</span>
-            <span class="pill-tag pill-tag-dark">Playwright &amp; Scraping</span>
+          <div class="section-label">Core Technical Repertoire &amp; Systems Matrix</div>
+          <div class="repertoire-matrix">
+            <div>
+              <div class="repertoire-col-title">01 / Languages &amp; Core</div>
+              <div class="repertoire-pills">
+                <span class="repertoire-item">Python 3.11+</span>
+                <span class="repertoire-item">JavaScript (ESNext)</span>
+                <span class="repertoire-item">TypeScript</span>
+                <span class="repertoire-item">C++ / C</span>
+                <span class="repertoire-item">SQL &amp; NoSQL</span>
+              </div>
+            </div>
+            <div>
+              <div class="repertoire-col-title">02 / Full-Stack &amp; Services</div>
+              <div class="repertoire-pills">
+                <span class="repertoire-item">React &amp; Next.js</span>
+                <span class="repertoire-item">Node.js &amp; Express</span>
+                <span class="repertoire-item">FastAPI</span>
+                <span class="repertoire-item">MongoDB &amp; PostgreSQL</span>
+                <span class="repertoire-item">REST &amp; WebSockets</span>
+              </div>
+            </div>
+            <div>
+              <div class="repertoire-col-title">03 / AI &amp; Vision Systems</div>
+              <div class="repertoire-pills">
+                <span class="repertoire-item">Ollama &amp; Local LLMs</span>
+                <span class="repertoire-item">OpenCV &amp; Vision</span>
+                <span class="repertoire-item">RAG Pipelines</span>
+                <span class="repertoire-item">Apple Siri Integration</span>
+                <span class="repertoire-item">Vector Embeddings</span>
+              </div>
+            </div>
+            <div>
+              <div class="repertoire-col-title">04 / Tooling &amp; Infrastructure</div>
+              <div class="repertoire-pills">
+                <span class="repertoire-item">Git &amp; GitHub</span>
+                <span class="repertoire-item">Playwright Automation</span>
+                <span class="repertoire-item">Linux / Shell Scripting</span>
+                <span class="repertoire-item">WebGL &amp; GLSL Shaders</span>
+                <span class="repertoire-item">Docker &amp; Cloud Workflows</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -442,17 +571,25 @@
          ========================================================================== -->
     <section class="manifesto-section" id="credentials" style="padding-top: 100px;">
       <div class="monopo-container">
-        <div class="section-label">04 / Background &amp; Leadership</div>
-        <h2 class="heading-anchor">Credentials</h2>
+        <div class="credentials-header-flex">
+          <div>
+            <div class="section-label">04 / Background &amp; Leadership</div>
+            <h2 class="heading-anchor" style="margin-bottom: 0;">Credentials</h2>
+          </div>
+          <a href="assets/VedantDhadge_Resume.pdf" target="_blank" download="VedantDhadge_Resume.pdf" class="ghost-pill-light" style="padding: 10px 24px; font-size: 13px;">
+            <span style="margin-right: 6px;">↓</span> Download Resume (PDF)
+          </a>
+        </div>
 
         <div class="credentials-list">
           <div class="credential-row">
             <div>
               <div class="credential-role">SARTTHI</div>
               <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">Software Development Intern</div>
+              <span class="credential-badge">ENTERPRISE INTERNSHIP</span>
             </div>
             <div class="credential-desc">
-              Assisting development of frontend and backend features for Sartthi-CA &amp; Sartthi-Sales platforms. Managed support for 3 client accounts.
+              Assisting development of frontend and backend features for Sartthi-CA &amp; Sartthi-Sales platforms. Managed support for 3 client accounts and streamlined corporate client onboarding workflows.
             </div>
             <div class="credential-year">2026</div>
           </div>
@@ -461,9 +598,10 @@
             <div>
               <div class="credential-role">VISTARA</div>
               <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">Web Development Intern</div>
+              <span class="credential-badge">EDTECH PLATFORM</span>
             </div>
             <div class="credential-desc">
-              Developed live programming lab examination module, providing a LeetCode-like testing environment with AI anti-cheat answer analysis.
+              Developed live programming lab examination module, providing a LeetCode-like testing environment with AI anti-cheat answer analysis and automated unit test validation.
             </div>
             <div class="credential-year">2025</div>
           </div>
@@ -472,9 +610,10 @@
             <div>
               <div class="credential-role">Technoxian World Cup</div>
               <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">🏆 1st Prize Winner</div>
+              <span class="credential-badge badge-gold">WORLD CHAMPION 2025</span>
             </div>
             <div class="credential-desc">
-              Integrated Drone Delivery website and autonomous theme bot solution, winning the Technoxian World Cup.
+              Integrated Drone Delivery website and autonomous theme bot solution, winning 1st place in the world robotics championship at the Technoxian World Cup.
             </div>
             <div class="credential-year">2025</div>
           </div>
@@ -483,9 +622,10 @@
             <div>
               <div class="credential-role">Google Developer Group</div>
               <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">On-Campus Lead</div>
+              <span class="credential-badge">COMMUNITY LEADERSHIP</span>
             </div>
             <div class="credential-desc">
-              Directed college-level developer community with students across multiple academic branches, coordinating hackathons and technical events.
+              Directed college-level developer community with 500+ students across multiple academic branches, coordinating hackathons, open-source workshops, and cloud development events.
             </div>
             <div class="credential-year">2023 — 2024</div>
           </div>
@@ -494,9 +634,10 @@
             <div>
               <div class="credential-role">BTech Computer Engineering</div>
               <div style="font-size: 12px; color: var(--color-felt-gray); margin-top: 4px;">Sanjivani College of Engineering</div>
+              <span class="credential-badge">CGPA 8.2 / 10.0</span>
             </div>
             <div class="credential-desc">
-              Bachelor of Technology in Computer Engineering with academic CGPA of 8.2 / 10.0. Focus on full-stack systems and GenAI automation.
+              Bachelor of Technology in Computer Engineering with academic CGPA of 8.2 / 10.0. Deep coursework in Data Structures, Algorithms, Computer Architecture, and Artificial Intelligence.
             </div>
             <div class="credential-year">2023 — 2027</div>
           </div>
@@ -525,32 +666,43 @@
 
         <div class="footer-grid">
           <div>
-            <div class="footer-col-title">Studio / Focus</div>
+            <div class="footer-col-title">Engineering Disciplines</div>
             <div class="footer-address-stack">
-              <p>Full-Stack Engineering</p>
-              <p>System Automation</p>
-              <p>Generative AI Tools</p>
-              <p>Creative Development</p>
+              <p>High-Concurrency Architecture</p>
+              <p>Privacy-First On-Device AI</p>
+              <p>Intelligent Document Vision &amp; OCR</p>
+              <p>Full-Stack Web Systems (MERN / FastAPI)</p>
             </div>
           </div>
 
           <div>
-            <div class="footer-col-title">Digital Networks</div>
+            <div class="footer-col-title">Direct Coordinates</div>
+            <div class="footer-address-stack">
+              <a href="mailto:dhadgevedant@gmail.com">dhadgevedant@gmail.com ↗</a>
+              <a href="tel:+919322260485">+91 9322260485 ↗</a>
+              <p>Ahilyanagar &amp; Pune, India</p>
+              <p>Open for Global &amp; Remote Roles</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Profiles &amp; Artifacts</div>
             <div class="footer-address-stack">
               <a href="https://github.com/dhadgevedant" target="_blank" rel="noopener noreferrer">GitHub / dhadgevedant ↗</a>
               <a href="https://www.linkedin.com/in/vedantdhadge/" target="_blank" rel="noopener noreferrer">LinkedIn / vedantdhadge ↗</a>
-              <a href="mailto:dhadgevedant@gmail.com">dhadgevedant@gmail.com ↗</a>
-              <a href="tel:+919322260485">+91 9322260485 ↗</a>
+              <a href="assets/VedantDhadge_Resume.pdf" target="_blank" download="VedantDhadge_Resume.pdf">Resume / Curriculum Vitae (PDF) ↗</a>
             </div>
           </div>
 
           <div>
-            <div class="footer-col-title">Location / Node</div>
+            <div class="footer-col-title">Local Time &amp; Node</div>
             <div class="footer-address-stack">
-              <p>Ahilyanagar, Maharashtra, India</p>
-              <p>UTC +05:30</p>
               <p>Sanjivani College of Engineering</p>
-              <p>Open to Remote &amp; Global Teams</p>
+              <p>Maharashtra, India</p>
+              <div class="footer-clock-box">
+                <span class="clock-label">INDIA STANDARD TIME (UTC+5:30)</span>
+                <span id="live-ist-clock" class="clock-display">--:--:-- IST</span>
+              </div>
             </div>
           </div>
         </div>
@@ -558,7 +710,7 @@
         <div class="footer-bottom">
           <div class="footer-brand-wrap">
             <img src="assets/vd-logo-dark-mode.svg" alt="VD" class="footer-logo">
-            <p>© 2025 Vedant Dhadge. Crafted with Monopo Saigon editorial discipline.</p>
+            <p>© 2025 Vedant Dhadge. Crafted with architectural discipline &amp; WebGL liquid iridescence.</p>
           </div>
           <a href="#hero" class="nav-link" style="color: var(--color-felt-gray);">Back to Top ↑</a>
         </div>
@@ -655,35 +807,60 @@
 
         // Project Rows Reveal
         gsap.utils.toArray('.project-row').forEach(row => {
-          gsap.from(row, {
-            scrollTrigger: {
-              trigger: row,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            },
-            opacity: 0,
-            y: 50,
-            duration: 1.0,
-            ease: 'power3.out'
-          });
+          gsap.fromTo(row,
+            { opacity: 0, y: 35 },
+            {
+              scrollTrigger: {
+                trigger: row,
+                start: 'top 90%',
+                once: true
+              },
+              opacity: 1,
+              y: 0,
+              duration: 0.85,
+              ease: 'power3.out'
+            }
+          );
         });
 
         // Lab Cards Reveal
         gsap.utils.toArray('.archive-card').forEach((card, i) => {
-          gsap.from(card, {
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 90%',
-              toggleActions: 'play none none reverse'
-            },
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            delay: i * 0.08,
-            ease: 'power3.out'
-          });
+          gsap.fromTo(card,
+            { opacity: 0, y: 30 },
+            {
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 92%',
+                once: true
+              },
+              opacity: 1,
+              y: 0,
+              duration: 0.75,
+              delay: (i % 2) * 0.1,
+              ease: 'power3.out'
+            }
+          );
         });
+
+        ScrollTrigger.refresh();
       }
+
+      // Real-Time IST Digital Clock
+      const clockEl = document.getElementById('live-ist-clock');
+      function updateISTClock() {
+        if (!clockEl) return;
+        const now = new Date();
+        const istString = now.toLocaleTimeString('en-US', {
+          timeZone: 'Asia/Kolkata',
+          hour12: true,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+        clockEl.textContent = `${istString} IST`;
+      }
+      setInterval(updateISTClock, 1000);
+      updateISTClock();
 
       // Smooth link scrolling
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
