@@ -242,6 +242,8 @@
       let centerY = textCanvas.height * 0.44; // Vertically positioned above bottom bar
       let letterSpacing = -0.035 * fontSize;
 
+      let fontWeight = '400';
+
       if (headlineEl) {
         const rect = headlineEl.getBoundingClientRect();
         const canvasRect = canvas.getBoundingClientRect();
@@ -252,10 +254,11 @@
           const scaleY = textCanvas.height / canvasRect.height;
 
           fontSize = parseFloat(style.fontSize) * scaleX;
+          fontWeight = style.fontWeight || '400';
           const parsedSpacing = parseFloat(style.letterSpacing);
           letterSpacing = (isNaN(parsedSpacing) ? (-0.035 * fontSize / scaleX) : parsedSpacing) * scaleX;
 
-          centerX = (rect.left - canvasRect.left + rect.width * 0.5) * scaleX;
+          centerX = textCanvas.width * 0.5;
           centerY = (rect.top - canvasRect.top + rect.height * 0.5) * scaleY;
         }
       }
@@ -264,7 +267,7 @@
       textCtx.fillStyle = '#ffffff';
       textCtx.textAlign = 'center';
       textCtx.textBaseline = 'middle';
-      textCtx.font = `400 ${fontSize}px ${fontFamily}`;
+      textCtx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
       if (textCtx.letterSpacing !== undefined) {
         textCtx.letterSpacing = `${letterSpacing}px`;
       }
@@ -283,8 +286,8 @@
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const hero = document.getElementById('hero');
-      const width = hero ? hero.clientWidth : window.innerWidth;
-      const height = hero ? hero.clientHeight : window.innerHeight;
+      const width = hero ? hero.offsetWidth : window.innerWidth;
+      const height = hero ? hero.offsetHeight : window.innerHeight;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       gl.viewport(0, 0, canvas.width, canvas.height);

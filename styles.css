@@ -1587,10 +1587,24 @@ body {
   }
 
   .hero-viewport {
-    height: 72svh;
-    min-height: 460px;
-    max-height: 600px;
-    padding: 60px 16px 65px;
+    height: 74svh;
+    min-height: 480px;
+    max-height: 620px;
+    padding: 58px 20px 105px;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-display-headline {
+    font-size: clamp(3.5rem, 17.5vw, 4.6rem);
+    font-weight: 500;
+    line-height: 0.90;
+    letter-spacing: -0.035em;
+    width: 100%;
+    text-align: center;
   }
 
   .scroll-indicator-container {
@@ -1654,5 +1668,13 @@ body {
 @media (max-width: 390px) {
   .nav-wordmark {
     display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-display-headline {
+    font-size: clamp(3.2rem, 16.5vw, 4.0rem);
+    line-height: 0.90;
+    letter-spacing: -0.035em;
   }
 }
