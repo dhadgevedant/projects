@@ -1041,10 +1041,10 @@
             }
           });
 
-          // 1. Hero container & liquid background physically shrink from 100vh down to navbar height
+          // 1. Hero container & liquid background physically shrink from 100vh down to navbar height (no shadow)
           heroMorphTl.fromTo(heroSection,
-            { height: () => window.innerHeight, borderBottomColor: 'rgba(255, 255, 255, 0)', boxShadow: '0 0 0 rgba(0,0,0,0)' },
-            { height: () => (window.innerWidth <= 768 ? 58 : 66), borderBottomColor: 'rgba(255, 255, 255, 0.14)', boxShadow: '0 8px 30px rgba(0,0,0,0.5)', ease: 'none', duration: 1 },
+            { height: () => window.innerHeight, borderBottomColor: 'rgba(255, 255, 255, 0)' },
+            { height: () => (window.innerWidth <= 768 ? 58 : 66), borderBottomColor: 'rgba(255, 255, 255, 0.14)', ease: 'none', duration: 1 },
             0
           );
 

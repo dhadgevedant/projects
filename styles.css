@@ -208,6 +208,7 @@ html.lenis body {
   padding: 0 32px;
   background: transparent !important;
   border-bottom: none !important;
+  box-shadow: none !important;
   color: #ffffff;
   opacity: 0;
   pointer-events: none;
@@ -243,16 +244,16 @@ html.lenis body {
 .monopo-header.on-light {
   color: var(--color-obsidian);
   background-color: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .monopo-header.on-dark {
   color: var(--color-paper);
   background-color: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -533,7 +534,8 @@ html.lenis body {
   isolation: isolate;
   z-index: 99;
   border-bottom: 1px solid transparent;
-  will-change: height, border-color, box-shadow;
+  box-shadow: none !important;
+  will-change: height, border-color;
 }
 
 .iridescent-canvas-container {
