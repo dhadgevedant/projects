@@ -957,7 +957,7 @@
 
       // Adaptive Header color swap on scroll (Throttled with requestAnimationFrame)
       const header = document.getElementById('header');
-      const darkSections = document.querySelectorAll('.inverse-band, .monopo-footer');
+      const darkSections = document.querySelectorAll('.hero-viewport, .inverse-band, .monopo-footer');
       let headerRafId = null;
       let isDarkState = false;
 
@@ -965,33 +965,26 @@
         if (!header) return;
         const scrollY = window.scrollY;
 
-        if (scrollY > 50) {
-          let isDark = false;
-          for (let i = 0; i < darkSections.length; i++) {
-            const rect = darkSections[i].getBoundingClientRect();
-            if (rect.top <= 66 && rect.bottom >= 66) {
-              isDark = true;
-              break;
-            }
+        let isDark = false;
+        for (let i = 0; i < darkSections.length; i++) {
+          const rect = darkSections[i].getBoundingClientRect();
+          if (rect.top <= 66 && rect.bottom >= 66) {
+            isDark = true;
+            break;
           }
+        }
 
-          if (isDark !== isDarkState) {
-            isDarkState = isDark;
-            if (isDark) {
-              header.classList.add('on-dark');
-              header.classList.remove('on-light');
-            } else {
-              header.classList.add('on-light');
-              header.classList.remove('on-dark');
-            }
-          } else if (!header.classList.contains('on-light') && !header.classList.contains('on-dark')) {
-            header.classList.add(isDark ? 'on-dark' : 'on-light');
+        if (isDark !== isDarkState) {
+          isDarkState = isDark;
+          if (isDark) {
+            header.classList.add('on-dark');
+            header.classList.remove('on-light');
+          } else {
+            header.classList.add('on-light');
+            header.classList.remove('on-dark');
           }
-        } else {
-          if (header.classList.contains('on-light') || header.classList.contains('on-dark')) {
-            header.classList.remove('on-light', 'on-dark');
-          }
-          isDarkState = false;
+        } else if (!header.classList.contains('on-light') && !header.classList.contains('on-dark')) {
+          header.classList.add(isDark ? 'on-dark' : 'on-light');
         }
       }
 
@@ -1012,7 +1005,90 @@
         gsap.registerPlugin(ScrollTrigger);
         ScrollTrigger.config({ ignoreMobileResize: true });
 
-        // Hero Bottom Bar Entrance
+        // ====================================================================
+        // Hero-to-Navbar Morph & Reveal on Scroll
+        // At start (scroll 0): No navbar is visible. Hero is full screen.
+        // On scroll: Hero shrinks upwards into the top 66px header space;
+        // then the navbar background, VD logo, locale, and nav links appear.
+        // ====================================================================
+        const heroSection = document.getElementById('hero');
+        const heroContent = heroSection ? heroSection.querySelector('.hero-content') : null;
+        const heroHeadline = heroSection ? heroSection.querySelector('.hero-display-headline') : null;
+        const heroPills = heroSection ? heroSection.querySelector('.hero-services-pills') : null;
+        const heroBottom = heroSection ? heroSection.querySelector('.hero-bottom-bar') : null;
+        const heroBadge = heroSection ? heroSection.querySelector('.scroll-indicator-container') : null;
+        const navBrand = header ? header.querySelector('.nav-brand') : null;
+        const navLocale = header ? header.querySelector('.nav-locale') : null;
+        const navLinks = header ? header.querySelectorAll('.nav-menu li') : [];
+        const navToggle = header ? header.querySelector('.nav-mobile-toggle') : null;
+
+        if (heroSection && header && heroContent) {
+          // Explicit initial state: No navbar at start
+          gsap.set(header, { opacity: 0, y: -66, pointerEvents: 'none' });
+          gsap.set([navBrand, navLocale, ...navLinks, navToggle].filter(Boolean), { opacity: 0, y: -10 });
+
+          const heroMorphTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: heroSection,
+              start: 'top top',
+              end: '+=450',
+              pin: true,
+              scrub: 0.3,
+              anticipatePin: 1
+            }
+          });
+
+          // 1. Secondary hero elements dissolve early (0% -> 35%)
+          const secondaryHeroElements = [heroPills, heroBottom, heroBadge].filter(Boolean);
+          if (secondaryHeroElements.length) {
+            heroMorphTl.to(secondaryHeroElements, {
+              opacity: 0,
+              y: 20,
+              duration: 0.35,
+              ease: 'power1.out'
+            }, 0);
+          }
+
+          // 2. Hero content shrinks upwards towards top header (0% -> 80%)
+          heroMorphTl.to(heroContent, {
+            scale: 0.25,
+            y: () => -(window.innerHeight * 0.5 - (window.innerWidth <= 768 ? 29 : 33)),
+            duration: 0.8,
+            ease: 'power2.inOut'
+          }, 0);
+
+          // 3. Hero headline dissolves as it compresses into top bar (65% -> 85%)
+          if (heroHeadline) {
+            heroMorphTl.to(heroHeadline, {
+              opacity: 0,
+              duration: 0.2,
+              ease: 'power1.out'
+            }, 0.65);
+          }
+
+          // 4. Reveal navbar background and border (68% -> 90%)
+          heroMorphTl.to(header, {
+            opacity: 1,
+            y: 0,
+            pointerEvents: 'auto',
+            duration: 0.22,
+            ease: 'power2.out'
+          }, 0.68);
+
+          // 5. Stagger in the navbar logo, locale, links, and mobile toggle (75% -> 100%)
+          const navItems = [navBrand, navLocale, ...navLinks, navToggle].filter(Boolean);
+          if (navItems.length) {
+            heroMorphTl.to(navItems, {
+              opacity: 1,
+              y: 0,
+              stagger: 0.03,
+              duration: 0.25,
+              ease: 'power2.out'
+            }, 0.75);
+          }
+        }
+
+        // Hero Bottom Bar Entrance on initial load
         gsap.from('.hero-bottom-bar', {
           opacity: 0,
           y: 30,

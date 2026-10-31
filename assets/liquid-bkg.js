@@ -337,7 +337,8 @@
       gl.activeTexture(gl.TEXTURE0);
       gl.bindTexture(gl.TEXTURE_2D, textTexture);
       gl.uniform1i(textTexLoc, 0);
-      gl.uniform1i(hasTextLoc, 1);
+      // Set hasTextLoc to 0 so WebGL renders pure liquid fluid; typography is dynamically inverted in DOM via mix-blend-mode: difference for 120fps hardware-accelerated morphing
+      gl.uniform1i(hasTextLoc, 0);
       gl.uniform1i(isMobileLoc, (window.innerWidth <= 900) ? 1 : 0);
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
