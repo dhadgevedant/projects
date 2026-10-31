@@ -1029,8 +1029,8 @@
 
         if (heroSection && header && heroContent && heroScrollTrack) {
           // Explicit initial state: No navbar at start
-          gsap.set(header, { opacity: 0, y: -66, pointerEvents: 'none' });
-          gsap.set([navBrand, navLocale, ...navLinks, navToggle].filter(Boolean), { opacity: 0, y: -10 });
+          gsap.set(header, { opacity: 0, pointerEvents: 'none' });
+          gsap.set([navBrand, navLocale, ...navLinks, navToggle].filter(Boolean), { opacity: 0 });
 
           const heroMorphTl = gsap.timeline({
             scrollTrigger: {
@@ -1048,24 +1048,38 @@
             0
           );
 
-          // 2. Hide hero description bar, service pills, and scroll badge immediately on scroll (0% -> 20%)
-          const secondaryHeroElements = [heroBottom, heroPills, heroBadge].filter(Boolean);
-          if (secondaryHeroElements.length) {
-            heroMorphTl.to(secondaryHeroElements, {
+          // 2. Secondary pills and scroll badge fade out early (0% -> 22%)
+          const secondaryPills = [heroPills, heroBadge].filter(Boolean);
+          if (secondaryPills.length) {
+            heroMorphTl.to(secondaryPills, {
               autoAlpha: 0,
-              y: 20,
-              duration: 0.2,
-              ease: 'power1.out',
-              onComplete: () => {
-                if (heroBottom) heroBottom.style.display = 'none';
-              },
-              onReverseComplete: () => {
-                if (heroBottom) heroBottom.style.display = '';
-              }
+              y: 15,
+              duration: 0.22,
+              ease: 'power1.out'
             }, 0);
           }
 
-          // 3. Hero text zooms in while staying centered as the background shrinks (0% -> 60%)
+          // Hero bottom description bar stays visible for longer, then fades out smoothly (25% -> 52%)
+          if (heroBottom) {
+            heroMorphTl.fromTo(heroBottom,
+              { autoAlpha: 1, y: 0 },
+              {
+                autoAlpha: 0,
+                y: 15,
+                duration: 0.27,
+                ease: 'power1.out',
+                onComplete: () => {
+                  heroBottom.style.display = 'none';
+                },
+                onReverseComplete: () => {
+                  heroBottom.style.display = '';
+                }
+              },
+              0.25
+            );
+          }
+
+          // 3. Hero text zooms in while staying centered as the background shrinks (0% -> 55%)
           heroMorphTl.to(heroContent, {
             scale: 1.35,
             duration: 0.55,
@@ -1079,24 +1093,22 @@
             ease: 'power1.out'
           }, 0.2);
 
-          // 5. Reveal header container and stagger in logo, locale, nav links, and toggle button (70% -> 100%)
+          // 5. Reveal header container and stagger in logo, locale, nav links, and toggle button (70% -> 98%)
           heroMorphTl.to(header, {
             opacity: 1,
-            y: 0,
             pointerEvents: 'auto',
             duration: 0.25,
             ease: 'power2.out'
-          }, 0.7);
+          }, 0.70);
 
           const navItems = [navBrand, navLocale, ...navLinks, navToggle].filter(Boolean);
           if (navItems.length) {
             heroMorphTl.to(navItems, {
               opacity: 1,
-              y: 0,
-              stagger: 0.03,
-              duration: 0.25,
+              stagger: 0.015,
+              duration: 0.15,
               ease: 'power2.out'
-            }, 0.75);
+            }, 0.72);
           }
         }
 
@@ -1324,73 +1336,57 @@
           mobileTimeline.to({}, { duration: pause3 }, pause1 + glide1 + pause2 + glide2);
         });
 
-        // Hero WebGL Liquid Bleed Horizon (Projects -> What I Build)
-        const bleedHorizon = document.getElementById('bleed-horizon');
-        const bleedLine = document.getElementById('bleed-line');
-        const bleedHalo = document.getElementById('bleed-halo');
-        const bleedFlare = document.getElementById('bleed-flare');
+        // ====================================================================
+        // Navbar Expands into Background of What I Build (#skills)
+        // ====================================================================
         const skillsSection = document.getElementById('skills');
+        const expertiseSection = document.getElementById('expertise');
 
-        if (bleedHorizon && skillsSection) {
-          // 1. Expand laser line as horizon approaches viewport
-          gsap.fromTo(bleedLine,
-            { scaleX: 0, opacity: 0 },
-            {
-              scaleX: 1,
-              opacity: 1,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: skillsSection,
-                start: 'top 95%',
-                end: 'top 55%',
-                scrub: 0.4
-              }
-            }
-          );
+        if (heroSection && skillsSection) {
+          const navH = () => (window.innerWidth <= 768 ? 58 : 66);
+          const fullH = () => window.innerHeight;
 
-          // 2. Chromatic halo blooms as boundary enters
-          gsap.fromTo(bleedHalo,
-            { opacity: 0, scaleY: 0.3 },
-            {
-              opacity: 1,
-              scaleY: 1,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: skillsSection,
-                start: 'top 85%',
-                end: 'top 52%',
-                scrub: 0.4
-              }
-            }
-          );
-
-          // 3. Ambient halo softly dissolves into deep obsidian void as user reads section
-          gsap.to(bleedHalo, {
-            opacity: 0.2,
-            ease: 'power1.out',
+          // 1. As What I Build arrives at the top, the 66px navbar expands down to 100vh
+          const skillsExpandTl = gsap.timeline({
             scrollTrigger: {
               trigger: skillsSection,
-              start: 'top 48%',
-              end: 'top 15%',
-              scrub: 0.4
+              start: () => 'top ' + navH() + 'px',
+              end: () => 'top -250px',
+              scrub: true,
+              onEnter: () => {
+                heroSection.style.borderBottomColor = 'rgba(255, 255, 255, 0)';
+              },
+              onLeaveBack: () => {
+                heroSection.style.borderBottomColor = 'rgba(255, 255, 255, 0.14)';
+              }
             }
           });
 
-          // 4. Subtle specular flare drift along horizon
-          if (bleedFlare) {
-            gsap.fromTo(bleedFlare,
-              { xPercent: -150, opacity: 0.3 },
-              {
-                xPercent: 150,
-                opacity: 1,
-                ease: 'none',
-                scrollTrigger: {
-                  trigger: skillsSection,
-                  start: 'top 90%',
-                  end: 'top 30%',
-                  scrub: 0.8
+          skillsExpandTl.fromTo(heroSection,
+            { height: navH },
+            { height: fullH, ease: 'none', duration: 1 }
+          );
+
+          // 2. As What I Build finishes and Expertise arrives, shrink back from 100vh to 66px
+          if (expertiseSection) {
+            const skillsShrinkTl = gsap.timeline({
+              scrollTrigger: {
+                trigger: expertiseSection,
+                start: () => 'top 100%',
+                end: () => 'top ' + navH() + 'px',
+                scrub: true,
+                onLeave: () => {
+                  heroSection.style.borderBottomColor = 'rgba(255, 255, 255, 0.14)';
+                },
+                onEnterBack: () => {
+                  heroSection.style.borderBottomColor = 'rgba(255, 255, 255, 0)';
                 }
               }
+            });
+
+            skillsShrinkTl.fromTo(heroSection,
+              { height: fullH },
+              { height: navH, ease: 'none', duration: 1 }
             );
           }
         }

@@ -194,14 +194,14 @@ html.lenis body {
    }
    -------------------------------------------------------------------------- */
 
-/* Persistent Top Navigation Overlay: sits directly atop shrinking hero at z-index: 100 */
+/* Persistent Top Navigation Overlay: sits directly atop shrinking hero at z-index: 110 */
 .monopo-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 66px;
-  z-index: 100;
+  z-index: 110;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -212,8 +212,7 @@ html.lenis body {
   color: #ffffff;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-66px);
-  will-change: transform, opacity;
+  will-change: opacity;
 }
 
 .monopo-header a,
@@ -237,8 +236,7 @@ html.lenis body {
 .monopo-header .nav-menu li,
 .monopo-header .nav-mobile-toggle {
   opacity: 0;
-  transform: translateY(-10px);
-  will-change: transform, opacity;
+  will-change: opacity;
 }
 
 .monopo-header.on-light {
@@ -336,11 +334,21 @@ html.lenis body {
 
 .nav-locale {
   display: flex;
+  align-items: center;
   gap: 16px;
   font-size: 12px;
   font-weight: 400;
+  line-height: 1;
   letter-spacing: 0.05em;
   color: inherit;
+  height: 100%;
+}
+
+.nav-locale span,
+.nav-locale a {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
 }
 
 .nav-locale span.active {
@@ -348,15 +356,36 @@ html.lenis body {
   border-bottom: 1px solid currentColor;
 }
 
+.monopo-header nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
 .nav-menu {
   display: flex;
+  align-items: center;
   gap: 28px;
   list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.nav-menu li {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
+  display: inline-flex;
+  align-items: center;
   font-size: 12px;
   font-weight: 400;
+  line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
@@ -532,7 +561,7 @@ html.lenis body {
   overflow: hidden;
   padding: 0 24px;
   isolation: isolate;
-  z-index: 99;
+  z-index: 100;
   border-bottom: 1px solid transparent;
   box-shadow: none !important;
   will-change: height, border-color;
@@ -1113,6 +1142,9 @@ html.lenis body {
 .work-section {
   width: 100%;
   padding-bottom: clamp(100px, 12vw, 180px);
+  background-color: var(--surface-paper);
+  position: relative;
+  z-index: 10;
 }
 
 .work-fluid-container {
@@ -1767,26 +1799,28 @@ html.lenis body {
 }
 
 /* ==========================================================================
-   Inverse Section (Obsidian Dark Band — Full-Bleed)
+   Inverse Section (What I Build — Living Liquid Iridescent Background)
    ========================================================================== */
 .inverse-band {
-  background-color: var(--surface-obsidian);
+  background-color: transparent !important;
   color: var(--color-paper);
   padding: 120px 0;
   position: relative;
+  z-index: 101;
 }
 
 .inverse-band .section-label {
-  color: var(--color-ash-mist);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .inverse-band .heading-whisper,
 .inverse-band .heading-anchor {
-  color: var(--color-paper);
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
 }
 
 .inverse-band .editorial-reading-block {
-  color: var(--color-ash-mist);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .lab-header-wrap {
@@ -1821,17 +1855,10 @@ html.lenis body {
 }
 
 /* ==========================================================================
-   Section Transition: Hero WebGL Liquid Bleed Horizon (Projects -> What I Build)
+   Section Transition: Replaced by Real Expanding Liquid Navbar
    ========================================================================== */
 .liquid-bleed-horizon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  pointer-events: none;
-  z-index: 10;
-  overflow: visible;
+  display: none !important;
 }
 
 /* Hairline Horizon Liquid Core */
@@ -1927,7 +1954,9 @@ html.lenis body {
 }
 
 .build-card {
-  background-color: var(--surface-obsidian);
+  background-color: rgba(10, 10, 12, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: clamp(28px, 4vw, 42px) clamp(24px, 3.5vw, 36px);
   display: flex;
   flex-direction: column;
@@ -1938,7 +1967,7 @@ html.lenis body {
 }
 
 .build-card:hover {
-  background-color: #0b0b0e;
+  background-color: rgba(15, 15, 18, 0.85);
 }
 
 .build-card::before {
@@ -2064,9 +2093,11 @@ html.lenis body {
   gap: 10px;
   padding: 10px 18px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.88);
+  background: rgba(10, 10, 12, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
   transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   cursor: default;
   flex-shrink: 0;
