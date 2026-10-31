@@ -351,23 +351,15 @@
           </div>
         </div>
 
-        <!-- Mobile Smooth Navigation Dots & Counter (Hidden on Desktop) -->
-        <div class="mobile-phones-nav" id="mobile-phones-nav" aria-label="Featured projects navigation">
-          <button class="mobile-nav-dot is-active" aria-label="Go to project 1: Sartthi CA Practice Manager"
-            data-index="0">
-            <span class="dot-inner"></span>
-          </button>
-          <button class="mobile-nav-dot" aria-label="Go to project 2: Malabar Heritage" data-index="1">
-            <span class="dot-inner"></span>
-          </button>
-          <button class="mobile-nav-dot" aria-label="Go to project 3: Impackt Packaging" data-index="2">
-            <span class="dot-inner"></span>
-          </button>
-        </div>
+        <!-- Mobile Scroll Indicator & Project Counter (Hidden on Desktop) -->
         <div class="mobile-swipe-hint" id="mobile-swipe-hint">
           <span id="mobile-phone-counter">01 / 03</span>
           <span>·</span>
           <span>Keep scrolling</span>
+          <svg class="swipe-down-arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="4" x2="12" y2="20"></line>
+            <polyline points="18 14 12 20 6 14"></polyline>
+          </svg>
         </div>
       </div>
 
@@ -1145,7 +1137,6 @@
         mm.add("(max-width: 900px)", () => {
           const showcase = document.getElementById('phones-showcase');
           const cards = gsap.utils.toArray('.phone-project-card');
-          const dots = gsap.utils.toArray('.mobile-nav-dot');
           const counter = document.getElementById('mobile-phone-counter');
           const pinContainer = document.getElementById('mobile-work-pin') || showcase;
 
@@ -1218,9 +1209,6 @@
 
                 if (idx !== currentIdx) {
                   currentIdx = idx;
-                  dots.forEach((dot, i) => {
-                    dot.classList.toggle('is-active', i === idx);
-                  });
                   if (counter) {
                     counter.textContent = `0${idx + 1} / 0${cards.length}`;
                   }
@@ -1255,39 +1243,6 @@
 
           // 5. Pause 3: Project 03 slow stopping pause before unpinning
           mobileTimeline.to({}, { duration: pause3 }, pause1 + glide1 + pause2 + glide2);
-
-          // Dot click smooth scroll navigation
-          dots.forEach((dot, i) => {
-            dot.addEventListener('click', (e) => {
-              e.preventDefault();
-              const st = mobileTimeline.scrollTrigger;
-              if (st) {
-                const currentP1 = getPause1();
-                const currentG1 = getGlide1();
-                const currentP2 = getPause2();
-                const currentG2 = getGlide2();
-                const currentP3 = getPause3();
-
-                let targetY;
-                if (i === 0) {
-                  // Center of Pause 1 (fully settled on Phone 1)
-                  targetY = st.start + currentP1 * 0.7;
-                } else if (i === 1) {
-                  // Center of Pause 2 (settled on Phone 2)
-                  targetY = st.start + currentP1 + currentG1 + currentP2 * 0.5;
-                } else {
-                  // Center of Pause 3 (settled on Phone 3)
-                  targetY = st.start + currentP1 + currentG1 + currentP2 + currentG2 + currentP3 * 0.5;
-                }
-
-                if (window.lenis) {
-                  window.lenis.scrollTo(targetY, { duration: 0.7, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-                } else {
-                  window.scrollTo({ top: targetY, behavior: 'smooth' });
-                }
-              }
-            });
-          });
         });
 
         // Elastic Squircle Section Transition Rebound (Projects -> What I Build)
