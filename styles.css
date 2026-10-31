@@ -1199,6 +1199,8 @@ html.lenis, html.lenis body {
     padding-right: 0;
     width: 100%;
     overflow: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   .staggered-phones-showcase {
@@ -1213,6 +1215,10 @@ html.lenis, html.lenis body {
     margin-bottom: 20px;
     align-items: flex-start;
     will-change: transform;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   .phone-col-1,
@@ -1228,7 +1234,8 @@ html.lenis, html.lenis body {
     flex-direction: column;
     align-items: center;
     opacity: 1 !important;
-    transform: none !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
   }
 
   .phone-mockup-wrapper {
@@ -1236,15 +1243,18 @@ html.lenis, html.lenis body {
     max-width: clamp(220px, 64vw, 260px);
     margin: 0 auto;
     opacity: 1 !important;
-    transform: none !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
   }
 
   .phone-mockup-img {
     width: 100%;
     height: auto;
     display: block;
-    filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.14)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.05));
+    filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.12));
     opacity: 1 !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   .phone-project-info {

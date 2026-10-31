@@ -161,9 +161,9 @@
           }
 
           if (strokeMask > 0.0) {
-            // Crisp white border perfectly aligned on top of the text outline
-            vec3 borderColor = vec3(1.0, 1.0, 1.0);
-            color = mix(color, borderColor, strokeMask * 0.95);
+            // Crisp black border on mobile for bold contrast
+            vec3 borderColor = vec3(0.0, 0.0, 0.0);
+            color = mix(color, borderColor, strokeMask * 1.0);
           }
         }
 
