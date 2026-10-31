@@ -1,13 +1,16 @@
 /**
  * Monopo Saigon — Bold & Rich Liquid Iridescent Shader
- * "A fluid, hypnotic, and iridescent chromatic wash evoking molten light."
+ * Features Dynamic Negative/Opposite Typography:
+ * Every pixel of the monumental hero title ("VEDANT DHADGE") is calculated on the GPU
+ * as the true mathematical negative (1.0 - fluidColor) of whatever fluid wave is flowing behind it.
+ * Colors continuously ripple, swirl, and transform across each letter in real time.
  * 
- * Bold, rich palette:
+ * Palette:
  * - Obsidian:           #000000
  * - Rich Molten Oxblood: rgb(190, 24, 24)
  * - Fiery Amber Gold:    rgb(255, 155, 18)
- * - Vibrant Emerald Teal: rgb(16, 195, 130)
- * - Incandescent Gold:   rgb(255, 215, 85)
+ * - Vibrant Emerald Teal: rgb(16, 198, 132)
+ * - Incandescent Gold:   rgb(255, 220, 85)
  */
 (function() {
   function initLiquidShader(canvasId) {
@@ -49,6 +52,8 @@
       uniform vec2 u_resolution;
       uniform float u_time;
       uniform vec2 u_mouse;
+      uniform sampler2D u_textTexture;
+      uniform int u_hasTextTexture;
 
       // 2D Simplex noise
       vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -95,7 +100,7 @@
         vec2 uv = st;
         uv.x *= aspect;
 
-        // Slow, hypnotic tempo
+        // Slow, hypnotic fluid tempo
         float t = u_time * 0.16;
 
         // Smooth cursor liquid deflection
@@ -136,12 +141,25 @@
         float crest = clamp(pow(max(0.0, f * 1.15), 3.0) * 1.8, 0.0, 1.0);
         color += cGold * crest * 0.50;
 
-        // Vignette to preserve deep obsidian anchor at the perimeter
+        // Perimeter vignette
         float distCenter = length(st - vec2(0.5, 0.5));
         float vignette = smoothstep(1.35, 0.35, distCenter);
         color *= vignette;
-
         color = clamp(color, 0.0, 1.0);
+
+        // Dynamic Negative Typography Inversion
+        if (u_hasTextTexture == 1) {
+          vec2 textUV = vec2(st.x, 1.0 - st.y);
+          float textMask = texture2D(u_textTexture, textUV).a;
+
+          if (textMask > 0.0) {
+            // True mathematical negative: exact complement of whatever is behind it
+            vec3 negColor = vec3(1.0) - color;
+
+            // Smooth anti-aliased edge blending
+            color = mix(color, negColor, textMask);
+          }
+        }
 
         gl_FragColor = vec4(color, 1.0);
       }
@@ -187,6 +205,18 @@
     const resLoc = gl.getUniformLocation(program, 'u_resolution');
     const timeLoc = gl.getUniformLocation(program, 'u_time');
     const mouseLoc = gl.getUniformLocation(program, 'u_mouse');
+    const textTexLoc = gl.getUniformLocation(program, 'u_textTexture');
+    const hasTextLoc = gl.getUniformLocation(program, 'u_hasTextTexture');
+
+    // Setup Text Texture Buffer
+    const textCanvas = document.createElement('canvas');
+    const textCtx = textCanvas.getContext('2d');
+    const textTexture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, textTexture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
     let mouse = [window.innerWidth * 0.5, window.innerHeight * 0.5];
     let targetMouse = [mouse[0], mouse[1]];
@@ -196,6 +226,60 @@
       targetMouse[1] = window.innerHeight - e.clientY;
     }, { passive: true });
 
+    function updateTextTexture() {
+      if (!textCanvas || !textCtx || !gl || !textTexture) return;
+
+      textCanvas.width = canvas.width;
+      textCanvas.height = canvas.height;
+      textCtx.clearRect(0, 0, textCanvas.width, textCanvas.height);
+
+      const headlineEl = document.querySelector('.hero-display-headline');
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      let fontSize = Math.min(canvas.width * 0.13, canvas.height * 0.22);
+      let fontFamily = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+      let centerX = textCanvas.width * 0.5;
+      let centerY = textCanvas.height * 0.44; // Vertically positioned above bottom bar
+      let letterSpacing = -0.035 * fontSize;
+
+      if (headlineEl) {
+        const rect = headlineEl.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        const style = window.getComputedStyle(headlineEl);
+
+        if (rect.width > 0 && rect.height > 0 && canvasRect.width > 0 && canvasRect.height > 0) {
+          const scaleX = textCanvas.width / canvasRect.width;
+          const scaleY = textCanvas.height / canvasRect.height;
+
+          fontSize = parseFloat(style.fontSize) * scaleX;
+          const parsedSpacing = parseFloat(style.letterSpacing);
+          letterSpacing = (isNaN(parsedSpacing) ? (-0.035 * fontSize / scaleX) : parsedSpacing) * scaleX;
+
+          centerX = (rect.left - canvasRect.left + rect.width * 0.5) * scaleX;
+          centerY = (rect.top - canvasRect.top + rect.height * 0.5) * scaleY;
+        }
+      }
+
+      textCtx.save();
+      textCtx.fillStyle = '#ffffff';
+      textCtx.textAlign = 'center';
+      textCtx.textBaseline = 'middle';
+      textCtx.font = `400 ${fontSize}px ${fontFamily}`;
+      if (textCtx.letterSpacing !== undefined) {
+        textCtx.letterSpacing = `${letterSpacing}px`;
+      }
+
+      // Draw VEDANT and DHADGE in tight monumental editorial typography
+      const lineGap = fontSize * 0.88;
+      textCtx.fillText('VEDANT', centerX, centerY - lineGap * 0.5);
+      textCtx.fillText('DHADGE', centerX, centerY + lineGap * 0.5);
+      textCtx.restore();
+
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, textTexture);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textCanvas);
+    }
+
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const width = window.innerWidth;
@@ -203,9 +287,20 @@
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       gl.viewport(0, 0, canvas.width, canvas.height);
+      updateTextTexture();
     }
 
     window.addEventListener('resize', resize, { passive: true });
+    
+    // Refresh text texture when fonts are loaded or layout settles
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        updateTextTexture();
+      });
+    }
+    setTimeout(updateTextTexture, 200);
+    setTimeout(updateTextTexture, 600);
+
     resize();
 
     let startTime = performance.now();
@@ -224,6 +319,12 @@
       gl.uniform2f(resLoc, canvas.width, canvas.height);
       gl.uniform1f(timeLoc, (performance.now() - startTime) * 0.001);
       gl.uniform2f(mouseLoc, mouse[0] * dpr, mouse[1] * dpr);
+
+      // Bind text texture to texture unit 0
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, textTexture);
+      gl.uniform1i(textTexLoc, 0);
+      gl.uniform1i(hasTextLoc, 1);
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       requestAnimationFrame(render);
