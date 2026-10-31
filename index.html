@@ -1048,14 +1048,20 @@
             0
           );
 
-          // 2. Secondary hero elements dissolve early (0% -> 30%)
-          const secondaryHeroElements = [heroPills, heroBottom, heroBadge].filter(Boolean);
+          // 2. Hide hero description bar, service pills, and scroll badge immediately on scroll (0% -> 20%)
+          const secondaryHeroElements = [heroBottom, heroPills, heroBadge].filter(Boolean);
           if (secondaryHeroElements.length) {
             heroMorphTl.to(secondaryHeroElements, {
-              opacity: 0,
+              autoAlpha: 0,
               y: 20,
-              duration: 0.3,
-              ease: 'power1.out'
+              duration: 0.2,
+              ease: 'power1.out',
+              onComplete: () => {
+                if (heroBottom) heroBottom.style.display = 'none';
+              },
+              onReverseComplete: () => {
+                if (heroBottom) heroBottom.style.display = '';
+              }
             }, 0);
           }
 
@@ -1093,15 +1099,6 @@
             }, 0.75);
           }
         }
-
-        // Hero Bottom Bar Entrance on initial load
-        gsap.from('.hero-bottom-bar', {
-          opacity: 0,
-          y: 30,
-          duration: 1.0,
-          ease: 'power3.out',
-          delay: 0.35
-        });
 
         // Responsive ScrollTrigger MatchMedia
         const mm = gsap.matchMedia();
